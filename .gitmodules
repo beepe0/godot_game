@@ -7,3 +7,6 @@
 [submodule "submodules/console_manager"]
 	path = submodules/console_manager
 	url = https://github.com/beepe0/godot_console_manager.git
+[submodule "submodules/voip_system"]
+	path = submodules/voip_system
+	url = https://github.com/beepe0/godot_voip_system.git
