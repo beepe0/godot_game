@@ -1,10 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://bemctsja6wlyg"]
+[gd_scene load_steps=12 format=3 uid="uid://bemctsja6wlyg"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_q1sgy"]
 [ext_resource type="Script" path="res://submodules/scene_manager/SceneManager.cs" id="2_enoti"]
 [ext_resource type="PackedScene" uid="uid://5lrb2dbumiw3" path="res://scenes/debug/test_level.tscn" id="3_1itlg"]
 [ext_resource type="PackedScene" uid="uid://dik5knqywq2fa" path="res://scenes/player.tscn" id="4_1f4f1"]
 [ext_resource type="Script" path="res://submodules/console_manager/CommandManager.cs" id="4_1ivhn"]
+[ext_resource type="Script" path="res://submodules/voip_system/VoiceGrabber.cs" id="5_guotx"]
+[ext_resource type="Script" path="res://submodules/voip_system/VoiceManager.cs" id="5_huyi7"]
 [ext_resource type="PackedScene" uid="uid://byssswptinsio" path="res://submodules/console_manager/scene/ui/console.tscn" id="6_qchd8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fl535"]
@@ -36,6 +38,16 @@ CurrentScene = NodePath("TestLevel")
 [node name="CommandManager" type="Node" parent="Singeltons"]
 script = ExtResource("4_1ivhn")
 
+[node name="VoiceManager" type="Node" parent="Singeltons" node_paths=PackedStringArray("audioStreamPlayer", "_voiceGrabber")]
+script = ExtResource("5_huyi7")
+audioStreamPlayer = NodePath("Audio")
+_voiceGrabber = NodePath("AudioStreamPlayer")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Singeltons/VoiceManager"]
+script = ExtResource("5_guotx")
+
+[node name="Audio" type="AudioStreamPlayer" parent="Singeltons/VoiceManager"]
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_v4uvn")
 
@@ -44,7 +56,6 @@ transform = Transform3D(0.978846, -0.13823, -0.150841, 0.204599, 0.661324, 0.721
 
 [node name="Player" parent="." instance=ExtResource("4_1f4f1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-MouseSensivity = 0.001
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
