@@ -1,6 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://bemctsja6wlyg"]
+[gd_scene load_steps=5 format=3 uid="uid://bemctsja6wlyg"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_q1sgy"]
 
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_adn0h"]
+ground_color = Color(0.0784314, 0.0784314, 0.0588235, 1)
+
+[sub_resource type="Sky" id="Sky_xrkip"]
+sky_material = SubResource("PhysicalSkyMaterial_adn0h")
+
+[sub_resource type="Environment" id="Environment_v4uvn"]
+background_mode = 2
+background_color = Color(0.733333, 0.733333, 0.733333, 1)
+sky = SubResource("Sky_xrkip")
+ambient_light_source = 3
+reflected_light_source = 2
+tonemap_mode = 2
+glow_enabled = true
+glow_normalized = true
+
 [node name="Game" type="Node"]
 script = ExtResource("1_q1sgy")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_v4uvn")
