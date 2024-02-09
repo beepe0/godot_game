@@ -49,3 +49,4 @@ MouseSensivity = 0.001
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Console" parent="CanvasLayer" instance=ExtResource("6_qchd8")]
+visible = false
