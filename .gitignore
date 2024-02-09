@@ -14,5 +14,8 @@ export_presets.cfg
 data_*/
 mono_crash.*.json
 
-# Custom ignores
+# Plugins ignores
 addons/godot-jolt
+
+# Custom ignores
+.vs/
