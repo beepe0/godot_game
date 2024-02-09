@@ -1,12 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://dik5knqywq2fa"]
+[gd_scene load_steps=4 format=3 uid="uid://dik5knqywq2fa"]
 
 [ext_resource type="Script" path="res://scripts/Player.cs" id="1_i0nj7"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_y4odl"]
+friction = 0.5
+bounce = 0.25
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hwg6v"]
 
-[node name="Player" type="RigidBody3D"]
+[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("Neck", "Head")]
+physics_material_override = SubResource("PhysicsMaterial_y4odl")
+can_sleep = false
 lock_rotation = true
+max_contacts_reported = 1
+contact_monitor = true
+linear_damp = 3.0
 script = ExtResource("1_i0nj7")
+Neck = NodePath("Neck")
+Head = NodePath("Neck/Camera3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_hwg6v")
