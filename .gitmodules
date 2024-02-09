@@ -4,3 +4,6 @@
 [submodule "submodules/scene_manager"]
 	path = submodules/scene_manager
 	url = https://github.com/ihorekghost/godot_scene_manager.git
+[submodule "submodules/rigidbodyex"]
+	path = submodules/rigidbodyex
+	url = https://github.com/ihorekghost/godot_rigidbodyex.git
