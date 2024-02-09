@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dik5knqywq2fa"]
+[gd_scene load_steps=10 format=3 uid="uid://dik5knqywq2fa"]
 
 [ext_resource type="Script" path="res://scripts/Player.cs" id="1_i0nj7"]
 
@@ -8,7 +8,59 @@ bounce = 0.25
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hwg6v"]
 
-[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("Neck", "Head")]
+[sub_resource type="Animation" id="Animation_bv7al"]
+resource_name = "move"
+length = 0.5
+loop_mode = 2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Neck:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.1, 0.5, 0), Vector3(0, 0.55, 0), Vector3(0.1, 0.5, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_v0yv4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Neck:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.5, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eq31v"]
+_data = {
+"RESET": SubResource("Animation_v0yv4"),
+"move": SubResource("Animation_bv7al")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i5gtp"]
+animation = &"move"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rxc6o"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_uh1fi"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_i5gtp")
+blend_point_0/pos = 1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_rxc6o")
+blend_point_1/pos = 0.0
+min_space = 0.0
+
+[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("Neck", "Head", "AnimationTree")]
 physics_material_override = SubResource("PhysicsMaterial_y4odl")
 can_sleep = false
 lock_rotation = true
@@ -18,6 +70,7 @@ linear_damp = 4.0
 script = ExtResource("1_i0nj7")
 Neck = NodePath("Neck")
 Head = NodePath("Neck/Camera3D")
+AnimationTree = NodePath("AnimationTree")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_hwg6v")
@@ -26,3 +79,16 @@ shape = SubResource("CapsuleShape3D_hwg6v")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Neck"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_eq31v")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_eq31v")
+}
+tree_root = SubResource("AnimationNodeBlendSpace1D_uh1fi")
+anim_player = NodePath("../AnimationPlayer")
+parameters/blend_position = 1.0
