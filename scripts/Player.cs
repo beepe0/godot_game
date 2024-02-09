@@ -20,7 +20,7 @@ public partial class Player : CharacterBody3D
 
     [ExportGroup("Controls")]
     [Export]
-    public float MouseSensitivity = 0.01f;
+    public float MouseSensitivity = 0.0001f;
 
     [ExportGroup("References")]
     [Export]

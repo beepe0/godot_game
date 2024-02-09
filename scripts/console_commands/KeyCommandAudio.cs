@@ -13,6 +13,10 @@ public partial class KeyCommandAudio : Command
         {
             VoiceManager.Instance.recording = !VoiceManager.Instance.recording;
         }
+        if (keys[1] == "lis")
+        {
+            VoiceManager.Instance.listen = !VoiceManager.Instance.listen;
+        }
         else if (keys[1] == "idev")
         {
             GetInputDeviceList();
