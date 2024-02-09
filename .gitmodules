@@ -4,3 +4,6 @@
 [submodule "submodules/scene_manager"]
 	path = submodules/scene_manager
 	url = https://github.com/ihorekghost/godot_scene_manager.git
+[submodule "submodules/console_manager"]
+	path = submodules/console_manager
+	url = https://github.com/beepe0/godot_console_manager.git

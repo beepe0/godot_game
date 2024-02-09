@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bemctsja6wlyg"]
+[gd_scene load_steps=7 format=3 uid="uid://bemctsja6wlyg"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_q1sgy"]
+[ext_resource type="PackedScene" uid="uid://byssswptinsio" path="res://submodules/console_manager/scene/ui/console.tscn" id="2_d1wsp"]
+[ext_resource type="Script" path="res://submodules/console_manager/CommandManager.cs" id="3_8wbne"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_adn0h"]
 ground_color = Color(0.0784314, 0.0784314, 0.0588235, 1)
@@ -23,3 +25,10 @@ script = ExtResource("1_q1sgy")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_v4uvn")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Console" parent="CanvasLayer" instance=ExtResource("2_d1wsp")]
+
+[node name="CommandManager" type="Node" parent="."]
+script = ExtResource("3_8wbne")
