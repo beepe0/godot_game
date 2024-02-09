@@ -1,14 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://5lrb2dbumiw3"]
+[gd_scene load_steps=6 format=3 uid="uid://5lrb2dbumiw3"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yyho1"]
-albedo_color = Color(0.372549, 0.160784, 0.160784, 1)
+[ext_resource type="Material" uid="uid://daehsxnqo8q76" path="res://materials/test.tres" id="1_mg43t"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ii1dw"]
-material = SubResource("StandardMaterial3D_yyho1")
+material = ExtResource("1_mg43t")
 size = Vector3(10, 1, 10)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1pqht"]
 size = Vector3(10, 1, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8is06"]
+material = ExtResource("1_mg43t")
+size = Vector3(2, 0.5, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_miccw"]
+size = Vector3(2, 0.5, 2)
 
 [node name="TestLevel" type="Node3D"]
 
@@ -19,3 +25,30 @@ mesh = SubResource("BoxMesh_ii1dw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("BoxShape3D_1pqht")
+
+[node name="Platform" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platform"]
+mesh = SubResource("BoxMesh_8is06")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform"]
+shape = SubResource("BoxShape3D_miccw")
+
+[node name="Platform2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1, -3)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platform2"]
+mesh = SubResource("BoxMesh_8is06")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform2"]
+shape = SubResource("BoxShape3D_miccw")
+
+[node name="Platform3" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 2, -6)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platform3"]
+mesh = SubResource("BoxMesh_8is06")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform3"]
+shape = SubResource("BoxShape3D_miccw")
