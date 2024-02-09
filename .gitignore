@@ -18,4 +18,4 @@ mono_crash.*.json
 addons/godot-jolt
 
 # Custom ignores
-.vs/
+.vs
