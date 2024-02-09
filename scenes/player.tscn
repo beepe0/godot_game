@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dik5knqywq2fa"]
 
-[ext_resource type="Script" path="res://scripts/Player.cs" id="1_i0nj7"]
+[ext_resource type="Script" path="res://scripts/multiplayer/players/LocalPlayer.cs" id="1_xjohd"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hwg6v"]
 
@@ -56,27 +56,30 @@ blend_point_1/node = SubResource("AnimationNodeAnimation_rxc6o")
 blend_point_1/pos = 0.0
 min_space = 0.0
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("Neck", "Head", "AnimationTree", "AnimationPlayer")]
-script = ExtResource("1_i0nj7")
-Neck = NodePath("Neck")
-Head = NodePath("Neck/Camera3D")
-AnimationTree = NodePath("AnimationTree")
-AnimationPlayer = NodePath("AnimationPlayer")
+[node name="LocalPlayer" type="Node" node_paths=PackedStringArray("CharacterBody3D", "Neck", "Head", "AnimationTree", "AnimationPlayer")]
+script = ExtResource("1_xjohd")
+CharacterBody3D = NodePath("CharacterBody3D")
+Neck = NodePath("CharacterBody3D/Neck")
+Head = NodePath("CharacterBody3D/Neck/Camera3D")
+AnimationTree = NodePath("CharacterBody3D/AnimationTree")
+AnimationPlayer = NodePath("CharacterBody3D/AnimationPlayer")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
 shape = SubResource("CapsuleShape3D_hwg6v")
 
-[node name="Neck" type="Node3D" parent="."]
+[node name="Neck" type="Node3D" parent="CharacterBody3D"]
 
-[node name="Camera3D" type="Camera3D" parent="Neck"]
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/Neck"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D"]
 libraries = {
 "": SubResource("AnimationLibrary_eq31v")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="."]
+[node name="AnimationTree" type="AnimationTree" parent="CharacterBody3D"]
 libraries = {
 "": SubResource("AnimationLibrary_eq31v")
 }

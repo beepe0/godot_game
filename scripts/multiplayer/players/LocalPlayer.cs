@@ -1,7 +1,7 @@
-using Godot;
+﻿using Godot;
 using System;
 
-public partial class Player : CharacterBody3D
+public partial class LocalPlayer : Player
 {
     [ExportGroup("Animation")]
     private float _moveAnimationSensitivity = 4.0f;
@@ -20,9 +20,12 @@ public partial class Player : CharacterBody3D
 
     [ExportGroup("Controls")]
     [Export]
-    public float MouseSensitivity = 0.0001f;
+    public float MouseSensitivity = 0.1f;
 
     [ExportGroup("References")]
+    [Export]
+    public CharacterBody3D CharacterBody3D = null;
+
     [Export]
     public Node3D Neck { get; private set; } = null;
 
@@ -35,6 +38,10 @@ public partial class Player : CharacterBody3D
     [Export]
     public AnimationPlayer AnimationPlayer { get; private set; } = null;
 
+    public override void _EnterTree()
+    {
+        Game.LocalPlayer = this;
+    }
     public override void _Ready()
     {
         Input.MouseMode = Input.MouseModeEnum.Captured;
@@ -44,14 +51,14 @@ public partial class Player : CharacterBody3D
     {
         Vector2 direction = Input.GetVector("move_left", "move_right", "move_forward", "move_backward");
 
-        Velocity = Neck.Basis * new Vector3(direction.X * Speed, (Input.IsActionJustPressed("jump") && IsOnFloor()) ? JumpForce : Velocity.Y - Gravity, direction.Y * Speed);
+        CharacterBody3D.Velocity = Neck.Basis * new Vector3(direction.X * Speed, (Input.IsActionJustPressed("jump") && CharacterBody3D.IsOnFloor()) ? JumpForce : CharacterBody3D.Velocity.Y - Gravity, direction.Y * Speed);
 
-        _moveAnimationBlend = Mathf.Min((float)Mathf.MoveToward(_moveAnimationBlend, direction.Length() * Convert.ToSingle(IsOnFloor()), delta * _moveAnimationSensitivity), 1.0f);
+        _moveAnimationBlend = Mathf.Min((float)Mathf.MoveToward(_moveAnimationBlend, direction.Length() * Convert.ToSingle(CharacterBody3D.IsOnFloor()), delta * _moveAnimationSensitivity), 1.0f);
 
         AnimationPlayer.SpeedScale = _moveAnimationBlend * 3.0f;
         AnimationTree.Set("parameters/blend_position", _moveAnimationBlend);
 
-        MoveAndSlide();
+        CharacterBody3D.MoveAndSlide();
     }
 
     public override void _UnhandledInput(InputEvent @event)
@@ -59,8 +66,8 @@ public partial class Player : CharacterBody3D
         InputEventMouseMotion mouseMotion = @event as InputEventMouseMotion;
         if (mouseMotion != null)
         {
-            Neck.RotateY(-mouseMotion.Relative.X * MouseSensitivity);
-            Head.Rotation = new Vector3(Mathf.Clamp(Head.Rotation.X - mouseMotion.Relative.Y * MouseSensitivity, -Mathf.Pi*0.5f, Mathf.Pi*0.5f), Head.Rotation.Y, Head.Rotation.Z);
+            Neck.RotateY(-mouseMotion.Relative.X * MouseSensitivity * 0.001f);
+            Head.Rotation = new Vector3(Mathf.Clamp(Head.Rotation.X - mouseMotion.Relative.Y * MouseSensitivity * 0.001f, -Mathf.Pi * 0.5f, Mathf.Pi * 0.5f), Head.Rotation.Y, Head.Rotation.Z);
         }
     }
 }
