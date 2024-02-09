@@ -1,17 +1,9 @@
-<<<<<<< HEAD
-[gd_scene load_steps=7 format=3 uid="uid://bemctsja6wlyg"]
-
-[ext_resource type="Script" path="res://scripts/Game.cs" id="1_q1sgy"]
-[ext_resource type="PackedScene" uid="uid://byssswptinsio" path="res://submodules/console_manager/scene/ui/console.tscn" id="2_d1wsp"]
-[ext_resource type="Script" path="res://submodules/console_manager/CommandManager.cs" id="3_8wbne"]
-=======
 [gd_scene load_steps=8 format=3 uid="uid://bemctsja6wlyg"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_q1sgy"]
 [ext_resource type="Script" path="res://submodules/scene_manager/SceneManager.cs" id="2_enoti"]
 [ext_resource type="PackedScene" uid="uid://5lrb2dbumiw3" path="res://scenes/debug/test_level.tscn" id="3_1itlg"]
 [ext_resource type="PackedScene" uid="uid://dik5knqywq2fa" path="res://scenes/player.tscn" id="4_1f4f1"]
->>>>>>> 20be2c593172629710cb200fc04abf93187e6da2
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fl535"]
 
@@ -34,14 +26,6 @@ script = ExtResource("1_q1sgy")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_v4uvn")
 
-<<<<<<< HEAD
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Console" parent="CanvasLayer" instance=ExtResource("2_d1wsp")]
-
-[node name="CommandManager" type="Node" parent="."]
-script = ExtResource("3_8wbne")
-=======
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.978846, -0.13823, -0.150841, 0.204599, 0.661324, 0.721658, 3.51838e-09, -0.737254, 0.675616, 0, 0, 0)
 
@@ -53,4 +37,3 @@ CurrentScene = NodePath("TestLevel")
 
 [node name="Player" parent="." instance=ExtResource("4_1f4f1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
->>>>>>> 20be2c593172629710cb200fc04abf93187e6da2
