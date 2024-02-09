@@ -1,0 +1,6 @@
+[submodule "submodules/component_system"]
+	path = submodules/component_system
+	url = https://github.com/ihorekghost/godot_component_system.git
+[submodule "submodules/scene_manager"]
+	path = submodules/scene_manager
+	url = https://github.com/ihorekghost/godot_scene_manager.git
