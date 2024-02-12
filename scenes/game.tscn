@@ -64,3 +64,7 @@ transform = Transform3D(0.978846, -0.13823, -0.150841, 0.204599, 0.661324, 0.721
 
 [node name="Console" parent="CanvasLayer" instance=ExtResource("6_qchd8")]
 visible = false
+_numberOfLines = 10
+
+[node name="LocalPlayer" parent="." instance=ExtResource("4_1f4f1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.73376, 0)
