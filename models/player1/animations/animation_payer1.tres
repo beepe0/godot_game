@@ -1,0 +1,18 @@
+[gd_resource type="AnimationLibrary" load_steps=7 format=3 uid="uid://d3jrp8ovwg613"]
+
+[ext_resource type="Animation" uid="uid://d32jinnntay0t" path="res://models/player1/animations/_fall.res" id="1_k25rk"]
+[ext_resource type="Animation" uid="uid://8jab27rqxsvk" path="res://models/player1/animations/_idle.res" id="2_7kryu"]
+[ext_resource type="Animation" uid="uid://6jsjf1ti2hm6" path="res://models/player1/animations/_jump.res" id="3_c8omi"]
+[ext_resource type="Animation" uid="uid://c85uc10bildps" path="res://models/player1/animations/_run.res" id="4_u3ire"]
+[ext_resource type="Animation" uid="uid://7pmqr5butwkj" path="res://models/player1/animations/_t.res" id="5_w51x4"]
+[ext_resource type="Animation" uid="uid://cfnfkd1rikopw" path="res://models/player1/animations/_walk.res" id="6_cojy1"]
+
+[resource]
+_data = {
+"_fall": ExtResource("1_k25rk"),
+"_idle": ExtResource("2_7kryu"),
+"_jump": ExtResource("3_c8omi"),
+"_run": ExtResource("4_u3ire"),
+"_t": ExtResource("5_w51x4"),
+"_walk": ExtResource("6_cojy1")
+}
