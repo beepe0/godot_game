@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dik5knqywq2fa"]
+[gd_scene load_steps=3 format=3 uid="uid://c5q0it6f74vd8"]
 
 [ext_resource type="Script" path="res://scripts/components/PlayerController.cs" id="2_bhfba"]
 
