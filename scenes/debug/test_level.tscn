@@ -1,54 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://5lrb2dbumiw3"]
+[gd_scene load_steps=2 format=3 uid="uid://5lrb2dbumiw3"]
 
-[ext_resource type="Material" uid="uid://daehsxnqo8q76" path="res://models/standard/materials/test.tres" id="1_mg43t"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_ii1dw"]
-material = ExtResource("1_mg43t")
-size = Vector3(10, 1, 10)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_1pqht"]
-size = Vector3(10, 1, 10)
-
-[sub_resource type="BoxMesh" id="BoxMesh_8is06"]
-material = ExtResource("1_mg43t")
-size = Vector3(2, 0.5, 2)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_miccw"]
-size = Vector3(2, 0.5, 2)
+[ext_resource type="MeshLibrary" uid="uid://drtyfarnln56k" path="res://mesh_libraries/tileset_bunker.tres" id="1_u1ndc"]
 
 [node name="TestLevel" type="Node3D"]
 
-[node name="Floor" type="StaticBody3D" parent="."]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
-mesh = SubResource("BoxMesh_ii1dw")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
-shape = SubResource("BoxShape3D_1pqht")
-
-[node name="Platform" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Platform"]
-mesh = SubResource("BoxMesh_8is06")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform"]
-shape = SubResource("BoxShape3D_miccw")
-
-[node name="Platform2" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 1, -3)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Platform2"]
-mesh = SubResource("BoxMesh_8is06")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform2"]
-shape = SubResource("BoxShape3D_miccw")
-
-[node name="Platform3" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 2, -6)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Platform3"]
-mesh = SubResource("BoxMesh_8is06")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform3"]
-shape = SubResource("BoxShape3D_miccw")
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = ExtResource("1_u1ndc")
+cell_size = Vector3(1.6, 1.6, 1.6)
+cell_scale = 1.001
+data = {
+"cells": PackedInt32Array(65532, 65532, 8, 65532, 3, 8, 4, 3, 8, 4, 65532, 8, 65533, 65532, 8, 65534, 65532, 8, 65535, 65532, 8, 0, 65532, 8, 1, 65532, 8, 2, 65532, 8, 3, 65532, 8, 3, 65533, 8, 3, 65534, 8, 3, 65535, 8, 3, 0, 8, 3, 1, 8, 3, 2, 8, 3, 3, 8, 2, 3, 8, 1, 3, 8, 0, 3, 8, 65535, 3, 8, 65534, 3, 8, 65533, 3, 8, 65533, 2, 8, 65533, 1, 8, 65533, 0, 8, 65533, 65535, 8, 65533, 65534, 8, 65533, 65533, 8, 65532, 65533, 8, 65532, 65534, 8, 65532, 65535, 8, 65532, 0, 8, 65532, 1, 8, 65532, 2, 8, 4, 65533, 8, 4, 65534, 8, 4, 65535, 8, 4, 0, 8, 4, 1, 8, 4, 2, 8, 2, 65533, 8, 1, 65533, 8, 0, 65533, 8, 65535, 65533, 8, 65534, 65533, 8, 65534, 65534, 8, 65535, 65534, 8, 0, 65534, 8, 1, 65534, 8, 2, 65534, 8, 2, 65535, 8, 2, 0, 8, 1, 0, 8, 0, 0, 8, 65535, 0, 8, 65535, 65535, 8, 0, 65535, 8, 1, 65535, 8, 65534, 65535, 8, 65534, 0, 8, 65534, 1, 8, 65534, 2, 8, 65535, 2, 8, 0, 2, 8, 1, 2, 8, 2, 2, 8, 2, 1, 8, 1, 1, 8, 0, 1, 8, 65535, 1, 8)
+}

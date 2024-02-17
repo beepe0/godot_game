@@ -8,7 +8,6 @@ diffuse_mode = 3
 albedo_texture = ExtResource("1_vcivu")
 metallic = 1.0
 metallic_specular = 1.0
-roughness = 0.15
 ao_light_affect = 1.0
 subsurf_scatter_strength = 0.46
 texture_filter = 2
