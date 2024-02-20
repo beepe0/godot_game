@@ -25,7 +25,7 @@ tonemap_mode = 2
 sdfgi_use_occlusion = true
 glow_normalized = true
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.5212
+volumetric_fog_density = 0.8121
 volumetric_fog_albedo = Color(0.0980392, 0.0980392, 0.0980392, 1)
 volumetric_fog_anisotropy = 0.13
 

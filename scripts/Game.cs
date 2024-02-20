@@ -7,4 +7,8 @@ public partial class Game : Node
     {
         Instance = this;
     }
+    public override void _Ready()
+    {
+        Input.MouseMode = Input.MouseModeEnum.Captured;
+    }
 }
