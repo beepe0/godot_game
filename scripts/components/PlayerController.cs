@@ -129,7 +129,7 @@ public partial class PlayerController : Node
 
         CameraShaker.Position = _neckBone.Position.Lerp(CameraShaker.Position, ShakingForcePosition);
         CameraShaker.Rotation = _neckBone.Rotation.Lerp(CameraShaker.Rotation, ShakingForceRotation);
-        CameraHandler.Rotation = Vector3.Forward * _cameraRotation.X;
+        CameraHandler.Rotation = Vector3.Right * _cameraRotation.X;
 
         _mouseDelta = Vector2.Zero;
     }

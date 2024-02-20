@@ -10,7 +10,4 @@
 [submodule "submodules/voip_system"]
 	path = submodules/voip_system
 	url = https://github.com/beepe0/godot_voip_system.git
-[submodule "submodules/rigidbodyex"]
-	path = submodules/rigidbodyex
-	url = https://github.com/ihorekghost/godot_rigidbodyex.git
 
