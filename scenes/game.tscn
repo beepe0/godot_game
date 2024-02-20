@@ -1,10 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://bemctsja6wlyg"]
+[gd_scene load_steps=12 format=3 uid="uid://bemctsja6wlyg"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_q1sgy"]
 [ext_resource type="Script" path="res://submodules/scene_manager/SceneManager.cs" id="2_enoti"]
-[ext_resource type="PackedScene" uid="uid://bfc8d7yw4eehl" path="res://scenes/rooms/room2.tscn" id="3_5apal"]
-[ext_resource type="PackedScene" uid="uid://bfn32pyb52prj" path="res://scenes/rooms/room3.tscn" id="3_65j21"]
-[ext_resource type="PackedScene" uid="uid://dwi4b8w62jegq" path="res://scenes/rooms/room1.tscn" id="3_tg62r"]
+[ext_resource type="Script" path="res://scripts/generation/LevelGenerator.cs" id="3_pnjj3"]
 [ext_resource type="PackedScene" uid="uid://c5q0it6f74vd8" path="res://scenes/player.tscn" id="4_1f4f1"]
 [ext_resource type="Script" path="res://submodules/console_manager/CommandManager.cs" id="4_1ivhn"]
 [ext_resource type="Script" path="res://submodules/voip_system/VoiceGrabber.cs" id="5_guotx"]
@@ -34,15 +32,15 @@ script = ExtResource("1_q1sgy")
 
 [node name="SceneManager" type="Node" parent="." node_paths=PackedStringArray("CurrentScene")]
 script = ExtResource("2_enoti")
-CurrentScene = NodePath("Сompartment1")
+CurrentScene = NodePath("Dungeon")
 
-[node name="Сompartment1" parent="SceneManager" instance=ExtResource("3_tg62r")]
-
-[node name="Сompartment2" parent="SceneManager" instance=ExtResource("3_5apal")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 44.8)
-
-[node name="Сompartment3" parent="SceneManager" instance=ExtResource("3_65j21")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 22.4)
+[node name="Dungeon" type="Node3D" parent="SceneManager"]
+script = ExtResource("3_pnjj3")
+RoomsFolderPath = "res://scenes/rooms"
+TargetRoomsCount = 10
+LevelSize = Vector2i(10, 10)
+TileSize = Vector2(1.6, 1.6)
+RoomSizeTiles = Vector2i(13, 13)
 
 [node name="Singeltons" type="Node" parent="."]
 
@@ -68,4 +66,3 @@ environment = SubResource("Environment_v4uvn")
 visible = false
 
 [node name="Player" parent="." instance=ExtResource("4_1f4f1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.05128, 1.45646, 0)
