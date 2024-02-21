@@ -9,34 +9,34 @@ public partial class KeyCommandAudio : Command
     string[] devices = null;
     public override void Execute(string[] keys)
     {
-        if (keys[1] == "rec")
+        if (keys[1].Equals("record"))
         {
             VoiceManager.Instance.recording = !VoiceManager.Instance.recording;
         }
-        if (keys[1] == "lis")
+        if (keys[1].Equals("listen"))
         {
             VoiceManager.Instance.listen = !VoiceManager.Instance.listen;
         }
-        else if (keys[1] == "idev")
+        else if (keys[1].Equals("input-device"))
         {
             GetInputDeviceList();
         }
-        else if (keys[1] == "odev")
+        else if (keys[1].Equals("output-device"))
         {
             GetOutputDeviceList();
         }
-        else if (keys[1] == "iset")
+        else if (keys[1].Equals("set-input-device"))
         {
             SetInputDevice(ushort.Parse(keys[2]));
         }
-        else if (keys[1] == "oset")
+        else if (keys[1].Equals("set-output-device"))
         {
             SetOutputDevice(ushort.Parse(keys[2]));
         }
     }
     private void GetInputDeviceList()
     {
-        GameConsole.Instance.Debug($"Current input device is {AudioServer.InputDevice}");
+        GameConsole.Instance.DebugCallDeferrd($"Current input device is {AudioServer.InputDevice}");
 
         devices = AudioServer.GetInputDeviceList();
         for (int i = 0; i < devices.Length; i++)
@@ -46,7 +46,7 @@ public partial class KeyCommandAudio : Command
     }
     private void GetOutputDeviceList()
     {
-        GameConsole.Instance.Debug($"Current output device is {AudioServer.InputDevice}");
+        GameConsole.Instance.DebugCallDeferrd($"Current output device is {AudioServer.InputDevice}");
 
         devices = AudioServer.GetOutputDeviceList();
         for (int i = 0; i < devices.Length; i++)
