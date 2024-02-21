@@ -2,22 +2,13 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Reflection.Emit;
-using static Godot.TextServer;
 
 public partial class LevelGenerator : Node3D
 {
+    public static LevelGenerator Instance { get; private set; }
+
     [Export(PropertyHint.Dir)]
     public string RoomsFolderPath { get; private set; }
-
-    public Dictionary<char, List<PackedScene>> RoomsScenes { get; private set; } = new Dictionary<char, List<PackedScene>>()
-    {
-        {'c', new List<PackedScene>()},
-        {'t', new List<PackedScene>()},
-        {'d', new List<PackedScene>()},
-        {'r', new List<PackedScene>()},
-        {'e', new List<PackedScene>()},
-    };
 
     [Export]
     public ushort TargetRoomsCount { get; private set; }
@@ -50,9 +41,22 @@ public partial class LevelGenerator : Node3D
         { new { id = 3, neightbour = Vector2I.Up }, 180 },
         { new { id = 3, neightbour = Vector2I.Down },0 },
     };
+    public Dictionary<char, List<PackedScene>> RoomsScenes { get; private set; } = new Dictionary<char, List<PackedScene>>()
+    {
+        {'c', new List<PackedScene>()},
+        {'t', new List<PackedScene>()},
+        {'d', new List<PackedScene>()},
+        {'r', new List<PackedScene>()},
+        {'e', new List<PackedScene>()},
+    };
 
     private string _view;
-    public override void _Ready()
+
+    public override void _EnterTree()
+    {
+        Instance = this;
+    }
+    public void Generate(ulong seed)
     {
         Grid<bool> grid = new Grid<bool>(LevelSize, false);
         Generator generator = new Generator() { Grid = grid, TargetRoomsCount = TargetRoomsCount };
@@ -61,9 +65,9 @@ public partial class LevelGenerator : Node3D
 
         LoadRooms();
 
-        Game.Instance.Rng.Seed = 1;
+        if (seed != 0) Game.Instance.Rng.Seed = seed;
         GameConsole.Instance.DebugWarningCallDeferrd($"Random Seed: {Game.Instance.Rng.Seed}");
-
+        
         generator.Generate();
         for (int y = 0; y < grid.Size.Y; y++)
         {
@@ -124,6 +128,8 @@ public partial class LevelGenerator : Node3D
                     string roomPath = roomsFolder.GetCurrentDir().PathJoin(filename);
                     string[] filenameSplit = filename.Split(".")[0].Split("_");
                     char cat = char.Parse(filenameSplit[1]);
+
+                    if (roomPath.Contains(".tscn.remap")) roomPath = roomPath.Replace(".remap", "");
 
                     RoomsScenes[cat].Add(ResourceLoader.Load<PackedScene>(roomPath));
                     GameConsole.Instance.DebugLog($"LevelGenerator :: Loaded room at {roomPath}, Filename: {filename}");

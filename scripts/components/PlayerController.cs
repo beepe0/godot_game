@@ -1,4 +1,5 @@
 using BP.GameConsole;
+using GH.ComponentSystem;
 using Godot;
 using System;
 
@@ -24,8 +25,11 @@ public partial class PlayerController : Node
     public Vector3 Direction { get; private set; } = Vector3.Zero;
     public Vector2 InputDirectionInterpolate { get; private set; } = Vector2.Zero;
     public Vector2 InputDirection { get; private set; } = Vector2.Zero;
+    public Vector3 Position { get; private set; } = Vector3.Zero;
+    public Vector3 Rotation { get; private set; } = Vector3.Zero;
     public float Magnitude { get; private set; } = 0f;
     public bool IsOnFloor { get; private set; } = false;
+    public bool IsJumped { get; private set; } = false;
 
     [ExportGroup("Control")]
     [Export(PropertyHint.Range, "0.01,10,0.01")] public float MouseSensitivityX = 0.01f;
@@ -41,6 +45,9 @@ public partial class PlayerController : Node
     [Export(PropertyHint.Range, "0,1,0.01")] public float ShakingForcePosition = 0.01f;
     [Export(PropertyHint.Range, "0,1,0.01")] public float ShakingForceRotation = 0.95f;
 
+    [ExportGroup("Multiplayer")]
+    [Export] public StatePlayerController State = StatePlayerController.Noclip;
+
     [ExportGroup("References")]
     [Export] private BoneAttachment3D _neckBone;
     [Export] public Node3D Body { get; private set; } = null;
@@ -49,7 +56,6 @@ public partial class PlayerController : Node
     [Export] public Camera3D Camera { get; private set; } = null;
     [Export] public CollisionShape3D Collider { get; private set; } = null;
 
-    public StatePlayerController State = StatePlayerController.Noclip;
     public override void _Ready()
     {
         Player = GetParent<CharacterBody3D>();
@@ -57,8 +63,7 @@ public partial class PlayerController : Node
     public override void _PhysicsProcess(double delta)
     {
         if (GameConsole.Instance.Visible) return;
-        CameraControll();
-        BodyControll();
+        Controll();
     }
     public override void _UnhandledInput(InputEvent @event)
     {
@@ -70,15 +75,14 @@ public partial class PlayerController : Node
             }
         }
     }
-    private void BodyControll()
+    private void Controll()
     {
         switch(State)
         {
             case StatePlayerController.Normal: NormalControll(); break;
+            case StatePlayerController.Remote: RemoteControll(); break;
             case StatePlayerController.Noclip: NoclipControll(); break;
         }
-        Player.Velocity = Velocity;
-        Player.MoveAndSlide();
     }
     private void CameraControll()
     {
@@ -96,8 +100,14 @@ public partial class PlayerController : Node
 
         _mouseDelta = Vector2.Zero;
     }
+    private void RemoteCameraControll()
+    {
+        Body.Rotation = Body.Rotation.Lerp(Rotation, 0.33f);
+    }
     private void NormalControll()
     {
+        CameraControll();
+
         Collider.Disabled = false;
         InputDirection = Input.GetVector("move_left", "move_right", "move_forward", "move_backward");
 
@@ -111,11 +121,13 @@ public partial class PlayerController : Node
 
         if (IsOnFloor)
         {
+            IsJumped = false;
             Velocity.Y = 0;
             JumpDirection = Vector3.Zero;
 
             if (Input.IsActionJustPressed("jump"))
             {
+                IsJumped = true;
                 JumpDirection = Direction * CurrentSpeedOfMovement;
                 Velocity.Y = JumpForce;
             }
@@ -143,19 +155,41 @@ public partial class PlayerController : Node
             Velocity.Y -= CurrentFallAcceleration;
             CurrentSpeedOfMovement = FallingSpeed;
         }
+        Player.Velocity = Velocity;
+        Player.MoveAndSlide();
+    }
+    private void RemoteControll()
+    {
+        RemoteCameraControll();
+        Collider.Disabled = true;
+        Player.Position = Player.Position.Lerp(Position, 0.3f);
     }
     private void NoclipControll()
     {
+        CameraControll();
         Collider.Disabled = true;
         CurrentSpeedOfMovement = NoclipingSpeed;
 
         InputDirection = Input.GetVector("move_left", "move_right", "move_forward", "move_backward");
         Direction = (Body.Basis * CameraHandler.Basis) * new Vector3(InputDirection.X, 0, InputDirection.Y);
         Velocity = Direction * CurrentSpeedOfMovement;
+        Player.Velocity = Velocity;
+        Player.MoveAndSlide();
+    }
+    public void FromRemotePlayer(Vector3 position, Vector3 rotation, Vector2 inputDirectionInterpolate, bool isOnFloor, bool isJumped, float magnitude)
+    {
+        Position = position;
+        Rotation = rotation;
+        InputDirectionInterpolate = inputDirectionInterpolate;
+
+        IsOnFloor = isOnFloor;
+        IsJumped = isJumped;
+        Magnitude = magnitude;
     }
     public enum StatePlayerController
     {
         Normal,
+        Remote,
         Noclip
     }
 }
