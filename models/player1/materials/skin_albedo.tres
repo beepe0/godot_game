@@ -1,13 +1,16 @@
 [gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://5262uff6vxoa"]
 
-[ext_resource type="Texture2D" uid="uid://dugaq73rrlrek" path="res://models/player1/model_player1_low_rig_skin_albedo.png" id="1_vcivu"]
+[ext_resource type="Texture2D" uid="uid://d0dytweipqks2" path="res://models/player1/materials/textures/model_camera_player1_low_rig_skin_albedo.png" id="1_ejpef"]
 
 [resource]
 resource_name = "skin_albedo"
+shading_mode = 2
 diffuse_mode = 3
-albedo_texture = ExtResource("1_vcivu")
-metallic = 1.0
+specular_mode = 2
+albedo_texture = ExtResource("1_ejpef")
+metallic = 0.68
 metallic_specular = 1.0
+roughness = 0.9
 ao_light_affect = 1.0
 subsurf_scatter_strength = 0.46
 texture_filter = 2

@@ -16,16 +16,22 @@ public partial class KeyCommandPlayer : Command
     }
     public override void Execute(string[] keys)
     {
-        playerController = GetTree().GetFirstNodeInGroup("LocalPlayer").GetComponent<PlayerController>();
+        if (playerController == null) 
+        {
+            if (keys[1].Equals("create"))
+            {
+                MultiplayerManager.Instance.InitPlayer(MultiplayerManager.Instance._localPlayerScene, 0);
+            }
 
-        if (playerController == null) { GameConsole.Instance.DebugError($"The player does not exist!"); return; }
-        if (keys[1].Equals("noclip"))
-        {
-            playerController.State = playerController.State == PlayerController.StatePlayerController.Normal ? PlayerController.StatePlayerController.Noclip : PlayerController.StatePlayerController.Normal;
+            playerController = GetTree().GetFirstNodeInGroup("LocalPlayer").GetComponent<PlayerController>();
         }
-        else if (keys[1].Equals("speed"))
+        else if (keys[1].Equals("noclip"))
         {
-            playerController.NoclipingSpeed = float.Parse(keys[2]);
+            playerController.State = playerController.State == PlayerController.StatePlayerController.Local ? PlayerController.StatePlayerController.Noclip : PlayerController.StatePlayerController.Local;
+        }
+        else if (keys[1].Equals("noclip-speed"))
+        {
+            playerController.NoclipingSpeed = float.Parse(keys[2], CultureInfo.InvariantCulture.NumberFormat);
         }
         else if (keys[1].Equals("sensitivity"))
         {

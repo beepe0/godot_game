@@ -10,8 +10,8 @@ public partial class MultiplayerManager : Node
     public static MultiplayerManager Instance { get; private set; }
 
     [ExportGroup("Player Scenes")]
-    [Export] private PackedScene _localPlayerScene;
-    [Export] private PackedScene _remotePlayerScene;
+    [Export] public PackedScene _localPlayerScene;
+    [Export] public PackedScene _remotePlayerScene;
 
     public Dictionary<long, PlayerNetwork> Players { get; private set; } = new Dictionary<long, PlayerNetwork>();
 
@@ -23,7 +23,7 @@ public partial class MultiplayerManager : Node
     {
         Multiplayer.PeerConnected += (id) => InitPlayer(_remotePlayerScene, id);
     }
-    private void InitPlayer(PackedScene playerScene, long id)
+    public void InitPlayer(PackedScene playerScene, long id)
     {
         CharacterBody3D player = playerScene.Instantiate<CharacterBody3D>();
         AddChild(player);

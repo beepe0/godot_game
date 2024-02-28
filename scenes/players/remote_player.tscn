@@ -9,10 +9,10 @@
 [ext_resource type="Animation" uid="uid://d2x04tg61fxpj" path="res://models/player1/animations/_walk_forward.res" id="7_rilf6"]
 [ext_resource type="Animation" uid="uid://c77myb6lbfea0" path="res://models/player1/animations/_walk_left.res" id="8_wa8xp"]
 [ext_resource type="Animation" uid="uid://xa37bl0xtpjr" path="res://models/player1/animations/_walk_right.res" id="9_rssk6"]
-[ext_resource type="Script" path="res://scripts/components/PlayerAnimator.cs" id="10_e7dk7"]
-[ext_resource type="Script" path="res://scripts/components/PlayerStats.cs" id="10_ut37d"]
-[ext_resource type="Script" path="res://scripts/components/PlayerController.cs" id="11_25gi0"]
-[ext_resource type="Script" path="res://scripts/components/RemotePlayerNetwork.cs" id="13_i6egw"]
+[ext_resource type="Script" path="res://scripts/components/player/PlayerAnimator.cs" id="10_e7dk7"]
+[ext_resource type="Script" path="res://scripts/components/player/PlayerStats.cs" id="10_ut37d"]
+[ext_resource type="Script" path="res://scripts/components/player/PlayerController.cs" id="11_25gi0"]
+[ext_resource type="Script" path="res://scripts/components/player/RemotePlayerNetwork.cs" id="13_i6egw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1jmgt"]
 resource_name = "skin_albedo"
@@ -300,7 +300,7 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(1, -6.10642e-08, 4.72248e-08, 5.4946e-08, 0.992752, 0.120182, -5.42213e-08, -0.120182, 0.992752, 5.16254e-15, 0.1945, 6.51925e-09)
 bones/1/enabled = true
 bones/1/position = Vector3(5.16254e-15, 0.1945, 6.51925e-09)
-bones/1/rotation = Quaternion(-0.0601618, 0.00829232, -0.00377532, 0.998147)
+bones/1/rotation = Quaternion(-0.0601636, -0.00452721, 0.00206121, 0.998176)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Breast"
 bones/2/parent = 1
@@ -511,12 +511,12 @@ mesh = SubResource("ArrayMesh_ubsuo")
 skin = SubResource("Skin_3l2eo")
 
 [node name="NeckBone" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(0.999834, 0.00688855, 0.0168696, -0.00863669, 0.994344, 0.105851, -0.016045, -0.105979, 0.994239, 0.00600317, 1.84971, 0.0590362)
+transform = Transform3D(0.999951, -0.00376095, -0.00921033, 0.00471539, 0.994365, 0.105902, 0.00876014, -0.10594, 0.994334, -0.00327736, 1.84973, 0.0590699)
 bone_name = "Head"
 bone_idx = 4
 
 [node name="RightHandBone" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(0.926717, 0.165975, -0.337117, 0.206122, -0.974674, 0.0867486, -0.314181, -0.149879, -0.937458, -0.269472, 1.11067, -0.00543039)
+transform = Transform3D(0.93139, 0.18264, -0.31489, 0.218528, -0.972346, 0.0823952, -0.291133, -0.145554, -0.945545, -0.267177, 1.10709, -0.0120869)
 bone_name = "Hand.R"
 bone_idx = 16
 
