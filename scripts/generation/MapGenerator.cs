@@ -10,11 +10,8 @@ public partial class Generator
     private List<Walker> WalkersToAdd = new List<Walker>();
 
     public int CurrentRoomsCount { get; private set; } = 0;
-
     public int TargetRoomsCount = 10;
     
-    
-
     public void Update()
     {
         foreach (Walker walker in Walkers)
@@ -29,11 +26,11 @@ public partial class Generator
                 Grid[walker.Position] = true;
                 CurrentRoomsCount++;
             }
-
-            List<Vector2I> validNeighbours = new List<Vector2I>();
-
             
-            foreach (Vector2I neighbor in Grid.GetNeighborsWith(walker.Position, Neighborhood.Manhattan, false))
+            List<Vector2I> validNeighbours = new List<Vector2I>();
+            List<Vector2I> tempNeighbours = Grid.GetNeighborsWith(walker.Position, Neighborhood.Manhattan, false);
+            
+            foreach (Vector2I neighbor in tempNeighbours)
             {
                 if(Grid.GetNeighborsWith(neighbor, Neighborhood.Moore, true).Count < 4)
                 {
@@ -56,20 +53,14 @@ public partial class Generator
 
                     WalkersToAdd.Add(newWalker);
                 }
-
                 else
                 {
                     walker.Position = targetPosition;
                 }
-
-                
-                
             }
-
             else if(walker.MoveHistory.Count > 0)
             {
                 walker.Position = walker.MoveHistory.Pop();
-                
             }
         }
         Walkers.AddRange(WalkersToAdd);

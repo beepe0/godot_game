@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d1do2dn31kwfh"]
 
-[ext_resource type="PackedScene" uid="uid://c5dwpfhhncq65" path="res://scenes/bunker/base_room.tscn" id="1_58nei"]
+[ext_resource type="PackedScene" uid="uid://c5dwpfhhncq65" path="res://scenes/bunker/room_b.tscn" id="1_58nei"]
 
 [node name="BaseRoom" instance=ExtResource("1_58nei")]
 

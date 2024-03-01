@@ -1,5 +1,5 @@
 using BP.GameConsole;
-using GH.ComponentSystem;
+using BP.ComponentSystem;
 using Godot;
 using Godot.Collections;
 using System;

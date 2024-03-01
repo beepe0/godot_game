@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://bemctsja6wlyg"]
+[gd_scene load_steps=14 format=3 uid="uid://bemctsja6wlyg"]
 
 [ext_resource type="Script" path="res://scripts/Game.cs" id="1_q1sgy"]
-[ext_resource type="Script" path="res://submodules/scene_manager/SceneManager.cs" id="2_enoti"]
-[ext_resource type="Script" path="res://scripts/generation/LevelGenerator.cs" id="3_pnjj3"]
+[ext_resource type="Script" path="res://scripts/generation/DungeonBuilder.cs" id="3_ifd8w"]
 [ext_resource type="PackedScene" uid="uid://c5q0it6f74vd8" path="res://scenes/players/local_player.tscn" id="4_1f4f1"]
 [ext_resource type="Script" path="res://submodules/console_manager/CommandManager.cs" id="4_1ivhn"]
 [ext_resource type="Script" path="res://submodules/voip_system/VoiceGrabber.cs" id="5_guotx"]
@@ -14,14 +13,15 @@
 [ext_resource type="Script" path="res://scripts/stats/DebugPlayer.cs" id="11_qp4hc"]
 
 [sub_resource type="Environment" id="Environment_v4uvn"]
-background_mode = 2
+background_mode = 1
+background_color = Color(0.133333, 0.0862745, 0, 1)
 ambient_light_source = 3
 reflected_light_source = 2
 tonemap_mode = 2
 sdfgi_use_occlusion = true
 glow_normalized = true
-volumetric_fog_density = 0.5394
-volumetric_fog_albedo = Color(0.0980392, 0.0980392, 0.0980392, 1)
+volumetric_fog_density = 0.2029
+volumetric_fog_albedo = Color(0, 0, 0, 1)
 volumetric_fog_anisotropy = 0.13
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g8m7r"]
@@ -29,18 +29,6 @@ bg_color = Color(0, 0, 0, 0)
 
 [node name="Game" type="Node"]
 script = ExtResource("1_q1sgy")
-
-[node name="SceneManager" type="Node" parent="." node_paths=PackedStringArray("CurrentScene")]
-script = ExtResource("2_enoti")
-CurrentScene = NodePath("Dungeon")
-
-[node name="Dungeon" type="Node3D" parent="SceneManager"]
-script = ExtResource("3_pnjj3")
-RoomsFolderPath = "res://scenes/bunker/rooms"
-TargetRoomsCount = 50
-LevelSize = Vector2i(10, 10)
-TileSize = Vector2(1.6, 1.6)
-RoomSizeTiles = Vector2i(13, 13)
 
 [node name="Singeltons" type="Node" parent="."]
 
@@ -64,6 +52,17 @@ _remotePlayerScene = ExtResource("9_2c66a")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_v4uvn")
+
+[node name="Dungeon" type="Node3D" parent="."]
+script = ExtResource("3_ifd8w")
+RoomsFolderPath = "res://scenes/bunker/rooms"
+TargetRoomsCount = 50
+LevelSize = Vector2i(10, 10)
+TileSize = Vector2(1.6, 1.6)
+MapOffset = Vector3(0, -10, 0)
+RoomSizeTiles = Vector2i(13, 13)
+
+[node name="Lobby" parent="." instance=ExtResource("11_huejg")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -104,7 +103,5 @@ autostart = true
 
 [node name="Console" parent="CanvasLayer" instance=ExtResource("6_qchd8")]
 visible = false
-
-[node name="Lobby" parent="." instance=ExtResource("11_huejg")]
 
 [connection signal="timeout" from="CanvasLayer/Stats/Timer" to="CanvasLayer/Stats" method="UpdateContent"]

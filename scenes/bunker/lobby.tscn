@@ -1,11 +1,12 @@
-[gd_scene load_steps=35 format=3 uid="uid://digtkc52es5kp"]
+[gd_scene load_steps=36 format=3 uid="uid://digtkc52es5kp"]
 
 [ext_resource type="Texture2D" uid="uid://eho2oquvlljy" path="res://models/bunker/lobby/lobby_bunker_1_atlas_albedo.png" id="1_0jp65"]
 [ext_resource type="Texture2D" uid="uid://bhf3bqiiyjutg" path="res://models/bunker/lobby/lobby_bunker_1_atlas_normal.png" id="2_4mm4q"]
-[ext_resource type="PackedScene" uid="uid://qe1b8jnjt1pm" path="res://scenes/bunker/doors/door_1.tscn" id="3_m0jbd"]
-[ext_resource type="PackedScene" uid="uid://ce5puivgjsvqs" path="res://scenes/bunker/doors/door_2.tscn" id="4_hfvfd"]
+[ext_resource type="PackedScene" uid="uid://ce5puivgjsvqs" path="res://scenes/bunker/doors/room_door.tscn" id="4_4jh4u"]
+[ext_resource type="PackedScene" uid="uid://qe1b8jnjt1pm" path="res://scenes/bunker/doors/bunker_door.tscn" id="5_icipe"]
 [ext_resource type="PackedScene" uid="uid://b4n008ng67ag4" path="res://scenes/bunker/tables/table_1.tscn" id="5_jdipw"]
 [ext_resource type="PackedScene" uid="uid://dgw3383ifm0rc" path="res://scenes/bunker/flashlights/flashlight_1.tscn" id="6_nc75e"]
+[ext_resource type="PackedScene" uid="uid://cnmef8gdc7rhb" path="res://scenes/bunker/doors/bunker_door_fake.tscn" id="6_xf1q2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0i0wg"]
 resource_name = "bunker_material"
@@ -466,28 +467,33 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0778, 0, 3.20904)
 
 [node name="Doors" type="Node" parent="."]
 
-[node name="Door_2" parent="Doors" instance=ExtResource("4_hfvfd")]
+[node name="Door_2" parent="Doors" instance=ExtResource("4_4jh4u")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.80096, 2.38419e-07, 4.80665)
 
-[node name="Door_5" parent="Doors" instance=ExtResource("4_hfvfd")]
+[node name="Door_5" parent="Doors" instance=ExtResource("4_4jh4u")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.79904, 2.38419e-07, 11.2066)
 
-[node name="Door_6" parent="Doors" instance=ExtResource("4_hfvfd")]
+[node name="Door_6" parent="Doors" instance=ExtResource("4_4jh4u")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.000962019, 2.38419e-07, 14.0066)
 
-[node name="Door_7" parent="Doors" instance=ExtResource("4_hfvfd")]
+[node name="Door_7" parent="Doors" instance=ExtResource("4_4jh4u")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.000962019, 2.38419e-07, 27.6066)
 
-[node name="Door_1" parent="Doors" instance=ExtResource("3_m0jbd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.906662)
-
-[node name="Door_3" parent="Doors" instance=ExtResource("3_m0jbd")]
+[node name="Door_3" parent="Doors" instance=ExtResource("5_icipe")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.3, 0, 19.9933)
 
-[node name="Door_4" parent="Doors" instance=ExtResource("3_m0jbd")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.3, 0, 19.993)
+[node name="Door_4" parent="Doors" instance=ExtResource("5_icipe")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -7.2, 0, 19.9933)
+
+[node name="Interactable" parent="Doors/Door_4" index="3"]
+CanInteract = false
+
+[node name="BunkerDoorFake" parent="Doors" instance=ExtResource("6_xf1q2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8)
 
 [node name="Items" type="Node" parent="."]
 
 [node name="Flashlight_1" parent="." instance=ExtResource("6_nc75e")]
 transform = Transform3D(0.636442, 0.771325, 3.37157e-08, 0, -4.37114e-08, 1, 0.771325, -0.636442, -2.78198e-08, 14.4187, 1.21885, 3.08269)
+
+[editable path="Doors/Door_4"]

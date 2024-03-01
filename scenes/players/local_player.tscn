@@ -314,7 +314,7 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(1, -6.10642e-08, 4.72248e-08, 5.4946e-08, 0.992752, 0.120182, -5.42213e-08, -0.120182, 0.992752, 4.996e-15, 0.1945, 6.51925e-09)
 bones/1/enabled = true
 bones/1/position = Vector3(4.996e-15, 0.1945, 6.51925e-09)
-bones/1/rotation = Quaternion(-0.0601631, 0.00570879, -0.00259908, 0.998169)
+bones/1/rotation = Quaternion(-0.0601643, 0.000268605, -0.000122251, 0.998188)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Breast"
 bones/2/parent = 1
@@ -356,7 +356,7 @@ bones/7/parent = 6
 bones/7/rest = Transform3D(0.997572, -0.0500224, 0.0484603, 0.0682145, 0.561383, -0.82474, 0.0140507, 0.826042, 0.563432, -6.51926e-09, 0.489513, -7.45058e-09)
 bones/7/enabled = true
 bones/7/position = Vector3(-6.51926e-09, 0.489513, -7.45058e-09)
-bones/7/rotation = Quaternion(0.467107, 0.00973658, 0.0334564, 0.883514)
+bones/7/rotation = Quaternion(0.467107, 0.00973657, 0.0334565, 0.883514)
 bones/7/scale = Vector3(1, 1, 1)
 bones/8/name = "LowerFoot.R"
 bones/8/parent = 7
@@ -403,12 +403,12 @@ mesh = SubResource("ArrayMesh_ak4o2")
 skin = SubResource("Skin_5dk0g")
 
 [node name="BoneAttachmentNeck" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(0.999921, 0.0047425, 0.011614, -0.005946, 0.99436, 0.105888, -0.0110463, -0.105949, 0.99431, 0.00413298, 1.84973, 0.0590621)
+transform = Transform3D(1, 0.000223134, 0.000546401, -0.000279756, 0.994374, 0.105923, -0.000519692, -0.105923, 0.994374, 0.000194582, 1.84974, 0.0590847)
 bone_name = "Head"
 bone_idx = 4
 
 [node name="BoneAttachmentBearst" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(0.999921, 0.00789931, 0.00974551, -0.0059462, 0.982482, -0.186261, -0.0110461, 0.186188, 0.982452, 0.000836464, 1.42408, -0.0102166)
+transform = Transform3D(1, 0.000371808, 0.000458308, -0.000279952, 0.982506, -0.186232, -0.000519533, 0.186232, 0.982506, 3.94233e-05, 1.42408, -0.0102121)
 bone_name = "Breast"
 bone_idx = 2
 
@@ -583,7 +583,7 @@ mesh = ExtResource("1_1txyu")
 skin = SubResource("Skin_jephv")
 
 [node name="BoneAttachmentHandR" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D/BoneAttachmentBearst/Root_Arms/Skeleton3D"]
-transform = Transform3D(0.911041, -0.278655, 0.303903, 0.282481, 0.95873, 0.0322596, -0.30035, 0.0564566, 0.952157, 0.270797, 1.73338, -0.305667)
+transform = Transform3D(0.91104, -0.278656, 0.303902, 0.282481, 0.95873, 0.0322604, -0.30035, 0.056456, 0.952157, 0.268263, 1.73391, -0.304682)
 bone_name = "Hand.R"
 bone_idx = 5
 
@@ -591,7 +591,7 @@ bone_idx = 5
 transform = Transform3D(0.930236, 0.281575, 0.235353, -0.204939, -0.133418, 0.969646, 0.304426, -0.950227, -0.0664045, -0.0457025, 0.12292, 0.0853515)
 
 [node name="BoneAttachmentShoulderR" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D/BoneAttachmentBearst/Root_Arms/Skeleton3D"]
-transform = Transform3D(1, 5.30346e-09, 0, -5.30346e-09, 1, -6.0709e-15, 0, 6.0709e-15, 1, 0.1, 1.73554, -8.88178e-16)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0974655, 1.73607, 0.000984346)
 bone_name = "Shoulder.R"
 bone_idx = 2
 override_pose = true
@@ -634,7 +634,6 @@ transform = Transform3D(0.999999, 0, 0, 0, 0.999999, 0, 0, 0, 1, -9.44979e-08, -
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0884558, -0.0866505)
 fov = 90.0
 near = 0.001
-far = 100.0
 
 [node name="RayCast3D" type="RayCast3D" parent="Body/CameraShaker/CameraHandler/Camera3D"]
 target_position = Vector3(0, 0, -1.3)

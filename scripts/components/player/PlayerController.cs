@@ -1,5 +1,5 @@
 using BP.GameConsole;
-using GH.ComponentSystem;
+using BP.ComponentSystem;
 using Godot;
 using System;
 
@@ -65,9 +65,9 @@ public partial class PlayerController : Node
     public override void _PhysicsProcess(double delta)
     {
         if (GameConsole.Instance.Visible) return;
-        Controll();
+        Control();
     }
-    public override void _UnhandledInput(InputEvent @event)
+    public override void _Input(InputEvent @event)
     {
         using(InputEventMouseMotion inputEventMouseMotion = @event as InputEventMouseMotion)
         {
@@ -77,23 +77,23 @@ public partial class PlayerController : Node
             }
         }
     }
-    private void Controll()
+    private void Control()
     {
         switch(State)
         {
-            case StatePlayerController.Local: LocalControll(); break;
-            case StatePlayerController.Remote: RemoteControll(); break;
-            case StatePlayerController.Noclip: NoclipControll(); break;
+            case StatePlayerController.Local: LocalControl(); break;
+            case StatePlayerController.Remote: RemoteControl(); break;
+            case StatePlayerController.Noclip: NoclipControl(); break;
         }
     }
     private void InteractWith()
     {
         if (Input.IsActionJustPressed("interact") && _interactRay.IsColliding())
         {
-            if (((Node)_interactRay.GetCollider()).GetParent().GetComponent<Interactable>() is Interactable interactable) interactable.Interact(this);
+            if (((Node)_interactRay.GetCollider()).GetParent().GetComponent<Interactable>() is { } interactable) interactable.Interact(Player);
         }
     }
-    private void LocalCameraControll()
+    private void LocalCameraControl()
     {
         float rX = (_mouseDelta.Y * MouseSensitivityX * 0.01f);
         float rY = (_mouseDelta.X * MouseSensitivityY * 0.01f);
@@ -107,21 +107,18 @@ public partial class PlayerController : Node
         Body.RotateY(-_cameraRotationDelta.Y);
         TargetArm.RotateX(-_cameraRotationDelta.X);
 
-        DebugPlayer.Instance.Debug($"TargetArm.Rotation: {TargetArm.RotationDegrees}");
-        DebugPlayer.Instance.Flush();
-
         CameraHandler.Rotation = CameraHandler.Rotation.Clamp(Vector3.Right * Mathf.DegToRad(LockAxisMinX), Vector3.Right * Mathf.DegToRad(LockAxisMaxX));
         TargetArm.Rotation = TargetArm.Rotation.Clamp(Vector3.Right * Mathf.DegToRad(LockArmAxisMinX), Vector3.Right * Mathf.DegToRad(LockArmAxisMaxX));
     
         _mouseDelta = Vector2.Zero;
     }
-    private void RemoteCameraControll()
+    private void RemoteCameraControl()
     {
         Body.Rotation = Body.Rotation.Lerp(Rotation, 0.33f);
     }
-    private void LocalControll()
+    private void LocalControl()
     {
-        LocalCameraControll();
+        LocalCameraControl();
         InteractWith();
 
         Collider.Disabled = false;
@@ -174,15 +171,15 @@ public partial class PlayerController : Node
         Player.Velocity = Velocity;
         Player.MoveAndSlide();
     }
-    private void RemoteControll()
+    private void RemoteControl()
     {
-        RemoteCameraControll();
+        RemoteCameraControl();
         Collider.Disabled = true;
         Player.Position = Player.Position.Lerp(Position, 0.3f);
     }
-    private void NoclipControll()
+    private void NoclipControl()
     {
-        LocalCameraControll();
+        LocalCameraControl();
         Collider.Disabled = true;
         CurrentSpeedOfMovement = NoclipingSpeed;
 
@@ -201,6 +198,11 @@ public partial class PlayerController : Node
         IsOnFloor = isOnFloor;
         IsJumped = isJumped;
         Magnitude = magnitude;
+    }
+    public void TeleportTo(Vector3 to)
+    {
+        GameConsole.Instance.Debug($"Teleported to: {to}");
+        Player.Position = to;
     }
     public enum StatePlayerController
     {
