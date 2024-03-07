@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cks0r2rn1ryxy"]
 
 [ext_resource type="MeshLibrary" uid="uid://drtyfarnln56k" path="res://mesh_libraries/tileset_bunker.tres" id="1_rd74p"]
-[ext_resource type="Script" path="res://scripts/components/room/MainRoom.cs" id="2_a7044"]
+[ext_resource type="Script" path="res://scripts/components/rooms/MainRoom.cs" id="2_a7044"]
 
 [node name="MainRoom" type="Node3D"]
 

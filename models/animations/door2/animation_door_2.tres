@@ -1,0 +1,12 @@
+[gd_resource type="AnimationLibrary" load_steps=4 format=3 uid="uid://dukarkngqs1nf"]
+
+[ext_resource type="Animation" uid="uid://cej146hkv0466" path="res://models/animations/door2/_close.res" id="1_24jlq"]
+[ext_resource type="Animation" uid="uid://bqj0tpbgrg424" path="res://models/animations/door2/_idle.res" id="2_hxujw"]
+[ext_resource type="Animation" uid="uid://b8c4cgv5avo8h" path="res://models/animations/door2/_open.res" id="3_2o46x"]
+
+[resource]
+_data = {
+"_close": ExtResource("1_24jlq"),
+"_idle": ExtResource("2_hxujw"),
+"_open": ExtResource("3_2o46x")
+}

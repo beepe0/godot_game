@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b4n008ng67ag4"]
 
-[ext_resource type="Material" uid="uid://28onfvxte2mp" path="res://models/bunker/tables/materials/tabel_material.tres" id="1_jabla"]
+[ext_resource type="Material" uid="uid://28onfvxte2mp" path="res://models/materials/tabel_material.tres" id="1_jabla"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x1sx3"]
 size = Vector3(1.6, 1.2, 3.2)

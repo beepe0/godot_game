@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c5dwpfhhncq65"]
 
 [ext_resource type="MeshLibrary" uid="uid://drtyfarnln56k" path="res://mesh_libraries/tileset_bunker.tres" id="1_ikneh"]
-[ext_resource type="Script" path="res://scripts/components/room/BaseRoom.cs" id="2_ewuue"]
+[ext_resource type="Script" path="res://scripts/components/rooms/BaseRoom.cs" id="2_ewuue"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fbd4q"]
 albedo_color = Color(0.196078, 0.12549, 0.0901961, 1)
@@ -27,6 +27,7 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5124, 0)
+visible = false
 light_color = Color(0.866667, 0.721569, 0.533333, 1)
 light_energy = 3.381
 shadow_enabled = true

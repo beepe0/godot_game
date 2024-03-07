@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dgw3383ifm0rc"]
 
-[ext_resource type="Material" uid="uid://d3vl6c7rihecs" path="res://models/bunker/flashlights/materials/flashlight_material.tres" id="1_pyair"]
+[ext_resource type="Material" uid="uid://d3vl6c7rihecs" path="res://models/materials/flashlight_material.tres" id="1_pyair"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_hjm3k"]
 _surfaces = [{
@@ -35,12 +35,12 @@ shadow_mesh = SubResource("ArrayMesh_hjm3k")
 [node name="Flashlight_1" type="Node3D"]
 
 [node name="Flashlight_1" type="MeshInstance3D" parent="."]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_xybyj")
 skeleton = NodePath("")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.239352, 0)
 light_energy = 6.0
-light_volumetric_fog_energy = 6.0
 spot_range = 50.0
 spot_angle = 27.9135

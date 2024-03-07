@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dafjqdf41do12"]
+
+[ext_resource type="Texture2D" uid="uid://cwk77t2jeviej" path="res://models/textures/door_3_albedo.png" id="1_4j6ni"]
+[ext_resource type="Texture2D" uid="uid://b4abo18niq2q4" path="res://models/textures/door_3_normal.png" id="2_xafec"]
+
+[resource]
+diffuse_mode = 3
+specular_mode = 2
+albedo_texture = ExtResource("1_4j6ni")
+normal_enabled = true
+normal_texture = ExtResource("2_xafec")
+texture_filter = 0

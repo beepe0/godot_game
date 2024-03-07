@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bimbybkib2qr7"]
+
+[ext_resource type="Texture2D" uid="uid://b6o85iffah24w" path="res://models/textures/boxes_boxes_atlas_albedo.png" id="1_u27rb"]
+[ext_resource type="Texture2D" uid="uid://bk4bbhnvvs1kd" path="res://models/textures/boxes_boxes_atlas_normal.png" id="2_ov4o7"]
+
+[resource]
+albedo_texture = ExtResource("1_u27rb")
+normal_enabled = true
+normal_texture = ExtResource("2_ov4o7")
+texture_filter = 0
