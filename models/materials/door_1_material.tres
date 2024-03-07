@@ -1,0 +1,25 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://dphv7g6m7a6sd"]
+
+[ext_resource type="Texture2D" uid="uid://c1ub8ih8jrbpn" path="res://models/textures/door_1_albedo.png" id="1_7igs3"]
+[ext_resource type="Texture2D" uid="uid://cdhrcl8yf36ri" path="res://models/textures/door_1_normal.png" id="2_pbd5v"]
+
+[resource]
+diffuse_mode = 3
+specular_mode = 2
+albedo_texture = ExtResource("1_7igs3")
+emission_energy_multiplier = 16.0
+normal_enabled = true
+normal_texture = ExtResource("2_pbd5v")
+rim = 0.43
+rim_tint = 1.0
+anisotropy = -1.0
+heightmap_scale = 0.853
+subsurf_scatter_strength = 1.0
+subsurf_scatter_transmittance_color = Color(1, 0.25098, 0.807843, 1)
+subsurf_scatter_transmittance_depth = 8.0
+subsurf_scatter_transmittance_boost = 1.0
+backlight = Color(0.501961, 0.501961, 0.501961, 1)
+refraction_scale = 1.0
+texture_filter = 0
+point_size = 38.1
+proximity_fade_distance = 4096.0

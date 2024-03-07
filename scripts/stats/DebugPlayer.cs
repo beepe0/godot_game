@@ -34,5 +34,5 @@ public partial class DebugPlayer : Control
         _consoleContent.Add($"[color=#ffffff]{text}[/color]");
     }
     public void Flush() => _isFlush = false;
-    public void FlushCallDeferrd() => CallDeferred(MethodName.Flush);
+    public void FlushCallDeferred() => CallDeferred(MethodName.Flush);
 }

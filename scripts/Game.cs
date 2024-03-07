@@ -14,4 +14,13 @@ public partial class Game : Node
     {
         Input.MouseMode = Input.MouseModeEnum.Captured;
     }
+
+    public override void _Process(double delta)
+    {
+        DebugPlayer.Instance.Debug($"Performance.GetMonitor");
+        DebugPlayer.Instance.Debug($"TimeFps: {Performance.GetMonitor(Performance.Monitor.TimeFps)}");
+        DebugPlayer.Instance.Debug($"RenderTotalDrawCallsInFrame: {Performance.GetMonitor(Performance.Monitor.RenderTotalDrawCallsInFrame)}");
+        DebugPlayer.Instance.Debug($"RenderTotalPrimitivesInFrame: {Performance.GetMonitor(Performance.Monitor.RenderTotalPrimitivesInFrame)}");
+        DebugPlayer.Instance.Flush();
+    }
 }

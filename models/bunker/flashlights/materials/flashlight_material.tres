@@ -1,8 +1,0 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://d3vl6c7rihecs"]
-
-[ext_resource type="Texture2D" uid="uid://bal04vy6qrgua" path="res://models/bunker/flashlights/materials/textures/flashlight_1_albedo.png" id="1_k743d"]
-
-[resource]
-diffuse_mode = 3
-specular_mode = 2
-albedo_texture = ExtResource("1_k743d")

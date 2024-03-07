@@ -1,7 +1,7 @@
 [gd_scene load_steps=79 format=3 uid="uid://bwlh7xksf3qve"]
 
-[ext_resource type="Texture2D" uid="uid://bymcqyp80s0fi" path="res://models/bunker/tileset_bunker_bunker_1_atlas_albedo.png" id="1_622qa"]
-[ext_resource type="Texture2D" uid="uid://cgygw7xkw0d7j" path="res://models/bunker/tileset_bunker_bunker_1_atlas_normal.png" id="2_f2i7v"]
+[ext_resource type="Texture2D" uid="uid://bymcqyp80s0fi" path="res://models/textures/tileset_bunker_bunker_1_atlas_albedo.png" id="1_622qa"]
+[ext_resource type="Texture2D" uid="uid://cgygw7xkw0d7j" path="res://models/textures/tileset_bunker_bunker_1_atlas_normal.png" id="2_f2i7v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8hqfu"]
 resource_name = "bunker_material"

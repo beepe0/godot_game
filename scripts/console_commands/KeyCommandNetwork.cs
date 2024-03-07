@@ -17,16 +17,13 @@ public partial class KeyCommandNetwork : Command
         }
         else if (keys[1].Equals("generate-dungeon"))
         {
-            if (Multiplayer.IsServer())
-            {
-                Rpc(MethodName.Test, ulong.Parse(keys[2]));
-            }
+            Test(ulong.Parse(keys[2]));
         }
     }
     
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 0, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
     private void Test(ulong seed)
     {
-        LevelGenerator.Instance.Generate(seed);
+        DungeonBuilder.Instance.Generate(seed);
     }
 }
