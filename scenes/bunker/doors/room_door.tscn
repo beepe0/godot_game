@@ -1,10 +1,14 @@
-[gd_scene load_steps=28 format=3 uid="uid://dp0us7uhydik7"]
+[gd_scene load_steps=29 format=3 uid="uid://dp0us7uhydik7"]
 
 [ext_resource type="Material" uid="uid://dbdn65xo848kp" path="res://models/materials/door_2_material.tres" id="1_0krr7"]
+[ext_resource type="Script" path="res://submodules/component_system/ComponentSystem.cs" id="2_jjabd"]
 [ext_resource type="Script" path="res://scripts/components/interactables/Interactable.cs" id="4_fy7xo"]
 [ext_resource type="Script" path="res://scripts/components/interactables/doors/DoorController.cs" id="5_rsrdj"]
 [ext_resource type="Script" path="res://scripts/components/interactables/doors/DoorAnimator.cs" id="6_6qj55"]
 [ext_resource type="Script" path="res://scripts/components/interactables/doors/behaviour/RoomDoorBehaviour.cs" id="7_m31gv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0c5os"]
+size = Vector3(1, 2.3, 0.110229)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_jsrsc"]
 _surfaces = [{
@@ -224,9 +228,6 @@ states/_room_door_interact1/position = Vector2(301.667, 235.111)
 transitions = ["_room_door_idle", "_room_door_interact", SubResource("AnimationNodeStateMachineTransition_lxfon"), "Start", "_room_door_idle", SubResource("AnimationNodeStateMachineTransition_orc4b"), "_room_door_interact", "_room_door_interact1", SubResource("AnimationNodeStateMachineTransition_rw2n7"), "_room_door_interact1", "_room_door_idle", SubResource("AnimationNodeStateMachineTransition_e4u04")]
 graph_offset = Vector2(-477, 62)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_0c5os"]
-size = Vector3(1, 2.3, 1)
-
 [node name="RoomDoor" type="Node3D"]
 
 [node name="Root_RoomDoor" type="StaticBody3D" parent="."]
@@ -251,6 +252,31 @@ bones/1/scale = Vector3(1, 1, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.639736, 1.1546, 1.16348e-07)
 bone_name = "Door"
 bone_idx = 0
+
+[node name="Area3D" type="Area3D" parent="Root_RoomDoor/Skeleton3D/BoneAttachmentDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.639736, -1.1546, -1.16348e-07)
+
+[node name="Components" type="Node" parent="Root_RoomDoor/Skeleton3D/BoneAttachmentDoor/Area3D"]
+script = ExtResource("2_jjabd")
+
+[node name="Interactable" type="Node" parent="Root_RoomDoor/Skeleton3D/BoneAttachmentDoor/Area3D/Components"]
+script = ExtResource("4_fy7xo")
+
+[node name="DoorController" type="Node" parent="Root_RoomDoor/Skeleton3D/BoneAttachmentDoor/Area3D/Components" node_paths=PackedStringArray("_currentBehaviour")]
+script = ExtResource("5_rsrdj")
+_currentBehaviour = NodePath("../RoomDoorBehaviour")
+
+[node name="DoorAnimator" type="Node" parent="Root_RoomDoor/Skeleton3D/BoneAttachmentDoor/Area3D/Components" node_paths=PackedStringArray("_currentBehaviour")]
+script = ExtResource("6_6qj55")
+_currentBehaviour = NodePath("../RoomDoorBehaviour")
+
+[node name="RoomDoorBehaviour" type="Node" parent="Root_RoomDoor/Skeleton3D/BoneAttachmentDoor/Area3D/Components" node_paths=PackedStringArray("_animationTree")]
+script = ExtResource("7_m31gv")
+_animationTree = NodePath("../../../../../AnimationTree")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Root_RoomDoor/Skeleton3D/BoneAttachmentDoor/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0.0010376)
+shape = SubResource("BoxShape3D_0c5os")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Root_RoomDoor/Skeleton3D/BoneAttachmentDoor"]
 
@@ -308,26 +334,5 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/isIdle = false
 parameters/conditions/isInteract = false
 
-[node name="Area3D" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
-shape = SubResource("BoxShape3D_0c5os")
-
-[node name="Interactable" type="Node" parent="."]
-script = ExtResource("4_fy7xo")
-
-[node name="DoorController" type="Node" parent="." node_paths=PackedStringArray("_currentBehaviour")]
-script = ExtResource("5_rsrdj")
-_currentBehaviour = NodePath("../RoomDoorBehaviour")
-
-[node name="DoorAnimator" type="Node" parent="." node_paths=PackedStringArray("_currentBehaviour")]
-script = ExtResource("6_6qj55")
-_currentBehaviour = NodePath("../RoomDoorBehaviour")
-
-[node name="RoomDoorBehaviour" type="Node" parent="." node_paths=PackedStringArray("_animationTree")]
-script = ExtResource("7_m31gv")
-_animationTree = NodePath("../Root_RoomDoor/AnimationTree")
-
-[connection signal="OnInteracted" from="Interactable" to="DoorController" method="_OnInteract"]
-[connection signal="OnInteracted" from="Interactable" to="DoorAnimator" method="_OnInteract"]
+[connection signal="OnInteracted" from="Root_RoomDoor/Skeleton3D/BoneAttachmentDoor/Area3D/Components/Interactable" to="Root_RoomDoor/Skeleton3D/BoneAttachmentDoor/Area3D/Components/DoorController" method="_OnInteract"]
+[connection signal="OnInteracted" from="Root_RoomDoor/Skeleton3D/BoneAttachmentDoor/Area3D/Components/Interactable" to="Root_RoomDoor/Skeleton3D/BoneAttachmentDoor/Area3D/Components/DoorAnimator" method="_OnInteract"]

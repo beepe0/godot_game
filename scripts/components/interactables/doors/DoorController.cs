@@ -3,7 +3,7 @@ using BP.GameConsole;
 using Godot;
 
 [GlobalClass]
-public partial class DoorController : Node
+public partial class DoorController : ComponentObject
 {
     [Export] private DoorBehaviour _currentBehaviour;
     

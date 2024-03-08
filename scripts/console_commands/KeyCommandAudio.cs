@@ -9,30 +9,31 @@ public partial class KeyCommandAudio : Command
     string[] devices = null;
     public override void Execute(string[] keys)
     {
-        if (keys[1].Equals("record"))
-        {
-            VoiceManager.Instance.recording = !VoiceManager.Instance.recording;
-        }
-        if (keys[1].Equals("listen"))
-        {
-            VoiceManager.Instance.listen = !VoiceManager.Instance.listen;
-        }
-        else if (keys[1].Equals("input-device"))
-        {
-            GetInputDeviceList();
-        }
-        else if (keys[1].Equals("output-device"))
-        {
-            GetOutputDeviceList();
-        }
-        else if (keys[1].Equals("set-input-device"))
-        {
-            SetInputDevice(ushort.Parse(keys[2]));
-        }
-        else if (keys[1].Equals("set-output-device"))
-        {
-            SetOutputDevice(ushort.Parse(keys[2]));
-        }
+        GameConsole.Instance.DebugWarningCallDeferrd($"KeyCommandAudio :: does not work!");
+        // if (keys[1].Equals("record"))
+        // {
+        //     VoiceManager.Instance.recording = !VoiceManager.Instance.recording;
+        // }
+        // if (keys[1].Equals("listen"))
+        // {
+        //     VoiceManager.Instance.listen = !VoiceManager.Instance.listen;
+        // }
+        // else if (keys[1].Equals("input-device"))
+        // {
+        //     GetInputDeviceList();
+        // }
+        // else if (keys[1].Equals("output-device"))
+        // {
+        //     GetOutputDeviceList();
+        // }
+        // else if (keys[1].Equals("set-input-device"))
+        // {
+        //     SetInputDevice(ushort.Parse(keys[2]));
+        // }
+        // else if (keys[1].Equals("set-output-device"))
+        // {
+        //     SetOutputDevice(ushort.Parse(keys[2]));
+        // }
     }
     private void GetInputDeviceList()
     {

@@ -1,7 +1,8 @@
-﻿using BP.GameConsole;
+﻿using BP.ComponentSystem;
+using BP.GameConsole;
 using Godot;
 
-public partial class PlayerNetwork : Node
+public partial class PlayerNetwork : ComponentObject
 {
     [ExportGroup("References")]
     [Export] protected PlayerStats _playerStats;

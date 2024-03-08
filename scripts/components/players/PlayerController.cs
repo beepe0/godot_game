@@ -3,10 +3,8 @@ using BP.ComponentSystem;
 using Godot;
 using System;
 
-public partial class PlayerController : Node
+public partial class PlayerController : ComponentObject
 {
-    public CharacterBody3D Player = null;
-
     [ExportGroup("Motion")]
     [Export] public float FallAcceleration = 0.2f;
     [Export] public float WalkingSpeed = 2.5f;
@@ -51,6 +49,7 @@ public partial class PlayerController : Node
     [Export] public StatePlayerController State = StatePlayerController.Noclip;
 
     [ExportGroup("References")]
+    [Export] public CharacterBody3D Player;
     [Export] private RayCast3D _interactRay;
     [Export] private BoneAttachment3D _boneAttachmentNeck;
     [Export] private BoneAttachment3D _boneAttachmentBreast;
@@ -62,10 +61,6 @@ public partial class PlayerController : Node
     [Export] public Camera3D Camera { get; private set; } = null;
     [Export] public CollisionShape3D Collider { get; private set; } = null;
 
-    public override void _Ready()
-    {
-        Player = GetParent<CharacterBody3D>();
-    }
     public override void _PhysicsProcess(double delta)
     {
         if (GameConsole.Instance.Visible) return;
@@ -90,7 +85,7 @@ public partial class PlayerController : Node
     {
         if (Input.IsActionJustPressed("interact") && _interactRay.IsColliding())
         {
-            if (((Node)_interactRay.GetCollider()).GetParent().GetComponent<Interactable>() is { } interactable) interactable.Interact(Player);
+            if (((Node)_interactRay.GetCollider()).GetComponentSystem().GetComponent<Interactable>() is { } interactable) interactable.Interact(Player);
         }
     }
     private void LocalCameraControl()

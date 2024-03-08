@@ -90,7 +90,7 @@ public partial class DungeonBuilder : Node3D
         
         if (seed != 0) Game.Instance.Rng.Seed = seed;
         GameConsole.Instance.DebugLogCallDeferrd($"Random Seed: {Game.Instance.Rng.Seed}");
-        
+
         ushort mainRoomId = (ushort)Game.Instance.Rng.RandiRange(TargetRoomsCount/2, TargetRoomsCount-1);
         ushort finishRoomId = (ushort)Game.Instance.Rng.RandiRange(0, TargetRoomsCount/2);
 
