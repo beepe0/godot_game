@@ -237,7 +237,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2, 1.7, -7.9)
 
 [node name="SubViewport" type="SubViewport" parent="Objects/Mirrors/Mirror"]
 
-[node name="Camera3D" type="Camera3D" parent="Objects/Mirrors/Mirror/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="Objects/Mirrors/Mirror/SubViewport" groups=["Mirrors"]]
 transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -5.2, 1.7, -7.9)
 size = 6.314
 near = 0.001

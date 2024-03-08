@@ -1,6 +1,7 @@
-[gd_scene load_steps=41 format=3 uid="uid://c5q0it6f74vd8"]
+[gd_scene load_steps=42 format=3 uid="uid://c5q0it6f74vd8"]
 
 [ext_resource type="Material" uid="uid://5262uff6vxoa" path="res://models/materials/skin_albedo.tres" id="1_62fy6"]
+[ext_resource type="Script" path="res://submodules/component_system/ComponentSystem.cs" id="1_dt56i"]
 [ext_resource type="PackedScene" uid="uid://dgw3383ifm0rc" path="res://scenes/bunker/flashlights/flashlight_1.tscn" id="2_hkem1"]
 [ext_resource type="ArrayMesh" uid="uid://byvon3h0wnwfl" path="res://models/meshes/players/arms/model_camera_player1_arms.res" id="2_k07vj"]
 [ext_resource type="AnimationLibrary" uid="uid://bu8de48jbredd" path="res://models/animations/player1/arms/animation_lib_payer1_arms.res" id="4_xgytn"]
@@ -312,7 +313,7 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(1, -6.10642e-08, 4.72248e-08, 5.4946e-08, 0.992752, 0.120182, -5.42213e-08, -0.120182, 0.992752, 4.996e-15, 0.1945, 6.51925e-09)
 bones/1/enabled = true
 bones/1/position = Vector3(4.996e-15, 0.1945, 6.51925e-09)
-bones/1/rotation = Quaternion(-0.0601625, -0.00710959, 0.00323693, 0.998158)
+bones/1/rotation = Quaternion(-0.0601622, 0.00765559, -0.00348543, 0.998153)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Breast"
 bones/2/parent = 1
@@ -402,12 +403,12 @@ mesh = SubResource("ArrayMesh_ak4o2")
 skin = SubResource("Skin_5dk0g")
 
 [node name="BoneAttachmentNeck" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(0.999878, -0.00590615, -0.0144637, 0.00740496, 0.994352, 0.105869, 0.0137568, -0.105964, 0.994275, -0.00514679, 1.84972, 0.0590493)
+transform = Transform3D(0.999858, 0.00635967, 0.0155743, -0.00797357, 0.994349, 0.105861, -0.014813, -0.10597, 0.994259, 0.00554227, 1.84972, 0.0590437)
 bone_name = "Head"
 bone_idx = 4
 
 [node name="BoneAttachmentBearst" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(0.999878, -0.00983721, -0.0121373, 0.00740477, 0.982469, -0.186277, 0.0137569, 0.186164, 0.982422, -0.00104155, 1.42408, -0.0102192)
+transform = Transform3D(0.999858, 0.0105929, 0.0130688, -0.00797376, 0.982464, -0.186284, -0.0148129, 0.186153, 0.982409, 0.00112167, 1.42408, -0.0102204)
 bone_name = "Breast"
 bone_idx = 2
 
@@ -641,38 +642,43 @@ override_pose = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
 shape = SubResource("CapsuleShape3D_hwg6v")
 
-[node name="PlayerStats" type="Node" parent="."]
-script = ExtResource("6_gsg0y")
+[node name="Components" type="Node" parent="."]
+script = ExtResource("1_dt56i")
+Tag = "LocalPlayer"
 
-[node name="PlayerAnimator" type="Node" parent="." node_paths=PackedStringArray("_controller", "_animationPlayer", "_animationTree")]
-script = ExtResource("7_m7fxw")
-_controller = NodePath("../PlayerController")
-_animationPlayer = NodePath("../Body/Armature/AnimationPlayer")
-_animationTree = NodePath("../Body/Armature/AnimationTree")
-
-[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("_interactRay", "_boneAttachmentNeck", "_boneAttachmentBreast", "_boneAttachmentShoulder", "ArmHandler", "Body", "CameraHandler", "CameraShaker", "Camera", "Collider")]
+[node name="PlayerController" type="Node" parent="Components" node_paths=PackedStringArray("Player", "_interactRay", "_boneAttachmentNeck", "_boneAttachmentBreast", "_boneAttachmentShoulder", "ArmHandler", "Body", "CameraHandler", "CameraShaker", "Camera", "Collider")]
 script = ExtResource("8_h0g3b")
 WalkingSpeed = 2.0
 RunningSpeed = 5.0
 RoughnessOfWalk = 0.08
+MouseSensitivityX = 0.1
+MouseSensitivityY = 0.1
 LockArmAxisMinX = -40
 LockArmAxisMaxX = 90
 State = 0
-_interactRay = NodePath("../Body/CameraShaker/CameraHandler/Camera3D/RayCast3D")
-_boneAttachmentNeck = NodePath("../Body/Armature/Skeleton3D/BoneAttachmentNeck")
-_boneAttachmentBreast = NodePath("../Body/Armature/Skeleton3D/BoneAttachmentBearst")
-_boneAttachmentShoulder = NodePath("../Body/ArmHandler/Root_Arms/Skeleton3D/BoneAttachmentShoulderR")
-ArmHandler = NodePath("../Body/ArmHandler")
-Body = NodePath("../Body")
-CameraHandler = NodePath("../Body/CameraShaker/CameraHandler")
-CameraShaker = NodePath("../Body/CameraShaker")
-Camera = NodePath("../Body/CameraShaker/CameraHandler/Camera3D")
-Collider = NodePath("../CollisionShape3D")
+Player = NodePath("../..")
+_interactRay = NodePath("../../Body/CameraShaker/CameraHandler/Camera3D/RayCast3D")
+_boneAttachmentNeck = NodePath("../../Body/Armature/Skeleton3D/BoneAttachmentNeck")
+_boneAttachmentBreast = NodePath("../../Body/Armature/Skeleton3D/BoneAttachmentBearst")
+_boneAttachmentShoulder = NodePath("../../Body/ArmHandler/Root_Arms/Skeleton3D/BoneAttachmentShoulderR")
+ArmHandler = NodePath("../../Body/ArmHandler")
+Body = NodePath("../../Body")
+CameraHandler = NodePath("../../Body/CameraShaker/CameraHandler")
+CameraShaker = NodePath("../../Body/CameraShaker")
+Camera = NodePath("../../Body/CameraShaker/CameraHandler/Camera3D")
+Collider = NodePath("../../CollisionShape3D")
 
-[node name="PlayerNetwork" type="Node" parent="." node_paths=PackedStringArray("_playerStats", "_playerAnimator", "_playerController")]
+[node name="PlayerStats" type="Node" parent="Components"]
+script = ExtResource("6_gsg0y")
+
+[node name="PlayerAnimator" type="Node" parent="Components" node_paths=PackedStringArray("_controller", "_animationPlayer", "_animationTree")]
+script = ExtResource("7_m7fxw")
+_controller = NodePath("../PlayerController")
+_animationPlayer = NodePath("../../Body/Armature/AnimationPlayer")
+_animationTree = NodePath("../../Body/Armature/AnimationTree")
+
+[node name="PlayerNetwork" type="Node" parent="Components" node_paths=PackedStringArray("_playerStats", "_playerAnimator", "_playerController")]
 script = ExtResource("9_1br11")
 _playerStats = NodePath("../PlayerStats")
 _playerAnimator = NodePath("../PlayerAnimator")
 _playerController = NodePath("../PlayerController")
-
-[node name="Components" type="Node" parent="."]

@@ -1,8 +1,9 @@
+using BP.ComponentSystem;
 using BP.GameConsole;
 using Godot;
 using System;
 
-public partial class PlayerAnimator : Node
+public partial class PlayerAnimator : ComponentObject
 {
     [Export] private PlayerController _controller;
     [Export] private AnimationPlayer _animationPlayer;

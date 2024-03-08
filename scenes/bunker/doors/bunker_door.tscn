@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://bpoam6311moyb"]
+[gd_scene load_steps=22 format=3 uid="uid://bpoam6311moyb"]
 
 [ext_resource type="ArrayMesh" uid="uid://r7jjga1r2hk4" path="res://models/meshes/doors/bunker_door/leaf_bunker_door.tres" id="1_pfi3p"]
 [ext_resource type="ArrayMesh" uid="uid://dvshkmsyl2351" path="res://models/meshes/doors/bunker_door/handle_bunker_door.tres" id="2_7qpwu"]
 [ext_resource type="Material" uid="uid://dafjqdf41do12" path="res://models/materials/door_3_material.tres" id="3_doo5e"]
+[ext_resource type="Script" path="res://submodules/component_system/ComponentSystem.cs" id="4_amj7t"]
 [ext_resource type="Script" path="res://scripts/components/interactables/Interactable.cs" id="4_fv7y0"]
 [ext_resource type="Script" path="res://scripts/components/interactables/doors/DoorController.cs" id="5_j1cuo"]
 [ext_resource type="Script" path="res://scripts/components/interactables/doors/DoorAnimator.cs" id="6_icwep"]
@@ -144,8 +145,8 @@ bones/1/name = "Handle"
 bones/1/parent = -1
 bones/1/rest = Transform3D(1, -1.42109e-13, -3.89414e-07, -3.89414e-07, -7.15256e-07, -1, -1.42109e-13, 1, -7.15256e-07, 2.98023e-08, 1.6, 0.510706)
 bones/1/enabled = true
-bones/1/position = Vector3(2.98024e-08, 1.6, 0.510706)
-bones/1/rotation = Quaternion(0.707107, -1.37679e-07, -1.37679e-07, 0.707107)
+bones/1/position = Vector3(2.98023e-08, 1.6, 0.510706)
+bones/1/rotation = Quaternion(0.5, -0.5, -0.5, 0.5)
 bones/1/scale = Vector3(1, 1, 1)
 
 [node name="BoneAttachmentDoor" type="BoneAttachment3D" parent="Root_BunkerDoor/Skeleton3D"]
@@ -160,7 +161,7 @@ mesh = ExtResource("1_pfi3p")
 skeleton = NodePath("")
 
 [node name="BoneAttachmentHandle" type="BoneAttachment3D" parent="Root_BunkerDoor/Skeleton3D"]
-transform = Transform3D(1, 0, -3.89415e-07, -3.89415e-07, 0, -1, 0, 1, 0, 2.98024e-08, 1.6, 0.510706)
+transform = Transform3D(-1.19209e-07, 5.96046e-08, -1, -1, -1.19209e-07, 5.96046e-08, -5.96046e-08, 1, 0, 2.98023e-08, 1.6, 0.510706)
 bone_name = "Handle"
 bone_idx = 1
 
@@ -201,20 +202,23 @@ parameters/conditions/isInteract = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00399992, 1.59903, 0.640001)
 shape = SubResource("BoxShape3D_nl8qb")
 
-[node name="Interactable" type="Node" parent="."]
+[node name="Components" type="Node" parent="Area3D"]
+script = ExtResource("4_amj7t")
+
+[node name="Interactable" type="Node" parent="Area3D/Components"]
 script = ExtResource("4_fv7y0")
 
-[node name="DoorController" type="Node" parent="." node_paths=PackedStringArray("_currentBehaviour")]
+[node name="DoorController" type="Node" parent="Area3D/Components" node_paths=PackedStringArray("_currentBehaviour")]
 script = ExtResource("5_j1cuo")
 _currentBehaviour = NodePath("../BunkerDoorBehaviour")
 
-[node name="DoorAnimator" type="Node" parent="." node_paths=PackedStringArray("_currentBehaviour")]
+[node name="DoorAnimator" type="Node" parent="Area3D/Components" node_paths=PackedStringArray("_currentBehaviour")]
 script = ExtResource("6_icwep")
 _currentBehaviour = NodePath("../BunkerDoorBehaviour")
 
-[node name="BunkerDoorBehaviour" type="Node" parent="." node_paths=PackedStringArray("_animationTree")]
+[node name="BunkerDoorBehaviour" type="Node" parent="Area3D/Components" node_paths=PackedStringArray("_animationTree")]
 script = ExtResource("7_i2o2p")
-_animationTree = NodePath("../Root_BunkerDoor/AnimationTree")
+_animationTree = NodePath("../../../Root_BunkerDoor/AnimationTree")
 
-[connection signal="OnInteracted" from="Interactable" to="DoorController" method="_OnInteract"]
-[connection signal="OnInteracted" from="Interactable" to="DoorAnimator" method="_OnInteract"]
+[connection signal="OnInteracted" from="Area3D/Components/Interactable" to="Area3D/Components/DoorController" method="_OnInteract"]
+[connection signal="OnInteracted" from="Area3D/Components/Interactable" to="Area3D/Components/DoorAnimator" method="_OnInteract"]
