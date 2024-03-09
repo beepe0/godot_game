@@ -41,5 +41,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19209e-07, 0.5, 0)
 shape = SubResource("BoxShape3D_fvub7")
 
 [node name="Box3" type="MeshInstance3D" parent="."]
+cast_shadow = 0
 mesh = SubResource("ArrayMesh_i0kmt")
 skeleton = NodePath("")

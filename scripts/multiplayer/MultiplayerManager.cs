@@ -28,7 +28,6 @@ public partial class MultiplayerManager : Node
         CharacterBody3D player = playerScene.Instantiate<CharacterBody3D>();
         AddChild(player);
         player.GetComponentSystem().GetComponent<PlayerNetwork>().Create(id);
-        player.GetComponentSystem().GetComponent<PlayerNetwork>();
         Players.Add(id, player.GetComponentSystem().GetComponent<PlayerNetwork>());
     }
     public void StartServer(string[] keys)

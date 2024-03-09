@@ -42,9 +42,11 @@ _remotePlayerScene = ExtResource("9_2c66a")
 environment = SubResource("Environment_v4uvn")
 
 [node name="Dungeon" type="Node3D" parent="."]
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00700259, -0.00164938, -0.00964925)
 script = ExtResource("3_ifd8w")
 RoomsFolderPath = "res://scenes/bunker/rooms"
+TargetRooms = 10
+TargetLevels = 10
 LevelSize = Vector2i(10, 10)
 TileSize = Vector2(1.6, 1.6)
 MapOffset = Vector3(0, -10, 0)
