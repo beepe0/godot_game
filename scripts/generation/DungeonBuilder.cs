@@ -9,7 +9,8 @@ public partial class DungeonBuilder : Node3D
     public static DungeonBuilder Instance { get; private set; }
 
     [Export(PropertyHint.Dir)] public string RoomsFolderPath { get; private set; }
-    [Export] public ushort TargetRoomsCount { get; private set; }
+    [Export] public ushort TargetRooms { get; private set; }
+    [Export] public ushort TargetLevels { get; private set; }
     [Export] public Vector2I LevelSize { get; private set; }
     [Export] public Vector2 TileSize { get; private set; }
     [Export] public Vector3 MapOffset { get; private set; }
@@ -79,83 +80,57 @@ public partial class DungeonBuilder : Node3D
     }
     public override void _Ready()
     {
-        Generate(0);
-    }
-    public void Generate(ulong seed)
-    {
-        Grid<bool> mapGrid = new Grid<bool>(LevelSize, false);
-        Generator mapGenerator = new Generator() { Grid = mapGrid, TargetRoomsCount = TargetRoomsCount };
-        string view = string.Empty;
-        ushort currentRoom = 0;
-        
-        if (seed != 0) Game.Instance.Rng.Seed = seed;
-        GameConsole.Instance.DebugLogCallDeferrd($"Random Seed: {Game.Instance.Rng.Seed}");
-
-        ushort mainRoomId = (ushort)Game.Instance.Rng.RandiRange(TargetRoomsCount/2, TargetRoomsCount-1);
-        ushort finishRoomId = (ushort)Game.Instance.Rng.RandiRange(0, TargetRoomsCount/2);
-
         LoadRooms();
+        Generate(1, TargetRooms, TargetLevels, true);
+    }
+    public void Generate(ulong seed, ushort targetRooms, ushort targetLevels, bool showResult)
+    {
+        GameConsole.Instance.DebugLogCallDeferrd($"Random Seed: {seed}");
+        
+        MapGenerator mapGenerator = new MapGenerator(seed) { MapGrid = new MapGrid(LevelSize, MapTile.Closed), TargetRoomsCount = targetRooms };
+        string viewOriginal = string.Empty;
+        string view = string.Empty;
 
         mapGenerator.Generate();
-
-        for (int y = 0; y < mapGrid.Size.Y; y++)
+        mapGenerator.ForEach((yx, c) =>
         {
-            for (int x = 0; x < mapGrid.Size.X; x++)
+            if (showResult)
             {
-                if (mapGrid[x, y])
+                viewOriginal += c.Cat;
+                view += c.State ? '\u25d9' : '\u25cb';
+                if (yx.X == mapGenerator.MapGrid.Size.X - 1)
                 {
-                    Node3D room;
-                    Vector2 roomPosition2d = TileSize * RoomSizeTiles * new Vector2I(x, y);
-                    List<Vector2I> neighbours = mapGrid.GetNeighborsWith(new Vector2I(x, y), Neighborhood.Manhattan, mapGrid[x, y]);
-                    char cat = ' ';
-                    char subCat = ' ';
-                    
-                    switch (neighbours.Count)
-                    {
-                        case 4: cat = 'c'; break;
-                        case 3: cat = 't'; break;
-                        case 2: cat = ((new Vector2I(x, y) - neighbours[0]) + (new Vector2I(x, y) - neighbours[1])) == Vector2I.Zero ? 'd' : 'r'; break;
-                        case 1: cat = 's'; break;
-                    }
-
-                    if (mainRoomId == currentRoom)
-                    {
-                        subCat = 'm';
-                        view += "M";
-                    }
-                    // else if (finishRoomId == currentRoom)
-                    // {
-                    //     //subCat = 'm';
-                    //     view += "F";
-                    // }
-                    else
-                    {
-                        subCat = 'b';
-                        view += "▓";
-                    }
-                    room = RoomsScenes[cat][subCat][Game.Instance.Rng.RandiRange(0, (RoomsScenes[cat][subCat].Count - 1) < 0 ? 0 : RoomsScenes[cat][subCat].Count - 1)].Instantiate<Node3D>();
-                    
-                    if(neighbours.Count < 4) 
-                    {
-                        Vector2I n = Vector2I.Zero;
-                    
-                        foreach (var item in neighbours)
-                        {
-                            n += item - new Vector2I(x, y);
-                        }
-                        if(n == Vector2I.Zero) n = neighbours[0] - new Vector2I(x, y);
-                        room.RotationDegrees = Vector3.Up * _rotates[new { id = neighbours.Count, neightbour = n }];
-                    }
-                    room.Position = new Vector3(roomPosition2d.X + MapOffset.X, MapOffset.Y, roomPosition2d.Y + MapOffset.Z);
-                    AddChild(room);
-                    currentRoom++;
+                    GameConsole.Instance.Debug(viewOriginal);
+                    GameConsole.Instance.DebugCallDeferrd(view);
+                    viewOriginal = string.Empty;
+                    view = string.Empty;
                 }
-                else view += "░";
             }
-            GameConsole.Instance.DebugCallDeferrd(view);
-            view = string.Empty;
-        }
-        GameConsole.Instance.DebugLogCallDeferrd($"currentRoom: {currentRoom}, mainRoomId: {mainRoomId}, finishRoomId: {finishRoomId}");
+            
+            if (c.State)
+            {
+                Node3D room;
+                Vector2 roomPosition2d = TileSize * RoomSizeTiles * yx;
+                List<Vector2I> neighbours = mapGenerator.MapGrid.GetNeighborsWith(yx, Neighborhood.Manhattan, mapGenerator.MapGrid[yx]);
+                
+                room = RoomsScenes[c.Cat][c.SubCat][mapGenerator.Random.RandiRange(0, (RoomsScenes[c.Cat][c.SubCat].Count - 1) < 0 ? 0 : RoomsScenes[c.Cat][c.SubCat].Count - 1)].Instantiate<Node3D>();
+                
+                if(neighbours.Count < 4) 
+                {
+                    Vector2I n = Vector2I.Zero;
+                
+                    foreach (var item in neighbours)
+                    {
+                        n += item - yx;
+                    }
+                    if(n == Vector2I.Zero) n = neighbours[0] - yx;
+                    room.RotationDegrees = Vector3.Up * _rotates[new { id = neighbours.Count, neightbour = n }];
+                }
+                room.Position = new Vector3(roomPosition2d.X + MapOffset.X, MapOffset.Y, roomPosition2d.Y + MapOffset.Z);
+                AddChild(room);
+            }
+        });
+        GameConsole.Instance.DebugLogCallDeferrd($"numberOfRooms: {mapGenerator.NumberOfGeneratedRooms}, mainRoomId: {mapGenerator.MainRoomId}, finishRoomId: {mapGenerator.FinishRoomId}");
     }
     private void LoadRooms()
     {

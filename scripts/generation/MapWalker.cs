@@ -1,9 +1,7 @@
 using Godot;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
-public partial class Walker
+public class MapWalker
 {
     public Stack<Vector2I> MoveHistory = new Stack<Vector2I>();
 

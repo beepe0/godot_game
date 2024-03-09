@@ -24,6 +24,6 @@ public partial class KeyCommandNetwork : Command
     [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true, TransferChannel = 0, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
     private void Test(ulong seed)
     {
-        DungeonBuilder.Instance.Generate(seed);
+       // DungeonBuilder.Instance.Generate(seed);
     }
 }

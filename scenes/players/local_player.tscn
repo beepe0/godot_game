@@ -294,7 +294,7 @@ bind/21/pose = Transform3D(0.960329, -0.152581, -0.233426, -0.233426, -0.897789,
 radius = 0.35
 height = 2.1
 
-[node name="Player" type="CharacterBody3D" groups=["LocalPlayer"]]
+[node name="Player" type="CharacterBody3D"]
 
 [node name="Body" type="Node3D" parent="."]
 
@@ -313,7 +313,7 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(1, -6.10642e-08, 4.72248e-08, 5.4946e-08, 0.992752, 0.120182, -5.42213e-08, -0.120182, 0.992752, 4.996e-15, 0.1945, 6.51925e-09)
 bones/1/enabled = true
 bones/1/position = Vector3(4.996e-15, 0.1945, 6.51925e-09)
-bones/1/rotation = Quaternion(-0.0601622, 0.00765559, -0.00348543, 0.998153)
+bones/1/rotation = Quaternion(-0.0601641, -0.00233336, 0.00106239, 0.998185)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Breast"
 bones/2/parent = 1
@@ -399,16 +399,17 @@ mesh = SubResource("ArrayMesh_k0023")
 skin = SubResource("Skin_5dk0g")
 
 [node name="Legs_Mesh" type="MeshInstance3D" parent="Body/Armature/Skeleton3D"]
+cast_shadow = 3
 mesh = SubResource("ArrayMesh_ak4o2")
 skin = SubResource("Skin_5dk0g")
 
 [node name="BoneAttachmentNeck" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(0.999858, 0.00635967, 0.0155743, -0.00797357, 0.994349, 0.105861, -0.014813, -0.10597, 0.994259, 0.00554227, 1.84972, 0.0590437)
+transform = Transform3D(0.999987, -0.00193846, -0.00474715, 0.00243039, 0.994372, 0.105918, 0.00451512, -0.105928, 0.994364, -0.00168914, 1.84974, 0.0590805)
 bone_name = "Head"
 bone_idx = 4
 
 [node name="BoneAttachmentBearst" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(0.999858, 0.0105929, 0.0130688, -0.00797376, 0.982464, -0.186284, -0.0148129, 0.186153, 0.982409, 0.00112167, 1.42408, -0.0102204)
+transform = Transform3D(0.999987, -0.00322857, -0.00398371, 0.00243019, 0.982502, -0.186236, 0.00451528, 0.186224, 0.982497, -0.0003418, 1.42408, -0.0102129)
 bone_name = "Breast"
 bone_idx = 2
 
@@ -651,11 +652,8 @@ script = ExtResource("8_h0g3b")
 WalkingSpeed = 2.0
 RunningSpeed = 5.0
 RoughnessOfWalk = 0.08
-MouseSensitivityX = 0.1
-MouseSensitivityY = 0.1
 LockArmAxisMinX = -40
 LockArmAxisMaxX = 90
-State = 0
 Player = NodePath("../..")
 _interactRay = NodePath("../../Body/CameraShaker/CameraHandler/Camera3D/RayCast3D")
 _boneAttachmentNeck = NodePath("../../Body/Armature/Skeleton3D/BoneAttachmentNeck")

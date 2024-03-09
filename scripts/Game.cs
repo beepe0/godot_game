@@ -5,8 +5,6 @@ public partial class Game : Node
 {
     public static Game Instance { get; private set; }
 
-    public RandomNumberGenerator Rng = new RandomNumberGenerator();
-
     public override void _EnterTree()
     {
         Instance = this;
