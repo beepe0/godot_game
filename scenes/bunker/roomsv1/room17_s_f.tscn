@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://hjk78wuticrj"]
+[gd_scene load_steps=4 format=3 uid="uid://dxtx83v50v2ru"]
 
-[ext_resource type="PackedScene" uid="uid://cks0r2rn1ryxy" path="res://scenes/bunker/room_m.tscn" id="1_iws8i"]
-[ext_resource type="PackedScene" uid="uid://qe1b8jnjt1pm" path="res://scenes/bunker/doors/bunker_door.tscn" id="2_o3c0j"]
-[ext_resource type="PackedScene" uid="uid://ce5puivgjsvqs" path="res://scenes/bunker/doors/room_door.tscn" id="3_qdnsj"]
+[ext_resource type="PackedScene" uid="uid://cks0r2rn1ryxy" path="res://scenes/bunker/room_m.tscn" id="1_efvlk"]
+[ext_resource type="PackedScene" uid="uid://bpoam6311moyb" path="res://scenes/bunker/doors/bunker_door.tscn" id="2_ggxbk"]
+[ext_resource type="PackedScene" uid="uid://dp0us7uhydik7" path="res://scenes/bunker/doors/room_door.tscn" id="3_3d03b"]
 
-[node name="MainRoom" instance=ExtResource("1_iws8i")]
+[node name="MainRoom" instance=ExtResource("1_efvlk")]
 
 [node name="GridMap" parent="." index="0"]
 data = {
@@ -14,8 +14,8 @@ data = {
 [node name="OmniLight3D2" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5124, 3.46368)
 
-[node name="Door_1" parent="Doors" index="0" instance=ExtResource("2_o3c0j")]
+[node name="Door_1" parent="Doors" index="0" instance=ExtResource("2_ggxbk")]
 transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -3.35434, 2.38419e-07, 3.04138)
 
-[node name="Door_5" parent="Doors" index="1" instance=ExtResource("3_qdnsj")]
+[node name="Door_5" parent="Doors" index="1" instance=ExtResource("3_3d03b")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -10.4, 0, 0)

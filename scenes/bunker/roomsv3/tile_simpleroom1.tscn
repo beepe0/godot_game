@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://d34j3gf6t30a8"]
+
+[ext_resource type="Script" path="res://scripts/dungeonv3/DungeonTile.cs" id="1_hf3bp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t24w8"]
+albedo_color = Color(0.101961, 0.784314, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x5iub"]
+
+[node name="SimpleRoom" type="Node3D" groups=["DungeonTile"]]
+script = ExtResource("1_hf3bp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2.8, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_t24w8")
+mesh = SubResource("BoxMesh_x5iub")
+
+[node name="Connectors" type="Node3D" parent="."]
+
+[node name="ConnectorA" type="Marker3D" parent="Connectors"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.6, 0, 0.9)
+
+[node name="ConnectorC" type="Marker3D" parent="Connectors"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.6, 0, -0.7)
