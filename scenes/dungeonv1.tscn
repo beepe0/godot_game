@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8ce62jdd5nn3"]
+
+[ext_resource type="Script" path="res://scripts/dungeonv1/DungeonBuilder.cs" id="1_ynglw"]
+
+[node name="Dungeon" type="Node3D"]
+script = ExtResource("1_ynglw")
+RoomsFolderPath = "res://scenes/bunker/rooms"
+TargetRooms = 5
+LevelSize = Vector3i(10, 10, 10)
+TileSize = Vector2(1.6, 1.6)
+MapOffset = Vector3(0, -10, 0)
+RoomSizeTiles = Vector2i(13, 13)

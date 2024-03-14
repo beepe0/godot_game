@@ -1,26 +1,20 @@
 [gd_scene load_steps=12 format=3 uid="uid://bemctsja6wlyg"]
 
-[ext_resource type="Script" path="res://scripts/generation/DungeonBuilder.cs" id="3_ifd8w"]
 [ext_resource type="PackedScene" uid="uid://c5q0it6f74vd8" path="res://scenes/players/local_player.tscn" id="4_1f4f1"]
 [ext_resource type="Script" path="res://submodules/console_manager/CommandManager.cs" id="4_1ivhn"]
 [ext_resource type="Script" path="res://scripts/Game.cs" id="5_guotx"]
 [ext_resource type="PackedScene" uid="uid://byssswptinsio" path="res://submodules/console_manager/scene/ui/console.tscn" id="6_qchd8"]
 [ext_resource type="Script" path="res://scripts/multiplayer/MultiplayerManager.cs" id="7_ab420"]
 [ext_resource type="PackedScene" uid="uid://cf43h8i06dy3d" path="res://scenes/players/remote_player.tscn" id="9_2c66a"]
+[ext_resource type="PackedScene" uid="uid://bsj3viea4fv0w" path="res://scenes/dungeonv2.tscn" id="9_g8yid"]
 [ext_resource type="PackedScene" uid="uid://f4wp04p4loc8" path="res://scenes/bunker/prototype_room.tscn" id="10_sqpw0"]
 [ext_resource type="Script" path="res://scripts/stats/DebugPlayer.cs" id="11_qp4hc"]
 
-[sub_resource type="Environment" id="Environment_v4uvn"]
-background_mode = 1
-background_color = Color(0.133333, 0.0862745, 0, 1)
-ambient_light_source = 3
-reflected_light_source = 2
-tonemap_mode = 2
-sdfgi_use_occlusion = true
-glow_normalized = true
-volumetric_fog_density = 1.0269
-volumetric_fog_albedo = Color(0.105882, 0.105882, 0.105882, 1)
-volumetric_fog_anisotropy = 0.13
+[sub_resource type="Environment" id="Environment_bua0u"]
+background_mode = 2
+ambient_light_source = 2
+ambient_light_color = Color(0.054902, 0.054902, 0.054902, 1)
+ambient_light_energy = 16.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g8m7r"]
 bg_color = Color(0, 0, 0, 0)
@@ -39,18 +33,7 @@ _localPlayerScene = ExtResource("4_1f4f1")
 _remotePlayerScene = ExtResource("9_2c66a")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_v4uvn")
-
-[node name="Dungeon" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00700259, -0.00164938, -0.00964925)
-script = ExtResource("3_ifd8w")
-RoomsFolderPath = "res://scenes/bunker/rooms"
-TargetRooms = 10
-TargetLevels = 10
-LevelSize = Vector2i(10, 10)
-TileSize = Vector2(1.6, 1.6)
-MapOffset = Vector3(0, -10, 0)
-RoomSizeTiles = Vector2i(13, 13)
+environment = SubResource("Environment_bua0u")
 
 [node name="PrototypeRoom" parent="." instance=ExtResource("10_sqpw0")]
 
@@ -93,5 +76,9 @@ autostart = true
 
 [node name="Console" parent="CanvasLayer" instance=ExtResource("6_qchd8")]
 visible = false
+
+[node name="Dungeon" parent="." instance=ExtResource("9_g8yid")]
+visible = true
+RoomsFolderPath = "res://scenes/bunker/roomsv2"
 
 [connection signal="timeout" from="CanvasLayer/Stats/Timer" to="CanvasLayer/Stats" method="UpdateContent"]

@@ -33,6 +33,10 @@ window/vsync/vsync_mode=0
 
 project/assembly_name="TeamGame"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/snapconnectors/plugin.cfg")
+
 [input]
 
 scroll_wheel_up={

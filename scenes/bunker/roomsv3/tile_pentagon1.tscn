@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://desmyyhics6fr"]
+
+[ext_resource type="Script" path="res://scripts/dungeonv3/DungeonTile.cs" id="1_g4xoy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y824b"]
+albedo_color = Color(0, 0.545098, 0.313726, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x5iub"]
+
+[node name="Pentagon" type="Node3D" groups=["DungeonTile"]]
+script = ExtResource("1_g4xoy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.4, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_y824b")
+mesh = SubResource("BoxMesh_x5iub")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.5, 0, 0, 0, 1, 0.4, -0.2, -0.9)
+material_override = SubResource("StandardMaterial3D_y824b")
+mesh = SubResource("BoxMesh_x5iub")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, -0.2, 0.9)
+material_override = SubResource("StandardMaterial3D_y824b")
+mesh = SubResource("BoxMesh_x5iub")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.4, 0, 0, 0, 0.5, 0, 0, 0, 1, -0.4, -0.2, -0.9)
+material_override = SubResource("StandardMaterial3D_y824b")
+mesh = SubResource("BoxMesh_x5iub")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.2, 0, 0.866025, 0, 0.5, 0, -0.34641, 0, -0.5, -0.9, -0.2, 0.5)
+material_override = SubResource("StandardMaterial3D_y824b")
+mesh = SubResource("BoxMesh_x5iub")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.34641, 0, -0.5, 0, 0.5, 0, 0.2, 0, -0.866025, 0.7, -0.2, 0.7)
+material_override = SubResource("StandardMaterial3D_y824b")
+mesh = SubResource("BoxMesh_x5iub")
+
+[node name="Connectors" type="Node3D" parent="."]
+
+[node name="ConnectorA" type="Marker3D" parent="Connectors"]
+transform = Transform3D(0.34641, 0, 0.5, 0, 0.5, 0, -0.2, 0, 0.866026, 1, -0.2, 1.21962)
+
+[node name="ConnectorB" type="Marker3D" parent="Connectors"]
+transform = Transform3D(0.2, -6.07985e-16, -0.866025, 3.02841e-08, 0.5, 4.37114e-08, 0.34641, -4.37114e-08, 0.5, -1.41962, -0.2, 0.8)
+
+[node name="ConnectorC" type="Marker3D" parent="Connectors"]
+transform = Transform3D(-0.16, 0, 8.74228e-08, 0, 0.25, 0, -1.39876e-08, 0, -1, -0.4, -0.2, -1.5)
+
+[node name="ConnectorD" type="Marker3D" parent="Connectors"]
+transform = Transform3D(0.4, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, -0.2, 1.5)
+
+[node name="ConnectorE" type="Marker3D" parent="Connectors"]
+transform = Transform3D(-0.4, 0, -8.74228e-08, 0, 0.5, 0, 3.49691e-08, 0, -1, 0.4, -0.2, -1.5)
