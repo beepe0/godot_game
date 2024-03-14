@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://byssswptinsio" path="res://submodules/console_manager/scene/ui/console.tscn" id="6_qchd8"]
 [ext_resource type="Script" path="res://scripts/multiplayer/MultiplayerManager.cs" id="7_ab420"]
 [ext_resource type="PackedScene" uid="uid://cf43h8i06dy3d" path="res://scenes/players/remote_player.tscn" id="9_2c66a"]
-[ext_resource type="PackedScene" uid="uid://bsj3viea4fv0w" path="res://scenes/dungeonv2.tscn" id="9_g8yid"]
+[ext_resource type="PackedScene" uid="uid://bai1nenlxlmy7" path="res://scenes/dungeonv3.tscn" id="9_fe3t2"]
 [ext_resource type="PackedScene" uid="uid://f4wp04p4loc8" path="res://scenes/bunker/prototype_room.tscn" id="10_sqpw0"]
 [ext_resource type="Script" path="res://scripts/stats/DebugPlayer.cs" id="11_qp4hc"]
 
@@ -77,8 +77,9 @@ autostart = true
 [node name="Console" parent="CanvasLayer" instance=ExtResource("6_qchd8")]
 visible = false
 
-[node name="Dungeon" parent="." instance=ExtResource("9_g8yid")]
-visible = true
-RoomsFolderPath = "res://scenes/bunker/roomsv2"
+[node name="Dungeon" parent="." instance=ExtResource("9_fe3t2")]
+
+[node name="Player" parent="." instance=ExtResource("4_1f4f1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.73228, 0, -2.14731)
 
 [connection signal="timeout" from="CanvasLayer/Stats/Timer" to="CanvasLayer/Stats" method="UpdateContent"]

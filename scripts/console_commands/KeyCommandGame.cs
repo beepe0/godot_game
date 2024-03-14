@@ -15,5 +15,9 @@ public partial class KeyCommandGame : Command
             ((Camera3D)GetTree().GetFirstNodeInGroup("Mirrors")).Current =
                 !((Camera3D)GetTree().GetFirstNodeInGroup("Mirrors")).Current;
         }
+        else if (keys[1].Equals("generate-dungeon"))
+        {
+            ComponentSystem.GetComponentSystemWithTag("Dungeon").GetComponent<DungeonBuilder>().Build();
+        }
     }
 }

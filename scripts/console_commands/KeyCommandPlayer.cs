@@ -19,7 +19,6 @@ public partial class KeyCommandPlayer : Command
                 MultiplayerManager.Instance.InitPlayer(MultiplayerManager.Instance._localPlayerScene, 0);
             }
 
-            //_playerController = GetTree().GetFirstNodeInGroup("LocalPlayer").GetComponent<PlayerController>();
             _playerController = ComponentSystem.GetComponentSystemWithTag("LocalPlayer").GetComponent<PlayerController>();
         }
         else if (keys[1].Equals("noclip"))

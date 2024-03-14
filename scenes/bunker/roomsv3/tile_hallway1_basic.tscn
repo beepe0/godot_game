@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bh4tedgdhsb7"]
+[gd_scene load_steps=4 format=3 uid="uid://bh4tedgdhsb7"]
 
-[ext_resource type="Script" path="res://scripts/dungeonv3/DungeonTile.cs" id="1_6xedl"]
+[ext_resource type="Script" path="res://scripts/dungeonv3/DungeonTile.cs" id="1_sapug"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_x5iub"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_llpfc"]
+
 [node name="Hallway" type="Node3D" groups=["DungeonTile"]]
-script = ExtResource("1_6xedl")
+script = ExtResource("1_sapug")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_x5iub")
@@ -23,3 +25,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6)
 
 [node name="ConnectorD" type="Marker3D" parent="Connectors"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -0.6)
+
+[node name="Bounds" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.98023e-08, 0)
+shape = SubResource("BoxShape3D_llpfc")
+
+[connection signal="area_entered" from="Bounds" to="." method="_OnBoundsAreaEntered"]

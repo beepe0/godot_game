@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://d34j3gf6t30a8"]
+[gd_scene load_steps=5 format=3 uid="uid://d34j3gf6t30a8"]
 
 [ext_resource type="Script" path="res://scripts/dungeonv3/DungeonTile.cs" id="1_hf3bp"]
 
@@ -6,6 +6,9 @@
 albedo_color = Color(0.101961, 0.784314, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_x5iub"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tqms8"]
+size = Vector3(1, 1, 2.8)
 
 [node name="SimpleRoom" type="Node3D" groups=["DungeonTile"]]
 script = ExtResource("1_hf3bp")
@@ -22,3 +25,11 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.6, 0
 
 [node name="ConnectorC" type="Marker3D" parent="Connectors"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.6, 0, -0.7)
+
+[node name="Bounds" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.98023e-08, 2.98023e-08)
+shape = SubResource("BoxShape3D_tqms8")
+
+[connection signal="area_entered" from="Bounds" to="." method="_OnBoundsAreaEntered"]

@@ -18,6 +18,8 @@ public partial class SnapConnector : EditorPlugin
     public override void _ExitTree()
     {
     }
+
+
     public override void _Process(double delta)
     {
         //GD.Print($"Connector: ");
