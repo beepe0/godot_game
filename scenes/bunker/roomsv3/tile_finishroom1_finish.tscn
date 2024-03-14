@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://bgwkntjea1lpp"]
+
+[ext_resource type="Script" path="res://scripts/dungeonv3/DungeonTile.cs" id="1_jp38f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jog2w"]
+albedo_color = Color(0.670588, 0, 0.815686, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x5iub"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_meuqm"]
+size = Vector3(1, 2.6, 1)
+
+[node name="SimpleRoom" type="Node3D" groups=["DungeonTile"]]
+script = ExtResource("1_jp38f")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 2.56, 0, 0, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_jog2w")
+mesh = SubResource("BoxMesh_x5iub")
+
+[node name="Connectors" type="Node3D" parent="."]
+
+[node name="ConnectorA" type="Marker3D" parent="Connectors"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.6, 0.7, 0)
+
+[node name="ConnectorB" type="Marker3D" parent="Connectors"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.6, -0.9, 0)
+
+[node name="Bounds" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.98023e-08, 0)
+shape = SubResource("BoxShape3D_meuqm")
+
+[connection signal="area_entered" from="Bounds" to="." method="_OnBoundsAreaEntered"]

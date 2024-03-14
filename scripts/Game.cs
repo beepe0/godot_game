@@ -13,7 +13,6 @@ public partial class Game : Node
     {
         Input.MouseMode = Input.MouseModeEnum.Captured;
     }
-
     public override void _Process(double delta)
     {
         DebugPlayer.Instance.Debug($"Performance.GetMonitor");

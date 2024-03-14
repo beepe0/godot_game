@@ -1,14 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://desmyyhics6fr"]
+[gd_scene load_steps=7 format=3 uid="uid://desmyyhics6fr"]
 
-[ext_resource type="Script" path="res://scripts/dungeonv3/DungeonTile.cs" id="1_g4xoy"]
+[ext_resource type="Script" path="res://scripts/dungeonv3/DungeonTile.cs" id="1_6v3qp"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y824b"]
 albedo_color = Color(0, 0.545098, 0.313726, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_x5iub"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_145vf"]
+size = Vector3(1.4, 1, 2.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4eyc7"]
+size = Vector3(0.875464, 1, 0.422607)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wd15x"]
+size = Vector3(0.882867, 1, 0.422607)
+
 [node name="Pentagon" type="Node3D" groups=["DungeonTile"]]
-script = ExtResource("1_g4xoy")
+script = ExtResource("1_6v3qp")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.4, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -56,3 +65,19 @@ transform = Transform3D(0.4, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, -0.2, 1.5)
 
 [node name="ConnectorE" type="Marker3D" parent="Connectors"]
 transform = Transform3D(-0.4, 0, -8.74228e-08, 0, 0.5, 0, 3.49691e-08, 0, -1, 0.4, -0.2, -1.5)
+
+[node name="Bounds" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.96046e-08, 0, -2.98023e-08)
+shape = SubResource("BoxShape3D_145vf")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Bounds"]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -0.961343, 0, 0.534678)
+shape = SubResource("BoxShape3D_4eyc7")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Bounds"]
+transform = Transform3D(0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 0.737669, 0, 0.768152)
+shape = SubResource("BoxShape3D_wd15x")
+
+[connection signal="area_entered" from="Bounds" to="." method="_OnBoundsAreaEntered"]

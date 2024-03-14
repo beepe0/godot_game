@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://vnxnircm6vd3"]
+
+[ext_resource type="Texture2D" uid="uid://bm4mwf68mcdwl" path="res://models/textures/tiles_bunker_1_atlas_albedo.png" id="1_botb1"]
+[ext_resource type="Texture2D" uid="uid://rn6oushl8w0n" path="res://models/textures/tiles_bunker_1_atlas_normal.png" id="2_etiqt"]
+
+[resource]
+albedo_texture = ExtResource("1_botb1")
+normal_enabled = true
+normal_texture = ExtResource("2_etiqt")
