@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="DungeonPreset" load_steps=7 format=3 uid="uid://dkd3gg6gvlji8"]
+
+[ext_resource type="Script" path="res://scripts/resources/dungeon_v3/DungeonTilePreset.cs" id="1_dflpb"]
+[ext_resource type="Script" path="res://scripts/resources/dungeon_v3/DungeonPreset.cs" id="1_qjbra"]
+
+[sub_resource type="Resource" id="Resource_8opa4"]
+script = ExtResource("1_dflpb")
+TilesCategory = "block"
+PercentageSpawnOfTile = 0.0
+RoomsFolderPath = "res://scenes/bunker/roomsv1/block"
+
+[sub_resource type="Resource" id="Resource_i5aga"]
+script = ExtResource("1_dflpb")
+TilesCategory = "basic"
+PercentageSpawnOfTile = 0.0
+RoomsFolderPath = "res://scenes/bunker/roomsv1/basic"
+
+[sub_resource type="Resource" id="Resource_dlth5"]
+script = ExtResource("1_dflpb")
+TilesCategory = "main"
+PercentageSpawnOfTile = 0.0
+RoomsFolderPath = "res://scenes/bunker/roomsv1/main"
+
+[sub_resource type="Resource" id="Resource_paf2f"]
+script = ExtResource("1_dflpb")
+TilesCategory = "finish"
+PercentageSpawnOfTile = 0.0
+RoomsFolderPath = "res://scenes/bunker/roomsv1/finish"
+
+[resource]
+script = ExtResource("1_qjbra")
+Seed = 0
+NumberOfRooms = 100
+StartPosition = Vector3(0, -30, 0)
+TileSences = [SubResource("Resource_8opa4"), SubResource("Resource_i5aga"), SubResource("Resource_dlth5"), SubResource("Resource_paf2f")]

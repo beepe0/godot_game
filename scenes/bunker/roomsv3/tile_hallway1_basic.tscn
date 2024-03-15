@@ -1,6 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bh4tedgdhsb7"]
 
-[ext_resource type="Script" path="res://scripts/dungeonv3/DungeonTile.cs" id="1_sapug"]
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/DungeonTile.cs" id="1_sapug"]
+
 
 [sub_resource type="BoxMesh" id="BoxMesh_x5iub"]
 

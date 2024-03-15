@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bgwkntjea1lpp"]
 
-[ext_resource type="Script" path="res://scripts/dungeonv3/DungeonTile.cs" id="1_jp38f"]
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/DungeonTile.cs" id="1_jp38f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jog2w"]
 albedo_color = Color(0.670588, 0, 0.815686, 1)

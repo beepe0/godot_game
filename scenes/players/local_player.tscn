@@ -313,7 +313,7 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(1, -6.10642e-08, 4.72248e-08, 5.4946e-08, 0.992752, 0.120182, -5.42213e-08, -0.120182, 0.992752, 4.996e-15, 0.1945, 6.51925e-09)
 bones/1/enabled = true
 bones/1/position = Vector3(4.996e-15, 0.1945, 6.51925e-09)
-bones/1/rotation = Quaternion(-0.0601642, -0.00157157, 0.00071555, 0.998187)
+bones/1/rotation = Quaternion(-0.0601625, -0.00714428, 0.00325272, 0.998158)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Breast"
 bones/2/parent = 1
@@ -399,17 +399,16 @@ mesh = SubResource("ArrayMesh_k0023")
 skin = SubResource("Skin_5dk0g")
 
 [node name="Legs_Mesh" type="MeshInstance3D" parent="Body/Armature/Skeleton3D"]
-cast_shadow = 3
 mesh = SubResource("ArrayMesh_ak4o2")
 skin = SubResource("Skin_5dk0g")
 
 [node name="BoneAttachmentNeck" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(0.999994, -0.00130559, -0.00319734, 0.00163692, 0.994373, 0.105921, 0.00304106, -0.105926, 0.994369, -0.00113763, 1.84974, 0.0590826)
+transform = Transform3D(0.999877, -0.00593496, -0.0145343, 0.00744109, 0.994352, 0.105869, 0.0138239, -0.105964, 0.994274, -0.0051719, 1.84972, 0.059049)
 bone_name = "Head"
 bone_idx = 4
 
 [node name="BoneAttachmentBearst" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(0.999994, -0.00217446, -0.00268321, 0.00163672, 0.982504, -0.186233, 0.00304122, 0.186228, 0.982502, -0.000230185, 1.42408, -0.0102124)
+transform = Transform3D(0.999877, -0.0098852, -0.0121965, 0.00744089, 0.982469, -0.186277, 0.013824, 0.186164, 0.982422, -0.00104663, 1.42408, -0.0102193)
 bone_name = "Breast"
 bone_idx = 2
 
@@ -652,6 +651,8 @@ script = ExtResource("8_h0g3b")
 WalkingSpeed = 2.0
 RunningSpeed = 5.0
 RoughnessOfWalk = 0.08
+MouseSensitivityX = 0.1
+MouseSensitivityY = 0.1
 LockArmAxisMinX = -40
 LockArmAxisMaxX = 90
 Player = NodePath("../..")

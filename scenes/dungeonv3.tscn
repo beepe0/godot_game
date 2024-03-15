@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bai1nenlxlmy7"]
+[gd_scene load_steps=4 format=3 uid="uid://bai1nenlxlmy7"]
 
 [ext_resource type="Script" path="res://submodules/component_system/ComponentSystem.cs" id="1_inula"]
-[ext_resource type="Script" path="res://scripts/dungeonv3/DungeonBuilder.cs" id="2_kssw0"]
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/DungeonBuilder.cs" id="2_kssw0"]
+[ext_resource type="Resource" uid="uid://dkd3gg6gvlji8" path="res://scripts/components/dungeon_v3/resources/dungeon_standart_preset.tres" id="3_3u11c"]
 
 [node name="Dungeon" type="Node3D"]
 
@@ -11,6 +12,4 @@ Tag = "Dungeon"
 
 [node name="DungeonBuilder" type="Node" parent="ComponentSystem"]
 script = ExtResource("2_kssw0")
-RoomsFolderPath = "res://scenes/bunker/roomsv1"
-NumberOfRooms = 100
-StartPosition = Vector3(0, -20, 0)
+_dungeonPreset = ExtResource("3_3u11c")

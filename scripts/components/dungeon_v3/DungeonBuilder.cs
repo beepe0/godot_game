@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using BP.ComponentSystem;
 using BP.GameConsole;
 using Godot;
@@ -8,27 +9,19 @@ using Godot.Collections;
 
 public partial class DungeonBuilder : ComponentObject
 {
-    [Export(PropertyHint.Dir)] private string RoomsFolderPath { get; set; }
-    [Export] private ulong Seed { get; set; }  
-    [Export] private ushort NumberOfRooms { get; set; }  
-    [Export] private Vector3 StartPosition { get; set; }  
+    [Export] private DungeonPreset _dungeonPreset;
+
     private RandomNumberGenerator _random = new ();
+    private Dictionary<string, Array<PackedScene>> _tileScenes = new();
     private DungeonTile _currentRoom = null;
     private Array<Node3D> _validConnectors = new ();
     private ushort _currentNumberOfRooms;
-    private Dictionary<string, Array<PackedScene>> _tileScenes = new ()
-    {
-        {"block", new Array<PackedScene>()},
-        {"basic", new Array<PackedScene>()},
-        {"main", new Array<PackedScene>()},
-        {"finish", new Array<PackedScene>()}
-    };
-    
+
     public async void Build()
     {
         Stopwatch workTime = Stopwatch.StartNew();
         GameConsole.Instance.DebugWarning($"Start generation!");
-        LoadRooms(RoomsFolderPath);
+        LoadRooms();
         
         await Generate();
         
@@ -37,7 +30,7 @@ public partial class DungeonBuilder : ComponentObject
     }
     private async Task Generate()
     {
-        if (Seed != 0) _random.Seed = Seed;
+        _random.Seed = _dungeonPreset.Seed != 0 ? _dungeonPreset.Seed : _dungeonPreset.Seed;
         
         if (_tileScenes.Count < 1)
         {
@@ -45,10 +38,10 @@ public partial class DungeonBuilder : ComponentObject
             return;
         }
 
-        while (_currentNumberOfRooms < NumberOfRooms)
+        while (_currentNumberOfRooms < _dungeonPreset.NumberOfRooms)
         {
             var randomCategory = _tileScenes.ElementAt(_random.RandiRange(1, _tileScenes.Count - 1)).Value;
-            _currentRoom = CreateOnStage<DungeonTile>(randomCategory[_random.RandiRange(0, randomCategory.Count - 1)], StartPosition);
+            _currentRoom = CreateOnStage<DungeonTile>(randomCategory[_random.RandiRange(0, randomCategory.Count - 1)], _dungeonPreset.StartPosition);
             
             if (_validConnectors.Count < 1)
             {
@@ -78,47 +71,51 @@ public partial class DungeonBuilder : ComponentObject
 
         foreach (Node3D connector in _validConnectors)
         {
-            _currentRoom = CreateOnStage<DungeonTile>(_tileScenes["block"][0], StartPosition);
+            _currentRoom = CreateOnStage<DungeonTile>(_tileScenes["block"][0], _dungeonPreset.StartPosition);
             SnapTileWithRandom(_currentRoom, _currentRoom.Connectors[0], connector);
         }
     }
-    private void LoadRooms(string path)
+    private void LoadRooms()
     {
-        using DirAccess roomsFolder = DirAccess.Open(path);
-
-        if (roomsFolder != null)
+        foreach (DungeonTilePreset preset in _dungeonPreset.TileSences)
         {
-            roomsFolder.ListDirBegin();
+            using DirAccess roomsFolder = DirAccess.Open(preset.RoomsFolderPath);
 
-            string filename = roomsFolder.GetNext();
-
-            while (filename != "")
+            if (roomsFolder != null)
             {
-                if (!roomsFolder.CurrentIsDir())
+                roomsFolder.ListDirBegin();
+
+                string filename = roomsFolder.GetNext();
+
+                while (filename != "")
                 {
-                    string roomPath = roomsFolder.GetCurrentDir().PathJoin(filename);
-                    string[] filenameSplit = filename.Split(".")[0].Split("_");
-                    string name = filenameSplit[1];
-                    string category = filenameSplit[2];
-                    if (_tileScenes.ContainsKey(category))
+                    if (!roomsFolder.CurrentIsDir())
                     {
-                        if (roomPath.Contains(".tscn.remap")) roomPath = roomPath.Replace(".remap", "");
-                        _tileScenes[category].Add(ResourceLoader.Load<PackedScene>(roomPath));
-                        
-                        GameConsole.Instance.DebugLog($"LevelGenerator :: Loaded room at {GameConsole.SetColor(roomPath, "#7db39e")}, Filename: {GameConsole.SetColor(filename, "#7db39e")}, name: {GameConsole.SetColor(name, "#7db39e")}, category: {GameConsole.SetColor(category, "#7db39e")}");
+                        string roomPath = roomsFolder.GetCurrentDir().PathJoin(filename);
+
+                        roomPath = roomPath.Contains(".tscn.remap") ? roomPath.Replace(".remap", "") : roomPath;
+
+                        if (_tileScenes.ContainsKey(preset.TilesCategory))
+                        {
+                            _tileScenes[preset.TilesCategory].Add(ResourceLoader.Load<PackedScene>(roomPath));
+                        }
+                        else
+                        {
+                            _tileScenes.Add(preset.TilesCategory, new Array<PackedScene>() { ResourceLoader.Load<PackedScene>(roomPath) });
+                        }
+                        GameConsole.Instance.DebugLog($"LevelGenerator :: Loaded room at {GameConsole.SetColor(roomPath, "#7db39e")}, Filename: {GameConsole.SetColor(filename, "#7db39e")}, Category: {GameConsole.SetColor(preset.TilesCategory, "#7db39e")}");
+                        filename = roomsFolder.GetNext();
                     }
-                    filename = roomsFolder.GetNext();
                 }
+                roomsFolder.ListDirEnd();
             }
-            roomsFolder.ListDirEnd();
         }
     }
     private void SnapTileWithRandom(DungeonTile tile, Node3D currentConnector, Node3D targetConnector)
     {
         if(_validConnectors.Count < 1 || tile.Connectors.Count < 1) return;
         
-        tile.GlobalRotation = Vector3.Zero;
-        tile.Position = Vector3.Zero;
+        tile.Rotation = Vector3.Zero;
         
         tile.Position = targetConnector.GlobalPosition - (currentConnector.GlobalPosition - tile.Position);
         Vector2 vectorA = new Vector2(currentConnector.GlobalBasis.Z.X, currentConnector.GlobalBasis.Z.Z);
@@ -127,7 +124,7 @@ public partial class DungeonBuilder : ComponentObject
         float angle = Mathf.Pi - rawAngle;
                     
         tile.Position = targetConnector.GlobalPosition + (tile.Position - targetConnector.GlobalPosition).Rotated(Vector3.Up, angle);
-        tile.GlobalRotation = Vector3.Up * angle;
+        tile.Rotation = Vector3.Up * angle;
     }
     public T CreateOnStage<T>(PackedScene scene) where T : Node
     {

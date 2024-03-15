@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bb01uyancg0j6"]
 
-[ext_resource type="Script" path="res://scripts/dungeonv3/DungeonTile.cs" id="1_ipmja"]
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/DungeonTile.cs" id="1_60fei"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mueer"]
 albedo_color = Color(0.921569, 0, 0.129412, 1)
@@ -8,7 +8,8 @@ albedo_color = Color(0.921569, 0, 0.129412, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_x5iub"]
 
 [node name="Block" type="Node3D" groups=["DungeonTile"]]
-script = ExtResource("1_ipmja")
+transform = Transform3D(1.6, 0, 0, 0, 1.30176, 0, 0, 0, 1.6, 0, 0, 0)
+script = ExtResource("1_60fei")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(2.04212, 0, 0, 0, 2.99835, 0, 0, 0, 0.1, 0, 0, 0)

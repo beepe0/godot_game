@@ -1,24 +1,24 @@
-[gd_scene load_steps=26 format=3 uid="uid://f4wp04p4loc8"]
+[gd_scene load_steps=26 format=3 uid="uid://clyjiw7yrsvyk"]
 
-[ext_resource type="Texture2D" uid="uid://b5f80svrglrfk" path="res://models/textures/lobby_room_prototype_atlas_albedo.png" id="1_8cpmw"]
-[ext_resource type="Texture2D" uid="uid://cdf027wblvyyg" path="res://models/textures/lobby_room_prototype_atlas_normal.png" id="2_nt8at"]
-[ext_resource type="PackedScene" uid="uid://bpoam6311moyb" path="res://scenes/bunker/doors/bunker_door.tscn" id="3_qowbe"]
-[ext_resource type="PackedScene" uid="uid://dp0us7uhydik7" path="res://scenes/bunker/doors/room_door.tscn" id="4_vyjsl"]
-[ext_resource type="PackedScene" uid="uid://dgw3383ifm0rc" path="res://scenes/bunker/flashlights/flashlight_1.tscn" id="5_vhk6e"]
-[ext_resource type="PackedScene" uid="uid://b4n008ng67ag4" path="res://scenes/bunker/tables/table_1.tscn" id="6_sv227"]
-[ext_resource type="PackedScene" uid="uid://b8r2yyll6nk5a" path="res://scenes/bunker/pipes/corner_pipe_plugs.tscn" id="7_cewg3"]
-[ext_resource type="PackedScene" uid="uid://cm8unrvt6a1h8" path="res://scenes/bunker/pipes/direct_pipe.tscn" id="8_uh6tk"]
-[ext_resource type="PackedScene" uid="uid://cisnik0r7jhji" path="res://scenes/bunker/pipes/direct_pipe_plugs.tscn" id="9_y5mr3"]
-[ext_resource type="PackedScene" uid="uid://71cnonmbgolh" path="res://scenes/bunker/boxes/orange_box.tscn" id="10_ycg2i"]
-[ext_resource type="PackedScene" uid="uid://b7gps8cpaa04w" path="res://scenes/bunker/boxes/green_box.tscn" id="11_a5oi7"]
-[ext_resource type="PackedScene" uid="uid://bsjevxcgldvw0" path="res://scenes/bunker/boxes/gray_box.tscn" id="12_wvne2"]
+[ext_resource type="Texture2D" uid="uid://b5f80svrglrfk" path="res://models/textures/lobby_room_prototype_atlas_albedo.png" id="1_ia2ch"]
+[ext_resource type="Texture2D" uid="uid://cdf027wblvyyg" path="res://models/textures/lobby_room_prototype_atlas_normal.png" id="2_vorrx"]
+[ext_resource type="PackedScene" uid="uid://bpoam6311moyb" path="res://scenes/bunker/doors/bunker_door.tscn" id="3_vwdgb"]
+[ext_resource type="PackedScene" uid="uid://dp0us7uhydik7" path="res://scenes/bunker/doors/room_door.tscn" id="4_v8qud"]
+[ext_resource type="PackedScene" uid="uid://b4n008ng67ag4" path="res://scenes/bunker/tables/table_1.tscn" id="5_4eabs"]
+[ext_resource type="PackedScene" uid="uid://dgw3383ifm0rc" path="res://scenes/bunker/flashlights/flashlight_1.tscn" id="6_chtu5"]
+[ext_resource type="PackedScene" uid="uid://b8r2yyll6nk5a" path="res://scenes/bunker/pipes/corner_pipe_plugs.tscn" id="7_kkv80"]
+[ext_resource type="PackedScene" uid="uid://cm8unrvt6a1h8" path="res://scenes/bunker/pipes/direct_pipe.tscn" id="8_5ro31"]
+[ext_resource type="PackedScene" uid="uid://cisnik0r7jhji" path="res://scenes/bunker/pipes/direct_pipe_plugs.tscn" id="9_yphyc"]
+[ext_resource type="PackedScene" uid="uid://71cnonmbgolh" path="res://scenes/bunker/boxes/orange_box.tscn" id="10_ded0u"]
+[ext_resource type="PackedScene" uid="uid://b7gps8cpaa04w" path="res://scenes/bunker/boxes/green_box.tscn" id="11_gvs2a"]
+[ext_resource type="PackedScene" uid="uid://bsjevxcgldvw0" path="res://scenes/bunker/boxes/gray_box.tscn" id="12_5jw65"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sib83"]
 resource_name = "prototype_material"
-albedo_texture = ExtResource("1_8cpmw")
+albedo_texture = ExtResource("1_ia2ch")
 normal_enabled = true
 normal_scale = 16.0
-normal_texture = ExtResource("2_nt8at")
+normal_texture = ExtResource("2_vorrx")
 texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_cuho8"]
@@ -126,12 +126,12 @@ shadow_mesh = SubResource("ArrayMesh_1egj0")
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_faoly"]
 data = PackedVector3Array(0.8, 3.2, 0.4, -0.8, 3.2, -0.4, -0.8, 3.2, 0.4, 0.8, 3.2, 0.4, 0.8, 3.2, -0.4, -0.8, 3.2, -0.4, -0.8, 3.2, -0.4, -0.8, 1.6, 0.4, -0.8, 3.2, 0.4, -0.8, 3.2, -0.4, -0.8, 1.6, -0.4, -0.8, 1.6, 0.4, -0.8, 1.6, -0.4, -0.8, 0, 0.4, -0.8, 1.6, 0.4, -0.8, 1.6, -0.4, -0.8, 0, -0.4, -0.8, 0, 0.4, -0.8, 0, -0.4, 0.8, 0, 0.4, -0.8, 0, 0.4, -0.8, 0, -0.4, 0.8, 0, -0.4, 0.8, 0, 0.4, 0.8, 0, -0.4, 0.8, 1.6, 0.4, 0.8, 0, 0.4, 0.8, 0, -0.4, 0.8, 1.6, -0.4, 0.8, 1.6, 0.4, 0.8, 1.6, -0.4, 0.8, 3.2, 0.4, 0.8, 1.6, 0.4, 0.8, 1.6, -0.4, 0.8, 3.2, -0.4, 0.8, 3.2, 0.4)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_vds6l"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_48oya"]
 viewport_path = NodePath("Objects/Mirrors/Mirror/SubViewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h6gi2"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1a0c8"]
 resource_local_to_scene = true
-albedo_texture = SubResource("ViewportTexture_vds6l")
+albedo_texture = SubResource("ViewportTexture_48oya")
 clearcoat = 0.0
 clearcoat_roughness = 0.0
 
@@ -179,55 +179,55 @@ shape = SubResource("ConcavePolygonShape3D_faoly")
 
 [node name="Doors" type="Node3D" parent="Objects"]
 
-[node name="BunkerDoor" parent="Objects/Doors" instance=ExtResource("3_qowbe")]
+[node name="BunkerDoor" parent="Objects/Doors" instance=ExtResource("3_vwdgb")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 6.2)
 
-[node name="RoomDoor" parent="Objects/Doors" instance=ExtResource("4_vyjsl")]
+[node name="RoomDoor" parent="Objects/Doors" instance=ExtResource("4_v8qud")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 0, 5.7)
 
 [node name="Tables" type="Node3D" parent="Objects"]
 
-[node name="Table_1" parent="Objects/Tables" instance=ExtResource("6_sv227")]
+[node name="Table_1" parent="Objects/Tables" instance=ExtResource("5_4eabs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.0635, 2.38419e-07, -6.38877)
 
 [node name="Items" type="Node3D" parent="Objects"]
 
-[node name="Flashlight_1" parent="Objects/Items" instance=ExtResource("5_vhk6e")]
+[node name="Flashlight_1" parent="Objects/Items" instance=ExtResource("6_chtu5")]
 transform = Transform3D(0.88964, -0.456663, -1.99614e-08, 0, -4.37114e-08, 1, -0.456663, -0.88964, -3.88874e-08, 15.1088, 1.19158, -5.25247)
 
 [node name="Pipes" type="Node3D" parent="Objects"]
 
-[node name="CornerPipePlugs" parent="Objects/Pipes" instance=ExtResource("7_cewg3")]
+[node name="CornerPipePlugs" parent="Objects/Pipes" instance=ExtResource("7_kkv80")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -5.44767, 0.9, 5.36564)
 
-[node name="DirectPipe" parent="Objects/Pipes" instance=ExtResource("8_uh6tk")]
+[node name="DirectPipe" parent="Objects/Pipes" instance=ExtResource("8_5ro31")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -3.84767, 0.9, 5.36564)
 
-[node name="DirectPipePlugs" parent="Objects/Pipes" instance=ExtResource("9_y5mr3")]
+[node name="DirectPipePlugs" parent="Objects/Pipes" instance=ExtResource("9_yphyc")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -4.24767, 0.9, 5.36564)
 
-[node name="CornerPipePlugs2" parent="Objects/Pipes" instance=ExtResource("7_cewg3")]
+[node name="CornerPipePlugs2" parent="Objects/Pipes" instance=ExtResource("7_kkv80")]
 transform = Transform3D(-1, 3.82137e-15, -8.74228e-08, 8.74228e-08, 4.37114e-08, -1, 0, -1, -4.37114e-08, -3.84767, 3.8, 7.86564)
 
-[node name="CornerPipePlugs4" parent="Objects/Pipes" instance=ExtResource("7_cewg3")]
+[node name="CornerPipePlugs4" parent="Objects/Pipes" instance=ExtResource("7_kkv80")]
 transform = Transform3D(1.31134e-07, 4.37114e-08, -1, 1, -5.73206e-15, 1.31134e-07, 0, -1, -4.37114e-08, -5.94767, 0.8, 7.86564)
 
-[node name="CornerPipePlugs5" parent="Objects/Pipes" instance=ExtResource("7_cewg3")]
+[node name="CornerPipePlugs5" parent="Objects/Pipes" instance=ExtResource("7_kkv80")]
 transform = Transform3D(-1, 3.82137e-15, -8.74228e-08, 8.74228e-08, 4.37114e-08, -1, 0, -1, -4.37114e-08, -6.54767, 0.8, 7.86564)
 
-[node name="CornerPipePlugs3" parent="Objects/Pipes" instance=ExtResource("7_cewg3")]
+[node name="CornerPipePlugs3" parent="Objects/Pipes" instance=ExtResource("7_kkv80")]
 transform = Transform3D(-1, 3.82137e-15, -8.74228e-08, 8.74228e-08, 4.37114e-08, -1, 0, -1, -4.37114e-08, -5.94767, 3.8, 7.86564)
 
-[node name="DirectPipe2" parent="Objects/Pipes" instance=ExtResource("8_uh6tk")]
+[node name="DirectPipe2" parent="Objects/Pipes" instance=ExtResource("8_5ro31")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -3.84767, 0.7, 7.86564)
 
-[node name="DirectPipe4" parent="Objects/Pipes" instance=ExtResource("8_uh6tk")]
+[node name="DirectPipe4" parent="Objects/Pipes" instance=ExtResource("8_5ro31")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -5.94767, 2.3, 7.86564)
 
-[node name="DirectPipe3" parent="Objects/Pipes" instance=ExtResource("8_uh6tk")]
+[node name="DirectPipe3" parent="Objects/Pipes" instance=ExtResource("8_5ro31")]
 transform = Transform3D(-4.37114e-08, 4.37114e-08, -1, 1, 1.91069e-15, -4.37114e-08, 0, -1, -4.37114e-08, -5.34767, 3.8, 7.86564)
 
-[node name="DirectPipePlugs2" parent="Objects/Pipes" instance=ExtResource("9_y5mr3")]
+[node name="DirectPipePlugs2" parent="Objects/Pipes" instance=ExtResource("9_yphyc")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -3.84767, 2.2, 7.86564)
 
 [node name="Mirrors" type="Node3D" parent="Objects"]
@@ -246,38 +246,38 @@ far = 30.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Objects/Mirrors/Mirror/SubViewport"]
 transform = Transform3D(1.95, 0, 0, 0, -8.52372e-08, -1.95, 0, 1.95, -8.52372e-08, -5.23393, 2.00557, -7.9)
-material_override = SubResource("StandardMaterial3D_h6gi2")
+material_override = SubResource("StandardMaterial3D_1a0c8")
 cast_shadow = 0
 gi_mode = 0
 mesh = SubResource("PlaneMesh_w6pea")
 
 [node name="Boxes" type="Node3D" parent="Objects"]
 
-[node name="OrangeBox" parent="Objects/Boxes" instance=ExtResource("10_ycg2i")]
+[node name="OrangeBox" parent="Objects/Boxes" instance=ExtResource("10_ded0u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.49174, -2.38419e-07, 5.36935)
 
-[node name="GreenBox" parent="Objects/Boxes" instance=ExtResource("11_a5oi7")]
+[node name="GreenBox" parent="Objects/Boxes" instance=ExtResource("11_gvs2a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.18302, 0.958353, 5)
 
-[node name="GrayBox" parent="Objects/Boxes" instance=ExtResource("12_wvne2")]
+[node name="GrayBox" parent="Objects/Boxes" instance=ExtResource("12_5jw65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.50448, 0, 4.7)
 
-[node name="OrangeBox2" parent="Objects/Boxes" instance=ExtResource("10_ycg2i")]
+[node name="OrangeBox2" parent="Objects/Boxes" instance=ExtResource("10_ded0u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.2917, -2.38419e-07, 7.46935)
 
-[node name="OrangeBox3" parent="Objects/Boxes" instance=ExtResource("10_ycg2i")]
+[node name="OrangeBox3" parent="Objects/Boxes" instance=ExtResource("10_ded0u")]
 transform = Transform3D(0.751414, 0.659831, 0, -0.659831, 0.751414, 0, 0, 0, 1, -13.433, 0.322293, 7.46935)
 
-[node name="GreenBox2" parent="Objects/Boxes" instance=ExtResource("11_a5oi7")]
+[node name="GreenBox2" parent="Objects/Boxes" instance=ExtResource("11_gvs2a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.983, 0.958353, 7.1)
 
-[node name="GreenBox3" parent="Objects/Boxes" instance=ExtResource("11_a5oi7")]
+[node name="GreenBox3" parent="Objects/Boxes" instance=ExtResource("11_gvs2a")]
 transform = Transform3D(0.998735, 0.0393621, -0.0313041, -0.0376703, 0.997889, 0.0529113, 0.0333207, -0.0516652, 0.998109, -15.4228, 1.91661, 7.40641)
 
-[node name="GrayBox2" parent="Objects/Boxes" instance=ExtResource("12_wvne2")]
+[node name="GrayBox2" parent="Objects/Boxes" instance=ExtResource("12_5jw65")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.3045, 0, 6.8)
 
-[node name="GrayBox3" parent="Objects/Boxes" instance=ExtResource("12_wvne2")]
+[node name="GrayBox3" parent="Objects/Boxes" instance=ExtResource("12_5jw65")]
 transform = Transform3D(0.713874, 0, -0.700274, 0, 1, 0, 0.700274, 0, 0.713874, -15.3045, 0, 5.5)
 
 [node name="Lights" type="Node3D" parent="."]
