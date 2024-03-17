@@ -1,6 +1,7 @@
+using System.Linq;
+using BP.GameConsole;
 using Godot;
 using Godot.Collections;
-using System;
 
 [GlobalClass]
 public partial class DungeonPreset : Resource
@@ -10,6 +11,6 @@ public partial class DungeonPreset : Resource
     [Export] public ushort NumberOfRooms { get; set; }
     [Export] public Vector3 StartPosition { get; set; }
 
-    [ExportGroup("Tiles Path Settings")]
-    [Export] public Array<DungeonTilePreset> TileSences = new();
+    [ExportGroup("Tiles Path Settings")] 
+    [Export] public Array<DungeonCategoryPreset> TileScenes = new();
 }
