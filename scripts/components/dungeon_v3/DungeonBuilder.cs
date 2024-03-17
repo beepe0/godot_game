@@ -1,28 +1,32 @@
-﻿using System.Diagnostics;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using BP.ComponentSystem;
 using BP.GameConsole;
 using Godot;
-using Godot.Collections;
 
 public partial class DungeonBuilder : ComponentObject
 {
-    [Export] private DungeonPreset _dungeonPreset;
-
+    [Export] private DungeonResourceLoader _resLoader;
+    
     private RandomNumberGenerator _random = new ();
-    private Dictionary<string, Array<PackedScene>> _tileScenes = new();
-    private DungeonTile _currentRoom = null;
-    private Array<Node3D> _validConnectors = new ();
+    private readonly List<DungeonResourceLoader.DungeonTileProperties> _availableTileScenes = new ();
+    private readonly List<DungeonResourceLoader.DungeonTileProperties> _unavailableTileScenes = new ();
+    private readonly List<DungeonTile> _validTiles = new ();
     private ushort _currentNumberOfRooms;
 
     public async void Build()
     {
         Stopwatch workTime = Stopwatch.StartNew();
         GameConsole.Instance.DebugWarning($"Start generation!");
-        LoadRooms();
         
+        if (_resLoader.LoadTiles(_resLoader.TileScenes) < 1)
+        {
+            GameConsole.Instance.DebugError($"_resLoader.TileScenes.Count == 0");
+            return;
+        }
+
         await Generate();
         
         workTime.Stop();
@@ -30,101 +34,80 @@ public partial class DungeonBuilder : ComponentObject
     }
     private async Task Generate()
     {
-        _random.Seed = _dungeonPreset.Seed != 0 ? _dungeonPreset.Seed : _dungeonPreset.Seed;
+        _random.Seed = _resLoader.DungeonPreset.Seed != 0 ? _resLoader.DungeonPreset.Seed : _random.Seed;
+        _availableTileScenes.AddRange(_resLoader.TileScenes.Values);
+        _validTiles.Add(await InitTileOrNull());
         
-        if (_tileScenes.Count < 1)
+        while (_currentNumberOfRooms < _resLoader.DungeonPreset.NumberOfRooms)
         {
-            GameConsole.Instance.DebugError($"_roomScenes.Count == 0");
-            return;
-        }
-
-        while (_currentNumberOfRooms < _dungeonPreset.NumberOfRooms)
-        {
-            var randomCategory = _tileScenes.ElementAt(_random.RandiRange(1, _tileScenes.Count - 1)).Value;
-            _currentRoom = CreateOnStage<DungeonTile>(randomCategory[_random.RandiRange(0, randomCategory.Count - 1)], _dungeonPreset.StartPosition);
+            if(_validTiles.Count < 1) return;
             
-            if (_validConnectors.Count < 1)
+            DungeonTile targetRoom = _validTiles[_random.RandiRange(0, _validTiles.Count - 1)];
+            
+            foreach (Node3D targetConnector in targetRoom.Connectors)
             {
-                _validConnectors.AddRange(_currentRoom.Connectors);
-                continue;
+                if(_currentNumberOfRooms >= _resLoader.DungeonPreset.NumberOfRooms || _availableTileScenes.Count < 1) break;
+                
+                DungeonTile currentRoom = await InitTileOrNull(targetConnector);
+                
+                if(currentRoom != null) _validTiles.Add(currentRoom);
             }
 
-            ushort idCurrent = (ushort)_random.RandiRange(0, _currentRoom.Connectors.Count - 1);
-            ushort idTarget = (ushort)_random.RandiRange(0, _validConnectors.Count - 1);
-            
-            SnapTileWithRandom(_currentRoom, _currentRoom.Connectors[idCurrent], _validConnectors[idTarget]);
-            
+            _validTiles.Remove(targetRoom);
+        }
+    }
+    private DungeonTile InitTileWithMin(out DungeonResourceLoader.DungeonTileProperties tileProperties)
+    {
+        return CreateOnStage<DungeonTile>((tileProperties = GetMin()).PackedScenes[(ushort)_random.RandiRange(0, tileProperties.PackedScenes.Count - 1)], _resLoader.DungeonPreset.StartPosition);
+    }
+    private async Task<DungeonTile> InitTileOrNull(Node3D targetSnap = null)
+    {
+        DungeonTile tile = InitTileWithMin(out var tileProperties);
+
+        if (targetSnap != null)
+        {
+            Node3D currentConnector = tile.Connectors[(ushort)_random.RandiRange(0, tile.Connectors.Count - 1)];
+            tile.Snap(currentConnector, targetSnap);
+                
             await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
-            
-            if (_currentRoom.Bounds.GetOverlappingAreas().Count > 0)
+                
+            if (tile.Bounds.GetOverlappingAreas().Count > 0)
             {
-                _currentRoom.QueueFree();
-                GameConsole.Instance.DebugLog($"deleted: {_currentRoom.Name}");
-                continue;
+                tile.QueueFree();
+                return null;
             }
-            
-            _currentRoom.Connectors.RemoveAt(idCurrent);
-            _validConnectors.RemoveAt(idTarget);
-            _validConnectors.AddRange(_currentRoom.Connectors);
-            _currentNumberOfRooms++;
-        }
-
-        foreach (Node3D connector in _validConnectors)
-        {
-            _currentRoom = CreateOnStage<DungeonTile>(_tileScenes["block"][0], _dungeonPreset.StartPosition);
-            SnapTileWithRandom(_currentRoom, _currentRoom.Connectors[0], connector);
-        }
-    }
-    private void LoadRooms()
-    {
-        foreach (DungeonTilePreset preset in _dungeonPreset.TileSences)
-        {
-            using DirAccess roomsFolder = DirAccess.Open(preset.RoomsFolderPath);
-
-            if (roomsFolder != null)
-            {
-                roomsFolder.ListDirBegin();
-
-                string filename = roomsFolder.GetNext();
-
-                while (filename != "")
-                {
-                    if (!roomsFolder.CurrentIsDir())
-                    {
-                        string roomPath = roomsFolder.GetCurrentDir().PathJoin(filename);
-
-                        roomPath = roomPath.Contains(".tscn.remap") ? roomPath.Replace(".remap", "") : roomPath;
-
-                        if (_tileScenes.ContainsKey(preset.TilesCategory))
-                        {
-                            _tileScenes[preset.TilesCategory].Add(ResourceLoader.Load<PackedScene>(roomPath));
-                        }
-                        else
-                        {
-                            _tileScenes.Add(preset.TilesCategory, new Array<PackedScene>() { ResourceLoader.Load<PackedScene>(roomPath) });
-                        }
-                        GameConsole.Instance.DebugLog($"LevelGenerator :: Loaded room at {GameConsole.SetColor(roomPath, "#7db39e")}, Filename: {GameConsole.SetColor(filename, "#7db39e")}, Category: {GameConsole.SetColor(preset.TilesCategory, "#7db39e")}");
-                        filename = roomsFolder.GetNext();
-                    }
-                }
-                roomsFolder.ListDirEnd();
-            }
-        }
-    }
-    private void SnapTileWithRandom(DungeonTile tile, Node3D currentConnector, Node3D targetConnector)
-    {
-        if(_validConnectors.Count < 1 || tile.Connectors.Count < 1) return;
         
-        tile.Rotation = Vector3.Zero;
+            currentConnector.Visible = false;
+            targetSnap.Visible = false;
+        }
         
-        tile.Position = targetConnector.GlobalPosition - (currentConnector.GlobalPosition - tile.Position);
-        Vector2 vectorA = new Vector2(currentConnector.GlobalBasis.Z.X, currentConnector.GlobalBasis.Z.Z);
-        Vector2 vectorB = new Vector2(targetConnector.GlobalBasis.Z.X, targetConnector.GlobalBasis.Z.Z);
-        float rawAngle = (vectorA).AngleTo(vectorB);
-        float angle = Mathf.Pi - rawAngle;
+        if (tileProperties.CurrentNumberOfTilesPerTier >= tileProperties.NumberOfTilesPerTier - 1)
+        {
+            _availableTileScenes.Remove(tileProperties);
+            _unavailableTileScenes.Add(tileProperties);
+        }
                     
-        tile.Position = targetConnector.GlobalPosition + (tile.Position - targetConnector.GlobalPosition).Rotated(Vector3.Up, angle);
-        tile.Rotation = Vector3.Up * angle;
+        tileProperties.CurrentNumberOfTilesPerTier++;
+        _currentNumberOfRooms++;
+        
+        return tile;
+    }
+
+    private DungeonResourceLoader.DungeonTileProperties GetMin()
+    {
+        DungeonResourceLoader.DungeonTileProperties minTile = _availableTileScenes[0];
+        ushort minPriority = minTile.Priority;
+
+        for (int i = 1; i < _availableTileScenes.Count; i++)
+        {
+            if (_availableTileScenes[i].Priority < minPriority)
+            {
+                minTile = _availableTileScenes[i];
+                minPriority = minTile.Priority;
+            }
+        }
+
+        return minTile;
     }
     public T CreateOnStage<T>(PackedScene scene) where T : Node
     {

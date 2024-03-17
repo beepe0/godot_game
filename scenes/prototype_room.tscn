@@ -19,7 +19,6 @@ albedo_texture = ExtResource("1_ia2ch")
 normal_enabled = true
 normal_scale = 16.0
 normal_texture = ExtResource("2_vorrx")
-texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_cuho8"]
 _surfaces = [{
