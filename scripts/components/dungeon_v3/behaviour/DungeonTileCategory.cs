@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using BP.ComponentSystem;
+using BP.GameConsole;
 using Godot;
+using System;
 
 public partial class DungeonTileCategory : Node
 {
@@ -15,8 +17,19 @@ public partial class DungeonTileCategory : Node
 
     public override void _Ready()
     {
-        DungeonBuilder = ComponentSystem.GetComponentSystemWithTag("Dungeon").GetComponent<DungeonBuilder>();
-        _availableTileScenes.AddRange(DungeonBuilder.TileScenes.Values);
+        try
+        {
+            DungeonBuilder = ComponentSystem.GetComponentSystemWithTag("Dungeon").GetComponent<DungeonBuilder>();
+
+            foreach (string e in DungeonTileCategoryPreset.ValidNeighbours)
+            {
+                _availableTileScenes.Add(DungeonBuilder.TileScenes[e]);
+            }
+        }
+        catch (Exception e)
+        {
+            GameConsole.Instance.DebugLog($"{GetType()} :: {e}");
+        }
     }
     public async Task<List<DungeonTile>> Execute(DungeonTile tile)
     {
@@ -34,6 +47,8 @@ public partial class DungeonTileCategory : Node
 
     private async Task<DungeonTile> InitTileOrNull(Node3D targetSnap = null)
     {
+        if (_availableTileScenes.Count < 1) return null;
+
         DungeonTile tile = InitTileWithMin(_availableTileScenes, out var tileProperties);
 
         if (targetSnap != null)

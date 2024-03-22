@@ -12,5 +12,5 @@ public partial class DungeonBuilderPreset : Resource
     [Export] public Vector3 StartPosition { get; set; }
 
     [ExportGroup("Tiles Path Settings")] 
-    [Export(PropertyHint.Dir)] public Dictionary<string, string> CategoryScenes = new();
+    [Export] public Dictionary<string, string> CategoryScenes = new();
 }

@@ -6,8 +6,9 @@
 [sub_resource type="Resource" id="Resource_1eklr"]
 script = ExtResource("2_on5tt")
 TilesCategory = "basic"
-TargetNumberOfTilesPerTier = 90
+TargetNumberOfTilesPerTier = 20
 Priority = 2
+ValidNeighbours = PackedStringArray("basic", "main", "finish")
 RoomsFolderPath = "res://scenes/bunker/dungeon/basic"
 
 [node name="Basic" type="Node3D"]

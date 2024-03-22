@@ -6,8 +6,9 @@
 [sub_resource type="Resource" id="Resource_giv5x"]
 script = ExtResource("2_vjd5i")
 TilesCategory = "finish"
-TargetNumberOfTilesPerTier = 9
+TargetNumberOfTilesPerTier = 1
 Priority = 3
+ValidNeighbours = PackedStringArray("basic")
 RoomsFolderPath = "res://scenes/bunker/dungeon/finish"
 
 [node name="Finish" type="Node3D"]

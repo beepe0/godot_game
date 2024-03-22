@@ -20,7 +20,7 @@ public partial class DungeonResourceLoader : ComponentObject
                             
                 if (!tileScenes.ContainsKey(preset.Key))
                 {
-                    tileScenes.Add(preset.Key, ResourceLoader.Load<PackedScene>(path).CreateOnStage<DungeonTileCategory>(this));
+                    tileScenes.Add(preset.Key, ResourceLoader.Load<PackedScene>(path).CreateOnStageCallDeferred<DungeonTileCategory>(this));
                     GameConsole.Instance.DebugLog($"{GetType()} :: Loaded room at {GameConsole.SetColor(path, "#7db39e")}, Category: {GameConsole.SetColor(preset.Key, "#7db39e")}");
                 }
             }

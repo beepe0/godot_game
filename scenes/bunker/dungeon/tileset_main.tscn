@@ -8,6 +8,7 @@ script = ExtResource("2_pydll")
 TilesCategory = "main"
 TargetNumberOfTilesPerTier = 1
 Priority = 1
+ValidNeighbours = PackedStringArray("basic")
 RoomsFolderPath = "res://scenes/bunker/dungeon/main"
 
 [node name="Main" type="Node3D"]

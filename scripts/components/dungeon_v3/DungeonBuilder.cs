@@ -27,6 +27,7 @@ public partial class DungeonBuilder : ComponentObject
             return;
         }
 
+        await ToSignal(GetTree().CreateTimer(1), "timeout");
         await Generate();
         
         workTime.Stop();
@@ -63,7 +64,9 @@ public partial class DungeonBuilder : ComponentObject
                 minPriority = minTile.DungeonTileCategoryPreset.Priority;
             }
         }
-
+        minTile.CurrentNumberOfTilesPerTier++;
+        CurrentNumberOfRooms++;
+        
         return minTile.PackedScenes[(ushort)Random.RandiRange(0, minTile.PackedScenes.Count - 1)].CreateOnStage<DungeonTile>(this, ResLoader.DungeonBuilderPreset.StartPosition);
     }
 }
