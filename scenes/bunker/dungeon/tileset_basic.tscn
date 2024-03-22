@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://csi1nkjnhl7r6"]
+
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/categories/DungeonTileBasic.cs" id="1_dgj34"]
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/resources/DungeonTileCategoryPreset.cs" id="2_on5tt"]
+
+[sub_resource type="Resource" id="Resource_1eklr"]
+script = ExtResource("2_on5tt")
+TilesCategory = "basic"
+TargetNumberOfTilesPerTier = 90
+Priority = 2
+RoomsFolderPath = "res://scenes/bunker/dungeon/basic"
+
+[node name="Basic" type="Node3D"]
+script = ExtResource("1_dgj34")
+DungeonTileCategoryPreset = SubResource("Resource_1eklr")

@@ -12,8 +12,7 @@ public partial class KeyCommandGame : Command
     {
         if (keys[1].Equals("mirror"))
         {
-            ((Camera3D)GetTree().GetFirstNodeInGroup("Mirrors")).Current =
-                !((Camera3D)GetTree().GetFirstNodeInGroup("Mirrors")).Current;
+            ((Camera3D)GetTree().GetFirstNodeInGroup("Mirrors")).Current = !((Camera3D)GetTree().GetFirstNodeInGroup("Mirrors")).Current;
         }
         else if (keys[1].Equals("generate-dungeon"))
         {

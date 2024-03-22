@@ -3,10 +3,10 @@ using Godot.Collections;
 using System;
 
 [GlobalClass]
-public partial class DungeonCategoryPreset : Resource
+public partial class DungeonTileCategoryPreset : Resource
 {
-    [ExportGroup("Tile Property Settings")]
-    [Export] public DungeonTile.DungeonTileCategory TilesCategory { get; set; }
+    [ExportGroup("Tile Property Settings")] 
+    [Export] public string TilesCategory { get; set; }
     [Export] public ushort TargetNumberOfTilesPerTier { get; set; }
     [Export] public ushort Priority { get; set; }
 
