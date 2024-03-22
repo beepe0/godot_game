@@ -4,7 +4,7 @@ using Godot;
 using Godot.Collections;
 
 [GlobalClass]
-public partial class DungeonPreset : Resource
+public partial class DungeonBuilderPreset : Resource
 {
     [ExportGroup("Dungeon Property Settings")]
     [Export] public ulong Seed { get; set; }
@@ -12,5 +12,5 @@ public partial class DungeonPreset : Resource
     [Export] public Vector3 StartPosition { get; set; }
 
     [ExportGroup("Tiles Path Settings")] 
-    [Export] public Array<DungeonCategoryPreset> TileScenes = new();
+    [Export(PropertyHint.Dir)] public Dictionary<string, string> CategoryScenes = new();
 }

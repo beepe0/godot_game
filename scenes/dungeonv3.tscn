@@ -1,49 +1,33 @@
-[gd_scene load_steps=10 format=3 uid="uid://bai1nenlxlmy7"]
+[gd_scene load_steps=6 format=3 uid="uid://bai1nenlxlmy7"]
 
 [ext_resource type="Script" path="res://submodules/component_system/ComponentSystem.cs" id="1_inula"]
 [ext_resource type="Script" path="res://scripts/components/dungeon_v3/DungeonBuilder.cs" id="2_kssw0"]
 [ext_resource type="Script" path="res://scripts/components/dungeon_v3/DungeonResourceLoader.cs" id="3_0dp3b"]
-[ext_resource type="Script" path="res://scripts/components/dungeon_v3/resources/DungeonCategoryPreset.cs" id="4_1pieg"]
-[ext_resource type="Script" path="res://scripts/components/dungeon_v3/resources/DungeonPreset.cs" id="5_c3rle"]
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/resources/DungeonBuilderPreset.cs" id="5_2upd2"]
 
-[sub_resource type="Resource" id="Resource_4uf7e"]
-script = ExtResource("4_1pieg")
-TilesCategory = 0
-TargetNumberOfTilesPerTier = 20
-Priority = 1
-RoomsFolderPath = "res://scenes/bunker/roomsv1/basic"
-
-[sub_resource type="Resource" id="Resource_x38l7"]
-script = ExtResource("4_1pieg")
-TilesCategory = 1
-TargetNumberOfTilesPerTier = 1
-Priority = 2
-RoomsFolderPath = "res://scenes/bunker/roomsv1/main"
-
-[sub_resource type="Resource" id="Resource_ge0dd"]
-script = ExtResource("4_1pieg")
-TilesCategory = 2
-TargetNumberOfTilesPerTier = 10
-Priority = 3
-RoomsFolderPath = "res://scenes/bunker/roomsv1/finish"
-
-[sub_resource type="Resource" id="Resource_5ira6"]
-script = ExtResource("5_c3rle")
+[sub_resource type="Resource" id="Resource_qwxxc"]
+script = ExtResource("5_2upd2")
 Seed = 0
 NumberOfRooms = 100
 StartPosition = Vector3(0, -30, 0)
-TileScenes = [SubResource("Resource_4uf7e"), SubResource("Resource_x38l7"), SubResource("Resource_ge0dd")]
+CategoryScenes = {
+"basic": "res://scenes/bunker/dungeon/tileset_basic.tscn",
+"finish": "res://scenes/bunker/dungeon/tileset_finish.tscn",
+"main": "res://scenes/bunker/dungeon/tileset_main.tscn"
+}
 
 [node name="Dungeon" type="Node3D"]
+
+[node name="Rooms" type="Node3D" parent="."]
 
 [node name="ComponentSystem" type="Node" parent="."]
 script = ExtResource("1_inula")
 Tag = "Dungeon"
 
-[node name="DungeonBuilder" type="Node" parent="ComponentSystem" node_paths=PackedStringArray("_resLoader")]
+[node name="DungeonBuilder" type="Node" parent="ComponentSystem" node_paths=PackedStringArray("ResLoader")]
 script = ExtResource("2_kssw0")
-_resLoader = NodePath("../DungeonResourceLoader")
+ResLoader = NodePath("../DungeonResourceLoader")
 
 [node name="DungeonResourceLoader" type="Node" parent="ComponentSystem"]
 script = ExtResource("3_0dp3b")
-DungeonPreset = SubResource("Resource_5ira6")
+DungeonBuilderPreset = SubResource("Resource_qwxxc")

@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cyjgii10vec80"]
+
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/categories/DungeonTileMain.cs" id="1_gpt4x"]
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/resources/DungeonTileCategoryPreset.cs" id="2_pydll"]
+
+[sub_resource type="Resource" id="Resource_brcp0"]
+script = ExtResource("2_pydll")
+TilesCategory = "main"
+TargetNumberOfTilesPerTier = 1
+Priority = 1
+RoomsFolderPath = "res://scenes/bunker/dungeon/main"
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_gpt4x")
+DungeonTileCategoryPreset = SubResource("Resource_brcp0")

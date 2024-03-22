@@ -1,11 +1,9 @@
-﻿using System;
-using BP.GameConsole;
-using Godot;
+﻿using Godot;
 using Godot.Collections;
 
 public partial class DungeonTile : Node3D
 {
-    [Export] public DungeonTileCategory TileCategory;
+    [Export] public string Category;
     public Array<Node3D> Connectors;
     public Area3D Bounds;
 
@@ -38,11 +36,5 @@ public partial class DungeonTile : Node3D
                     
         this.Position = targetConnector.GlobalPosition + (this.Position - targetConnector.GlobalPosition).Rotated(Vector3.Up, angle);
         this.Rotation = Vector3.Up * angle;
-    }
-    public enum DungeonTileCategory : byte
-    {
-        Basic,
-        Main,
-        Finish,
     }
 }

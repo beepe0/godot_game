@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://oll6fqnv7n17"]
 
-[ext_resource type="Script" path="res://scripts/components/dungeon_v3/DungeonTile.cs" id="1_ysax7"]
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/DungeonTile.cs" id="1_mj1iw"]
 [ext_resource type="Material" uid="uid://vnxnircm6vd3" path="res://models/materials/bunker_materials.tres" id="2_r6bxj"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_bcmhs"]
@@ -54,8 +54,8 @@ material = SubResource("StandardMaterial3D_vgp0i")
 
 [node name="Tile_Finish1" type="Node3D" groups=["DungeonTile"]]
 transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, 0, 0, 0)
-script = ExtResource("1_ysax7")
-TileCategory = 2
+script = ExtResource("1_mj1iw")
+Category = "finish"
 
 [node name="Tile_Finish1" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_1m34h")
