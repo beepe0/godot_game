@@ -1,4 +1,4 @@
-using BP.GameConsole;
+﻿using BP.GameConsole;
 using Godot;
 using System;
 using System.Collections.Generic;

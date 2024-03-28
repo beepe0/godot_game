@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="DungeonBuilderPreset" load_steps=2 format=3 uid="uid://diyyqccic7844"]
+
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/resources/DungeonBuilderPreset.cs" id="1_de0a4"]
+
+[resource]
+script = ExtResource("1_de0a4")
+Seed = 0
+TargetNumberOfTiles = 100
+NumberOfTiers = 3
+StartPosition = Vector3(0, -30, 0)
+CategoryScenes = {
+"basic": "res://scenes/bunker/dungeon/tileset_basic.tscn",
+"finish": "res://scenes/bunker/dungeon/tileset_finish.tscn",
+"main": "res://scenes/bunker/dungeon/tileset_main.tscn"
+}

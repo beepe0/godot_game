@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using BP.ComponentSystem;
 using BP.GameConsole;
@@ -13,8 +14,10 @@ public partial class DungeonBuilder : ComponentObject
     public RandomNumberGenerator Random = new ();
     public readonly Dictionary<string, DungeonTileCategory> TileScenes = new ();
 
-    private readonly List<DungeonTile> _validTiles = new ();
-    public ushort CurrentNumberOfRooms;
+    public readonly List<DungeonTile> ValidTiles = new ();
+    public readonly List<DungeonTile> ValidTilesFrom = new ();
+    public ushort CurrentNumberOfTiers;
+    public ushort CurrentNumberOfTiles;
 
     public async void Build()
     {
@@ -26,31 +29,47 @@ public partial class DungeonBuilder : ComponentObject
             GameConsole.Instance.DebugError($"_resLoader.TileScenes.Count == 0");
             return;
         }
-
-        await ToSignal(GetTree().CreateTimer(1), "timeout");
         await Generate();
         
         workTime.Stop();
-        GameConsole.Instance.DebugWarning($"Elapsed time: {workTime.Elapsed.TotalMilliseconds} ms, number of generated rooms: {CurrentNumberOfRooms}");
+        
+        foreach (var tileCat in TileScenes.Values) 
+            GameConsole.Instance.DebugWarning($"Number of generated {tileCat.DungeonTileCategoryPreset.TilesCategory} tiles: {tileCat.CurrentNumberOfTilesPerTier}");
+        
+        GameConsole.Instance.DebugWarning($"Elapsed time: {workTime.Elapsed.TotalMilliseconds} ms, number of generated tiles: {CurrentNumberOfTiles}");
     }
     private async Task Generate()
     {
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+
         Random.Seed = ResLoader.DungeonBuilderPreset.Seed != 0 ? ResLoader.DungeonBuilderPreset.Seed : Random.Seed;
         GameConsole.Instance.DebugLog($"Random Seed: {Random.Seed}");
 
-        _validTiles.Add(CreateRoot());
+        ValidTiles.Add(CreateRoot());
         
-        while (CurrentNumberOfRooms < ResLoader.DungeonBuilderPreset.NumberOfRooms)
+        while (CurrentNumberOfTiers < ResLoader.DungeonBuilderPreset.NumberOfTiers)
         {
-            if(_validTiles.Count < 1) return;
-            
-            DungeonTile targetRoom = _validTiles[Random.RandiRange(0, _validTiles.Count - 1)];
-            _validTiles.AddRange(await TileScenes[targetRoom.Category].Execute(targetRoom));
+            if(ValidTiles.Count < 1)
+            {
+                if (CurrentNumberOfTiers >= ResLoader.DungeonBuilderPreset.NumberOfTiers || ValidTilesFrom.Count < 1) break;
+                GameConsole.Instance.DebugLog($"CurrentNumberOfTiers: {CurrentNumberOfTiers}, ValidTiles.Count: {ValidTiles.Count}, ValidTilesFrom.Count: {ValidTilesFrom.Count}");
 
-            _validTiles.Remove(targetRoom);
+                ValidTiles.Clear();
+                ValidTiles.AddRange(ValidTilesFrom);
+                ValidTilesFrom.Clear();
+                
+                foreach (var cat in TileScenes.Values)
+                {
+                    cat.Reset();
+                }
+
+                CurrentNumberOfTiers++;
+            }
+
+            DungeonTile targetRoom = ValidTiles[Random.RandiRange(0, ValidTiles.Count - 1)];
+            ValidTiles.AddRange(await TileScenes[targetRoom.Category].Execute(targetRoom, true));
         }
     }
-
     private DungeonTile CreateRoot()
     {
         DungeonTileCategory minTile = null;
@@ -64,8 +83,8 @@ public partial class DungeonBuilder : ComponentObject
                 minPriority = minTile.DungeonTileCategoryPreset.Priority;
             }
         }
-        minTile.CurrentNumberOfTilesPerTier++;
-        CurrentNumberOfRooms++;
+        minTile!.CurrentNumberOfTilesPerTier++;
+        CurrentNumberOfTiles++;
         
         return minTile.PackedScenes[(ushort)Random.RandiRange(0, minTile.PackedScenes.Count - 1)].CreateOnStage<DungeonTile>(this, ResLoader.DungeonBuilderPreset.StartPosition);
     }

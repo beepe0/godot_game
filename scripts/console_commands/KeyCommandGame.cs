@@ -18,5 +18,9 @@ public partial class KeyCommandGame : Command
         {
             ComponentSystem.GetComponentSystemWithTag("Dungeon").GetComponent<DungeonBuilder>().Build();
         }
+        else if (keys[1].Equals("target-fps"))
+        {
+            Engine.MaxFps = int.Parse(keys[2]);
+        }
     }
 }

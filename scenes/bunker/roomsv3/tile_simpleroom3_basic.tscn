@@ -1,6 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://da6oshpd3l2ac"]
 
-[ext_resource type="Script" path="res://scripts/components/dungeon_v3/DungeonTile.cs" id="1_hr2dq"]
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/behaviour/DungeonTile.cs" id="1_hr2dq"]
+
 
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t24w8"]

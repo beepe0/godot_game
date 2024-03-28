@@ -13,7 +13,7 @@ public partial class PlayerNetwork : ComponentObject
     {
         Name = id.ToString();
 
-        _playerStats.PlayeId = id;
+        _playerStats.PlayerId = id;
         _playerStats.PlayerName = $"PLAYER_{id}";
         _playerController.Player.Name = _playerStats.PlayerName;
     }

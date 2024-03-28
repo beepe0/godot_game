@@ -8,9 +8,10 @@ public partial class DungeonBuilderPreset : Resource
 {
     [ExportGroup("Dungeon Property Settings")]
     [Export] public ulong Seed { get; set; }
-    [Export] public ushort NumberOfRooms { get; set; }
+    [Export] public ushort TargetNumberOfTiles { get; set; }
+    [Export] public ushort NumberOfTiers { get; set; }
     [Export] public Vector3 StartPosition { get; set; }
 
     [ExportGroup("Tiles Path Settings")] 
-    [Export] public Dictionary<string, string> CategoryScenes = new();
+    [Export] public Dictionary<string, string> CategoryScenes = new ();
 }

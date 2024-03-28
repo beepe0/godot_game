@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 
 driver/enable_input=true
 
+[autoload]
+
+DebugDraw="*res://addons/debug_drawing/DebugDraw.cs"
+
 [display]
 
 window/size/viewport_width=1920
@@ -32,6 +36,10 @@ window/vsync/vsync_mode=0
 [dotnet]
 
 project/assembly_name="TeamGame"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/debug_drawing/plugin.cfg")
 
 [input]
 

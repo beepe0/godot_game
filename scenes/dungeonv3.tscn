@@ -1,20 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bai1nenlxlmy7"]
+[gd_scene load_steps=5 format=3 uid="uid://bai1nenlxlmy7"]
 
 [ext_resource type="Script" path="res://submodules/component_system/ComponentSystem.cs" id="1_inula"]
 [ext_resource type="Script" path="res://scripts/components/dungeon_v3/DungeonBuilder.cs" id="2_kssw0"]
 [ext_resource type="Script" path="res://scripts/components/dungeon_v3/DungeonResourceLoader.cs" id="3_0dp3b"]
-[ext_resource type="Script" path="res://scripts/components/dungeon_v3/resources/DungeonBuilderPreset.cs" id="5_2upd2"]
-
-[sub_resource type="Resource" id="Resource_qwxxc"]
-script = ExtResource("5_2upd2")
-Seed = 0
-NumberOfRooms = 112
-StartPosition = Vector3(0, -30, 0)
-CategoryScenes = {
-"basic": "res://scenes/bunker/dungeon/tileset_basic.tscn",
-"finish": "res://scenes/bunker/dungeon/tileset_finish.tscn",
-"main": "res://scenes/bunker/dungeon/tileset_main.tscn"
-}
+[ext_resource type="Resource" uid="uid://diyyqccic7844" path="res://scenes/bunker/dungeon/resources/dungeonv3.tres" id="4_sf0eb"]
 
 [node name="Dungeon" type="Node3D"]
 
@@ -30,4 +19,4 @@ ResLoader = NodePath("../DungeonResourceLoader")
 
 [node name="DungeonResourceLoader" type="Node" parent="ComponentSystem"]
 script = ExtResource("3_0dp3b")
-DungeonBuilderPreset = SubResource("Resource_qwxxc")
+DungeonBuilderPreset = ExtResource("4_sf0eb")

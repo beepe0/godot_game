@@ -14,7 +14,7 @@ resource_name = "pipes_material"
 cull_mode = 2
 albedo_texture = ExtResource("1_sqkjy")
 normal_enabled = true
-normal_scale = 16.0
+normal_scale = 2.79
 normal_texture = ExtResource("2_pnlg3")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_6hgdb"]

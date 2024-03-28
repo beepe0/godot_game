@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://tc4lcwmul31i"]
 
-[ext_resource type="Script" path="res://scripts/components/dungeon_v3/DungeonTile.cs" id="1_dcad5"]
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/behaviour/DungeonTile.cs" id="1_dcad5"]
 [ext_resource type="Material" uid="uid://vnxnircm6vd3" path="res://models/materials/bunker_materials.tres" id="2_itvq8"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_jxfgf"]
@@ -44,10 +44,11 @@ albedo_color = Color(1, 0, 0, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_wdmb6"]
 size = Vector3(5.8, 2.4, 2.4)
 
-[node name="Tile_Hallway1" type="Node3D" groups=["DungeonTile"]]
+[node name="Tile_Hallway1" type="Node3D" node_paths=PackedStringArray("Connectors") groups=["DungeonTile"]]
 transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, 0, 0, 0)
 script = ExtResource("1_dcad5")
 Category = "basic"
+Connectors = []
 
 [node name="Tile_Hallway1" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_jotwr")

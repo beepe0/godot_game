@@ -61,7 +61,6 @@ public partial class DungeonResourceLoader : ComponentObject
         {
             GameConsole.Instance.DebugLog($"{GetType()} :: {GameConsole.SetColor("The loading was completed unsuccessfully!", "963636")} {e}");
         }
-        
         return (ushort)tileScenes.Count;
     }
 }
