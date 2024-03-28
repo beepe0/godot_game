@@ -313,7 +313,7 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(1, -6.10642e-08, 4.72248e-08, 5.4946e-08, 0.992752, 0.120182, -5.42213e-08, -0.120182, 0.992752, 4.996e-15, 0.1945, 6.51925e-09)
 bones/1/enabled = true
 bones/1/position = Vector3(4.996e-15, 0.1945, 6.51925e-09)
-bones/1/rotation = Quaternion(-0.0601624, 0.00727947, -0.00331419, 0.998157)
+bones/1/rotation = Quaternion(-0.0601629, -0.00621479, 0.00282954, 0.998165)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Breast"
 bones/2/parent = 1
@@ -394,7 +394,7 @@ bones/12/rotation = Quaternion(0.365516, -0.0610194, 0.120994, 0.920888)
 bones/12/scale = Vector3(1, 1, 1)
 
 [node name="Body_Mesh" type="MeshInstance3D" parent="Body/Armature/Skeleton3D"]
-cast_shadow = 0
+cast_shadow = 3
 mesh = SubResource("ArrayMesh_k0023")
 skin = SubResource("Skin_5dk0g")
 
@@ -403,12 +403,12 @@ mesh = SubResource("ArrayMesh_ak4o2")
 skin = SubResource("Skin_5dk0g")
 
 [node name="BoneAttachmentNeck" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(0.999872, 0.00604723, 0.0148092, -0.00758185, 0.994351, 0.105868, -0.0140853, -0.105966, 0.99427, 0.00527, 1.84972, 0.0590473)
+transform = Transform3D(0.999907, -0.00516284, -0.0126435, 0.00647304, 0.994358, 0.105883, 0.0120255, -0.105955, 0.994298, -0.00449903, 1.84972, 0.0590573)
 bone_name = "Head"
 bone_idx = 4
 
 [node name="BoneAttachmentBearst" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(0.999872, 0.0100725, 0.0124267, -0.00758205, 0.982468, -0.186278, -0.0140852, 0.18616, 0.982418, 0.00106657, 1.42407, -0.0102196)
+transform = Transform3D(0.999907, -0.00859915, -0.0106098, 0.00647284, 0.982478, -0.186265, 0.0120256, 0.186179, 0.982442, -0.000910459, 1.42407, -0.0102176)
 bone_name = "Breast"
 bone_idx = 2
 
@@ -651,6 +651,8 @@ script = ExtResource("8_h0g3b")
 WalkingSpeed = 2.0
 RunningSpeed = 5.0
 RoughnessOfWalk = 0.08
+MouseSensitivityX = 0.1
+MouseSensitivityY = 0.1
 LockArmAxisMinX = -40
 LockArmAxisMaxX = 90
 Player = NodePath("../..")

@@ -23,12 +23,12 @@ public partial class DebugDrawingPlugin : EditorPlugin
 		
 		
 		base._EnterTree();
-
-		_addEditorDebugCall = new Callable(this, nameof(AddEditorDebugDrawToScene));
+		//_addEditorDebugCall = new Callable(this, nameof(AddEditorDebugDrawToScene));
 
 		AddAutoloadSingleton("DebugDraw", "res://addons/debug_drawing/DebugDraw.cs");
+		AddAutoloadSingleton("Gizmo3D", "res://scripts/gizmo/Gizmo3D.cs");
 
-		//Add plugin settings
+        /*//Add plugin settings
 
 		const string settingName = "debug_drawing/layers/layer_";
 
@@ -37,7 +37,7 @@ public partial class DebugDrawingPlugin : EditorPlugin
 			AddProjectSetting(settingName + (i + 1), Variant.Type.String, i + 1);
 		}
 		
-		// AddProjectSetting(EnabledInEditorOption, Variant.Type.Bool, false);
+		AddProjectSetting(EnabledInEditorOption, Variant.Type.Bool, false);
 		AddProjectSetting(ToggleKeyOption, Variant.Type.Int, (int)Key.Apostrophe);
 
 		AddProjectSetting(MaxPoolSizeOption, Variant.Type.Int, 1024);
@@ -53,11 +53,11 @@ public partial class DebugDrawingPlugin : EditorPlugin
 		}
 
 		ProjectSettings.Save();
-		ProjectSettingsChanged += OnProjectSettingsChanged;
-	}
+		ProjectSettingsChanged += OnProjectSettingsChanged;*/
+    }
 
 
-	private void OnProjectSettingsChanged()
+/*	private void OnProjectSettingsChanged()
 	{
 		bool settingEnableInEditor =
 			(bool)ProjectSettings.GetSetting(EnabledInEditorOption, false);
@@ -76,7 +76,7 @@ public partial class DebugDrawingPlugin : EditorPlugin
 				Disconnect("scene_changed", _addEditorDebugCall);
 			}
 		}
-	}
+	}*/
 
 
 	public override void _ExitTree()
@@ -89,7 +89,7 @@ public partial class DebugDrawingPlugin : EditorPlugin
 	}
 
 
-	private bool AddProjectSetting(string name, Variant.Type type, Variant initialValue)
+/*	private bool AddProjectSetting(string name, Variant.Type type, Variant initialValue)
 	{
 		if (ProjectSettings.HasSetting(name))
 		{
@@ -104,10 +104,10 @@ public partial class DebugDrawingPlugin : EditorPlugin
 		ProjectSettings.AddPropertyInfo(dict);
 		ProjectSettings.SetInitialValue(name, initialValue);
 		return true;
-	}
+	}*/
 
 
-	public void AddEditorDebugDrawToScene(Node sceneRoot)
+/*	public void AddEditorDebugDrawToScene(Node sceneRoot)
 	{
 		//Delete the old one and make a new one, add it the the parent of the scene root
 		RemoveEditorDebugDraw();
@@ -130,7 +130,7 @@ public partial class DebugDrawingPlugin : EditorPlugin
 		{
 			GD.PushError("root is null, can't add DebugDraw!");
 		}
-	}
+	}*/
 
 
 	private static void RemoveEditorDebugDraw()
@@ -138,7 +138,7 @@ public partial class DebugDrawingPlugin : EditorPlugin
 		if (_editorDebugDraw != null)
 		{
 			_editorDebugDraw.Free();
-			_editorDebugDraw = null;
+			_editorDebugDraw = default;
 		}
 	}
 }

@@ -1,4 +1,4 @@
-﻿public partial class DungeonTileCategoryBasic : DungeonTileCategory
+public partial class DungeonTileCategoryBasic : DungeonTileCategory
 {
-    
+	
 }

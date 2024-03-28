@@ -1854,7 +1854,7 @@ namespace Burden.DebugDrawing
 
 		public Color Color;
 		public bool BeenDrawn;
-		protected ulong ExpirationTime;
+        public ulong ExpirationTime;
 		public uint DrawLayers;
 
 

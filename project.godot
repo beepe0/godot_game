@@ -23,6 +23,7 @@ driver/enable_input=true
 [autoload]
 
 DebugDraw="*res://addons/debug_drawing/DebugDraw.cs"
+Gizmo3D="*res://scripts/gizmo/Gizmo3D.cs"
 
 [display]
 

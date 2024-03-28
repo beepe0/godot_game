@@ -1,49 +1,123 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Reflection.Emit;
+using BP.GameConsole;
 using Godot;
+using Array = Godot.Collections.Array;
+using Label = Godot.Label;
 
-public static class Gizmo3D
+public partial class Gizmo3D : Node
 {
-    public static MeshInstance3D Line(Vector3 pos1, Vector3 pos2, Color? color = null)
+    private MultiMeshInstance3D _multiMeshInstance;
+    private Node2D _canvas2d;
+    private Font _font;
+    private static readonly Vector3[] CubeVertices =
     {
-        var meshInstance = new MeshInstance3D();
-        var immediateMesh = new ImmediateMesh();
-        var material = new StandardMaterial3D();
+        new(-0.5f, -0.5f, -0.5f),
+        new(0.5f, -0.5f, -0.5f),
+        new(0.5f, 0.5f, -0.5f),
+        new(-0.5f, 0.5f, -0.5f),
+        new(-0.5f, -0.5f, 0.5f),
+        new(0.5f, -0.5f, 0.5f),
+        new(0.5f, 0.5f, 0.5f),
+        new(-0.5f, 0.5f, 0.5f)
+    };
+
+    private static readonly int[] CubeIndices =
+    {
+		//top
+		0, 1,
+        1, 2,
+        2, 3,
+        3, 0,
+
+		//bottom
+		4, 5,
+        5, 6,
+        6, 7,
+        7, 4,
+
+		//edges
+		0, 4,
+        1, 5,
+        2, 6,
+        3, 7
+    };
+    public static Mesh CreateBoxMesh(Mesh.PrimitiveType type = Mesh.PrimitiveType.Lines)
+    {
+        var arrMesh = new ArrayMesh();
+
+        Vector3[] vertices = null;
+        int[] indices = null;
+        Color[] colors = null;
+
+        vertices = CubeVertices;
+        indices = CubeIndices;
         
-        meshInstance.Mesh = immediateMesh;
-        meshInstance.CastShadow = GeometryInstance3D.ShadowCastingSetting.Off;
+        Array arrays = new();
+        arrays.Resize((int)Mesh.ArrayType.Max);
+        arrays[(int)Mesh.ArrayType.Vertex] = vertices;
+        arrays[(int)Mesh.ArrayType.Index] = indices;
 
-        immediateMesh.SurfaceBegin(Mesh.PrimitiveType.Lines, material);
-        immediateMesh.SurfaceAddVertex(pos1);
-        immediateMesh.SurfaceAddVertex(pos2);
-        immediateMesh.SurfaceEnd();
+        if (colors != null)
+        {
+            arrays[(int)Mesh.ArrayType.Color] = colors;
+        }
 
-        material.ShadingMode = BaseMaterial3D.ShadingModeEnum.Unshaded;
-        material.AlbedoColor = color ?? Colors.WhiteSmoke;
+        arrMesh.AddSurfaceFromArrays(type, arrays);
 
-        (Engine.GetMainLoop() as SceneTree)?.Root.AddChild(meshInstance);
-        
-        return meshInstance;
+        return arrMesh;
     }
-
-    public static MeshInstance3D Point(Vector3 pos, float radius = 0.05f, Color? color = null)
+    public override void _Ready()
     {
-        var meshInstance = new MeshInstance3D();
-        var sphereMesh = new SphereMesh();
-        var material = new StandardMaterial3D();
+        Mesh box = CreateBoxMesh();
+        _canvas2d = new Node2D();
+        
+        Label label = new();
+        _font = label.GetThemeDefaultFont();
+        label.Free();
 
-        meshInstance.Mesh = sphereMesh;
-        meshInstance.CastShadow = GeometryInstance3D.ShadowCastingSetting.Off;
-        meshInstance.Position = pos;
+        _multiMeshInstance = new MultiMeshInstance3D
+        {
+            Name = "Box",
+            CastShadow = GeometryInstance3D.ShadowCastingSetting.Off,
+            GIMode = GeometryInstance3D.GIModeEnum.Disabled,
+            IgnoreOcclusionCulling = true,
 
-        sphereMesh.Radius = radius;
-        sphereMesh.Height = radius * 2f;
-        sphereMesh.Material = material;
+            MaterialOverride = new StandardMaterial3D
+            {
+                ShadingMode = BaseMaterial3D.ShadingModeEnum.Unshaded,
+                BlendMode = false ? BaseMaterial3D.BlendModeEnum.Add : BaseMaterial3D.BlendModeEnum.Mix,
+                VertexColorUseAsAlbedo = true,
+                Transparency = BaseMaterial3D.TransparencyEnum.Alpha,
+                CullMode = BaseMaterial3D.CullModeEnum.Back
+            },
+            Multimesh = new MultiMesh
+            {
+                TransformFormat = MultiMesh.TransformFormatEnum.Transform3D,
+                UseColors = true,
+                Mesh = box,
+            }
+        };
+        _multiMeshInstance.Multimesh.InstanceCount = 2;
 
-        material.ShadingMode = BaseMaterial3D.ShadingModeEnum.Unshaded;
-        material.AlbedoColor = color ?? Colors.WhiteSmoke;
+        _multiMeshInstance.Multimesh.SetInstanceTransform(0, new Transform3D(Basis.Identity, Vector3.One));
+        _multiMeshInstance.Multimesh.SetInstanceColor(0, Colors.Cyan);
+        _multiMeshInstance.Multimesh.SetInstanceTransform(1, new Transform3D(Basis.Identity, Vector3.Zero));
+        _multiMeshInstance.Multimesh.SetInstanceColor(1, Colors.Red);
 
-        (Engine.GetMainLoop() as SceneTree)?.Root.AddChild(meshInstance);
-
-        return meshInstance;
+        AddChild(_multiMeshInstance);
+        AddChild(_canvas2d);
+    }
+    public override void _Process(double delta)
+    {
+        Camera3D camera = _canvas2d.GetViewport().GetCamera3D();
+        if(camera == null)
+        {
+            GameConsole.Instance.Debug("asdasldkjasd");
+            return;
+        }
+        Vector2 offset = _font.GetStringSize("test", HorizontalAlignment.Left, -1f, 12) * 0.5f;
+        Vector2 pos = camera.UnprojectPosition(new Vector3(1, 1, 1)) - offset;
+        _canvas2d.DrawString(_font, pos, "test", HorizontalAlignment.Left, -1, 12, Colors.White);
     }
 }
