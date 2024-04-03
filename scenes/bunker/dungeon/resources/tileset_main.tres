@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DungeonTileCategoryPreset" load_steps=2 format=3 uid="uid://5jp2gplp4h1m"]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://5jp2gplp4h1m"]
 
 [ext_resource type="Script" path="res://scripts/components/dungeon_v3/resources/DungeonTileCategoryPreset.cs" id="1_ctllo"]
 

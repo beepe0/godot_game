@@ -28,7 +28,7 @@ public partial class DebugDraw : Node
 {
 	#if TOOLS
 	private static DebugMeshDrawer _meshDrawer;
-	private static DebugCanvasDrawer _canvasDrawer;
+	public static DebugCanvasDrawer _canvasDrawer;
 	private DebugDock _dock;
 	private CanvasLayer _drawCanvas;
 	
@@ -1460,7 +1460,7 @@ namespace Burden.DebugDrawing
 	}
 
 
-	internal partial class DebugCanvasDrawer : GodotObject
+	public partial class DebugCanvasDrawer : GodotObject
 	{
 		private Font _textFont;
 		private int _fontSize = 12;
@@ -1470,12 +1470,12 @@ namespace Burden.DebugDrawing
 		public readonly ObjectPool<DrawTextInstance> TextPool;
 
 		private readonly Dictionary<string, DrawTextInstance> _keyedTextEntries = new();
-		private readonly HashSet<DrawTextInstance> _textEntries = new();
+		public readonly HashSet<DrawTextInstance> _textEntries = new();
 
 		public readonly ObjectPool<DrawText3DInstance> Text3DPool;
 
 		private readonly Dictionary<string, DrawText3DInstance> _keyedText3dEntries = new();
-		private readonly HashSet<DrawText3DInstance> _text3dEntries = new();
+		public readonly HashSet<DrawText3DInstance> _text3dEntries = new();
 
 		private Node _parent;
 
@@ -1778,19 +1778,19 @@ namespace Burden.DebugDrawing
 	}
 
 
-	internal interface IPoolable
+	public interface IPoolable
 	{
 		void Reset();
 	}
 
 
-	internal class ObjectPool<T> where T : IPoolable, new()
+	public class ObjectPool<T> where T : IPoolable, new()
 	{
 		public readonly int MaxSize;
 		public int CurrentSize;
 		public int FreeObjects;
 
-		private readonly Queue<T> _pool;
+		public readonly Queue<T> _pool;
 
 
 		public ObjectPool()
@@ -1843,7 +1843,7 @@ namespace Burden.DebugDrawing
 	}
 
 
-	internal class DrawInstance : IPoolable
+	public class DrawInstance : IPoolable
 	{
 		public void SetDuration(float duration)
 		{
@@ -1854,7 +1854,7 @@ namespace Burden.DebugDrawing
 
 		public Color Color;
 		public bool BeenDrawn;
-        public ulong ExpirationTime;
+		protected ulong ExpirationTime;
 		public uint DrawLayers;
 
 
@@ -1888,7 +1888,7 @@ namespace Burden.DebugDrawing
 	}
 
 
-	internal class DrawTextInstance : DrawInstance
+	public class DrawTextInstance : DrawInstance
 	{
 		public string Text;
 
@@ -1901,7 +1901,7 @@ namespace Burden.DebugDrawing
 	}
 
 
-	internal class DrawText3DInstance : DrawTextInstance
+	public class DrawText3DInstance : DrawTextInstance
 	{
 		public Vector3 Location;
 
