@@ -313,7 +313,7 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(1, -6.10642e-08, 4.72248e-08, 5.4946e-08, 0.992752, 0.120182, -5.42213e-08, -0.120182, 0.992752, 4.996e-15, 0.1945, 6.51925e-09)
 bones/1/enabled = true
 bones/1/position = Vector3(4.996e-15, 0.1945, 6.51925e-09)
-bones/1/rotation = Quaternion(-0.0601629, -0.00621479, 0.00282954, 0.998165)
+bones/1/rotation = Quaternion(-0.0601643, -0.000134857, 6.14389e-05, 0.998188)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Breast"
 bones/2/parent = 1
@@ -403,12 +403,12 @@ mesh = SubResource("ArrayMesh_ak4o2")
 skin = SubResource("Skin_5dk0g")
 
 [node name="BoneAttachmentNeck" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(0.999907, -0.00516284, -0.0126435, 0.00647304, 0.994358, 0.105883, 0.0120255, -0.105955, 0.994298, -0.00449903, 1.84972, 0.0590573)
+transform = Transform3D(1, -0.000112043, -0.000274421, 0.00014048, 0.994374, 0.105923, 0.00026101, -0.105923, 0.994374, -9.75084e-05, 1.84974, 0.0590847)
 bone_name = "Head"
 bone_idx = 4
 
 [node name="BoneAttachmentBearst" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(0.999907, -0.00859915, -0.0106098, 0.00647284, 0.982478, -0.186265, 0.0120256, 0.186179, 0.982442, -0.000910459, 1.42407, -0.0102176)
+transform = Transform3D(1, -0.000186468, -0.000230475, 0.000140284, 0.982506, -0.186232, 0.000261169, 0.186232, 0.982506, -1.96891e-05, 1.42408, -0.0102121)
 bone_name = "Breast"
 bone_idx = 2
 
@@ -651,8 +651,6 @@ script = ExtResource("8_h0g3b")
 WalkingSpeed = 2.0
 RunningSpeed = 5.0
 RoughnessOfWalk = 0.08
-MouseSensitivityX = 0.1
-MouseSensitivityY = 0.1
 LockArmAxisMinX = -40
 LockArmAxisMaxX = 90
 Player = NodePath("../..")
@@ -673,7 +671,7 @@ script = ExtResource("6_gsg0y")
 [node name="PlayerAnimator" type="Node" parent="Components" node_paths=PackedStringArray("_controller", "_animationPlayer", "_animationTree")]
 script = ExtResource("7_m7fxw")
 _controller = NodePath("../PlayerController")
-_animationPlayer = NodePath("../../Body/Armature/AnimationPlayer")
+_animationPlayer = NodePath("../../Body/Armature/Skeleton3D/BoneAttachmentBearst/AnimationPlayer")
 _animationTree = NodePath("../../Body/Armature/AnimationTree")
 
 [node name="PlayerNetwork" type="Node" parent="Components" node_paths=PackedStringArray("_playerStats", "_playerAnimator", "_playerController")]

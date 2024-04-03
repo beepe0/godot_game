@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="TeamGame"
+config/name="godot_project"
 run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 run/max_fps=60
@@ -22,8 +22,7 @@ driver/enable_input=true
 
 [autoload]
 
-DebugDraw="*res://addons/debug_drawing/DebugDraw.cs"
-Gizmo3D="*res://scripts/gizmo/Gizmo3D.cs"
+DrawGizmos="*res://submodules/debug_draw_system/DrawGizmos.cs"
 
 [display]
 
@@ -31,16 +30,13 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=3
 window/size/resizable=false
+window/subwindows/embed_subwindows=false
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
 
 [dotnet]
 
-project/assembly_name="TeamGame"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/debug_drawing/plugin.cfg")
+project/assembly_name="godot_project"
 
 [input]
 
