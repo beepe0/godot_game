@@ -9,7 +9,7 @@ public partial class KeyCommandAudio : Command
     string[] devices = null;
     public override void Execute(string[] keys)
     {
-        GameConsole.Instance.DebugWarningCallDeferrd($"KeyCommandAudio :: does not work!");
+        GameConsole.Instance.DebugWarning($"KeyCommandAudio :: does not work!");
         // if (keys[1].Equals("record"))
         // {
         //     VoiceManager.Instance.recording = !VoiceManager.Instance.recording;
@@ -37,7 +37,7 @@ public partial class KeyCommandAudio : Command
     }
     private void GetInputDeviceList()
     {
-        GameConsole.Instance.DebugCallDeferrd($"Current input device is {AudioServer.InputDevice}");
+        GameConsole.Instance.Debug($"Current input device is {AudioServer.InputDevice}");
 
         devices = AudioServer.GetInputDeviceList();
         for (int i = 0; i < devices.Length; i++)
@@ -47,7 +47,7 @@ public partial class KeyCommandAudio : Command
     }
     private void GetOutputDeviceList()
     {
-        GameConsole.Instance.DebugCallDeferrd($"Current output device is {AudioServer.InputDevice}");
+        GameConsole.Instance.Debug($"Current output device is {AudioServer.InputDevice}");
 
         devices = AudioServer.GetOutputDeviceList();
         for (int i = 0; i < devices.Length; i++)

@@ -238,6 +238,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2, 1.7, -7.9)
 
 [node name="Camera3D" type="Camera3D" parent="Objects/Mirrors/Mirror/SubViewport" groups=["Mirrors"]]
 transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -5.2, 1.7, -7.9)
+visible = false
 fov = 90.0
 size = 6.314
 near = 0.001
@@ -245,6 +246,7 @@ far = 30.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Objects/Mirrors/Mirror/SubViewport"]
 transform = Transform3D(1.95, 0, 0, 0, -8.52372e-08, -1.95, 0, 1.95, -8.52372e-08, -5.23393, 2.00557, -7.9)
+visible = false
 material_override = SubResource("StandardMaterial3D_1a0c8")
 cast_shadow = 0
 gi_mode = 0
