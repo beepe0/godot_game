@@ -1,7 +1,7 @@
 [gd_scene load_steps=29 format=3 uid="uid://dp0us7uhydik7"]
 
 [ext_resource type="Material" uid="uid://dbdn65xo848kp" path="res://models/materials/door_2_material.tres" id="1_0krr7"]
-[ext_resource type="Script" path="res://submodules/component_system/ComponentSystem.cs" id="2_jjabd"]
+[ext_resource type="Script" path="res://addons/godot_component_system/ComponentSystem.cs" id="2_jjabd"]
 [ext_resource type="Script" path="res://scripts/components/interactables/Interactable.cs" id="4_fy7xo"]
 [ext_resource type="Script" path="res://scripts/components/interactables/doors/DoorController.cs" id="5_rsrdj"]
 [ext_resource type="Script" path="res://scripts/components/interactables/doors/DoorAnimator.cs" id="6_6qj55"]

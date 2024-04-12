@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bai1nenlxlmy7"]
 
-[ext_resource type="Script" path="res://submodules/component_system/ComponentSystem.cs" id="1_inula"]
+[ext_resource type="Script" path="res://addons/godot_component_system/ComponentSystem.cs" id="1_inula"]
 [ext_resource type="Script" path="res://scripts/components/dungeon_v3/DungeonBuilder.cs" id="2_kssw0"]
 [ext_resource type="Script" path="res://scripts/components/dungeon_v3/DungeonResourceLoader.cs" id="3_0dp3b"]
 [ext_resource type="Resource" uid="uid://diyyqccic7844" path="res://scenes/bunker/dungeon/resources/dungeonv3.tres" id="4_sf0eb"]

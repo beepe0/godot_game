@@ -1,7 +1,7 @@
 [gd_scene load_steps=42 format=3 uid="uid://c5q0it6f74vd8"]
 
 [ext_resource type="Material" uid="uid://5262uff6vxoa" path="res://models/materials/skin_albedo.tres" id="1_62fy6"]
-[ext_resource type="Script" path="res://submodules/component_system/ComponentSystem.cs" id="1_dt56i"]
+[ext_resource type="Script" path="res://addons/godot_component_system/ComponentSystem.cs" id="1_dt56i"]
 [ext_resource type="PackedScene" uid="uid://dgw3383ifm0rc" path="res://scenes/bunker/flashlights/flashlight_1.tscn" id="2_hkem1"]
 [ext_resource type="ArrayMesh" uid="uid://byvon3h0wnwfl" path="res://models/meshes/players/arms/model_camera_player1_arms.res" id="2_k07vj"]
 [ext_resource type="AnimationLibrary" uid="uid://bu8de48jbredd" path="res://models/animations/player1/arms/animation_lib_payer1_arms.res" id="4_xgytn"]
@@ -313,7 +313,7 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(1, -6.10642e-08, 4.72248e-08, 5.4946e-08, 0.992752, 0.120182, -5.42213e-08, -0.120182, 0.992752, 4.996e-15, 0.1945, 6.51925e-09)
 bones/1/enabled = true
 bones/1/position = Vector3(4.996e-15, 0.1945, 6.51925e-09)
-bones/1/rotation = Quaternion(-0.060164, 0.00286874, -0.00130605, 0.998184)
+bones/1/rotation = Quaternion(-0.0601643, 0.00120216, -0.000547283, 0.998188)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Breast"
 bones/2/parent = 1
@@ -403,12 +403,12 @@ mesh = SubResource("ArrayMesh_ak4o2")
 skin = SubResource("Skin_5dk0g")
 
 [node name="BoneAttachmentNeck" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(0.99998, 0.00238319, 0.00583621, -0.00298798, 0.994371, 0.105914, -0.00555094, -0.10593, 0.994358, 0.00207697, 1.84974, 0.059079)
+transform = Transform3D(0.999996, 0.000998686, 0.00244566, -0.00125212, 0.994374, 0.105921, -0.00232612, -0.105924, 0.994372, 0.000870436, 1.84974, 0.0590837)
 bone_name = "Head"
 bone_idx = 4
 
 [node name="BoneAttachmentBearst" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(0.99998, 0.00396963, 0.00489719, -0.00298817, 0.9825, -0.186239, -0.00555079, 0.186221, 0.982492, 0.000420375, 1.42408, -0.0102132)
+transform = Transform3D(0.999996, 0.00166358, 0.00205205, -0.00125232, 0.982505, -0.186233, -0.00232596, 0.18623, 0.982503, 0.000176201, 1.42408, -0.0102123)
 bone_name = "Breast"
 bone_idx = 2
 

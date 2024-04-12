@@ -3,7 +3,7 @@
 [ext_resource type="ArrayMesh" uid="uid://r7jjga1r2hk4" path="res://models/meshes/doors/bunker_door/leaf_bunker_door.tres" id="1_pfi3p"]
 [ext_resource type="ArrayMesh" uid="uid://dvshkmsyl2351" path="res://models/meshes/doors/bunker_door/handle_bunker_door.tres" id="2_7qpwu"]
 [ext_resource type="Material" uid="uid://dafjqdf41do12" path="res://models/materials/door_3_material.tres" id="3_doo5e"]
-[ext_resource type="Script" path="res://submodules/component_system/ComponentSystem.cs" id="4_amj7t"]
+[ext_resource type="Script" path="res://addons/godot_component_system/ComponentSystem.cs" id="4_amj7t"]
 [ext_resource type="Script" path="res://scripts/components/interactables/Interactable.cs" id="4_fv7y0"]
 [ext_resource type="Script" path="res://scripts/components/interactables/doors/DoorController.cs" id="5_j1cuo"]
 [ext_resource type="Script" path="res://scripts/components/interactables/doors/DoorAnimator.cs" id="6_icwep"]
@@ -161,7 +161,7 @@ mesh = ExtResource("1_pfi3p")
 skeleton = NodePath("")
 
 [node name="BoneAttachmentHandle" type="BoneAttachment3D" parent="Root_BunkerDoor/Skeleton3D"]
-transform = Transform3D(0, 0, -1, -1, 0, 0, 0, 1, 0, 2.98023e-08, 1.6, 0.510706)
+transform = Transform3D(-1.19209e-07, 5.96046e-08, -1, -1, -1.19209e-07, 5.96046e-08, -5.96046e-08, 1, 0, 2.98023e-08, 1.6, 0.510706)
 bone_name = "Handle"
 bone_idx = 1
 
