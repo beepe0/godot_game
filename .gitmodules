@@ -1,8 +1,0 @@
-[submodule "submodules/component_system"]
-	path = submodules/component_system
-	url = https://github.com/beepe0/godot_submodules.git
-	branch = godot_component_system
-[submodule "submodules/console_manager"]
-	path = submodules/console_manager
-	url = https://github.com/beepe0/godot_submodules.git
-	branch = godot_console_manager
