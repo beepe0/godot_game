@@ -313,7 +313,7 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(1, -6.10642e-08, 4.72248e-08, 5.4946e-08, 0.992752, 0.120182, -5.42213e-08, -0.120182, 0.992752, 4.996e-15, 0.1945, 6.51925e-09)
 bones/1/enabled = true
 bones/1/position = Vector3(4.996e-15, 0.1945, 6.51925e-09)
-bones/1/rotation = Quaternion(-0.0601643, -0.000134857, 6.14389e-05, 0.998188)
+bones/1/rotation = Quaternion(-0.0601619, 0.0081436, -0.00370762, 0.998149)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Breast"
 bones/2/parent = 1
@@ -403,12 +403,12 @@ mesh = SubResource("ArrayMesh_ak4o2")
 skin = SubResource("Skin_5dk0g")
 
 [node name="BoneAttachmentNeck" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(1, -0.000112043, -0.000274421, 0.00014048, 0.994374, 0.105923, 0.00026101, -0.105923, 0.994374, -9.75084e-05, 1.84974, 0.0590847)
+transform = Transform3D(0.99984, 0.00676504, 0.016567, -0.00848182, 0.994346, 0.105854, -0.0157572, -0.105977, 0.994244, 0.00589553, 1.84971, 0.0590379)
 bone_name = "Head"
 bone_idx = 4
 
 [node name="BoneAttachmentBearst" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(1, -0.000186468, -0.000230475, 0.000140284, 0.982506, -0.186232, 0.000261169, 0.186232, 0.982506, -1.96891e-05, 1.42408, -0.0102121)
+transform = Transform3D(0.99984, 0.0112681, 0.0139018, -0.00848202, 0.982458, -0.18629, -0.0157571, 0.186142, 0.982396, 0.00119317, 1.42407, -0.0102215)
 bone_name = "Breast"
 bone_idx = 2
 
@@ -648,11 +648,6 @@ Tag = "LocalPlayer"
 
 [node name="PlayerController" type="Node" parent="Components" node_paths=PackedStringArray("Player", "_interactRay", "_boneAttachmentNeck", "_boneAttachmentBreast", "_boneAttachmentShoulder", "ArmHandler", "Body", "CameraHandler", "CameraShaker", "Camera", "Collider")]
 script = ExtResource("8_h0g3b")
-WalkingSpeed = 2.0
-RunningSpeed = 5.0
-RoughnessOfWalk = 0.08
-LockArmAxisMinX = -40
-LockArmAxisMaxX = 90
 Player = NodePath("../..")
 _interactRay = NodePath("../../Body/CameraShaker/CameraHandler/Camera3D/RayCast3D")
 _boneAttachmentNeck = NodePath("../../Body/Armature/Skeleton3D/BoneAttachmentNeck")

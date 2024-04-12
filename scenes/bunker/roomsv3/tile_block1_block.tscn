@@ -2,15 +2,14 @@
 
 [ext_resource type="Script" path="res://scripts/components/dungeon_v3/behaviour/DungeonTile.cs" id="1_tqe1m"]
 
-
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mueer"]
 albedo_color = Color(0.921569, 0, 0.129412, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_x5iub"]
 
-[node name="Block" type="Node3D" groups=["DungeonTile"]]
+[node name="Block" type="Node3D" node_paths=PackedStringArray("Connectors") groups=["DungeonTile"]]
 script = ExtResource("1_tqe1m")
+Connectors = []
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.6, 0, 0, 0, 0.7, 0, 0, 0, 0.08, 0, 0, 0)

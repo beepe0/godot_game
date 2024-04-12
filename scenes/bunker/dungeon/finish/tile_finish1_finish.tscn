@@ -55,11 +55,11 @@ material = SubResource("StandardMaterial3D_vgp0i")
 [node name="Tile_Finish1" type="Node3D" node_paths=PackedStringArray("SecondConnectors", "Connectors", "Bounds") groups=["DungeonTile"]]
 transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, 0, 0, 0)
 script = ExtResource("1_5i5nk")
-SecondConnectors = []
+SecondConnectors = [NodePath("Connectors/ConnectorC"), NodePath("Connectors/ConnectorD")]
 Category = "finish"
 IsAutoDetect = false
-Connectors = []
-Bounds = NodePath("")
+Connectors = [NodePath("Connectors/ConnectorA"), NodePath("Connectors/ConnectorB")]
+Bounds = NodePath("Bounds")
 
 [node name="Tile_Finish1" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_1m34h")

@@ -15,7 +15,7 @@ Tag = "Dungeon"
 
 [node name="DungeonBuilder" type="Node" parent="ComponentSystem" node_paths=PackedStringArray("ResLoader")]
 script = ExtResource("2_kssw0")
-ResLoader = NodePath("")
+ResLoader = NodePath("../DungeonResourceLoader")
 
 [node name="DungeonResourceLoader" type="Node" parent="ComponentSystem"]
 script = ExtResource("3_0dp3b")

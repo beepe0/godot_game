@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bemctsja6wlyg"]
+[gd_scene load_steps=11 format=3 uid="uid://bemctsja6wlyg"]
 
 [ext_resource type="PackedScene" uid="uid://c5q0it6f74vd8" path="res://scenes/players/local_player.tscn" id="4_1f4f1"]
 [ext_resource type="Script" path="res://submodules/console_manager/CommandManager.cs" id="4_1ivhn"]
@@ -7,8 +7,8 @@
 [ext_resource type="Script" path="res://scripts/multiplayer/MultiplayerManager.cs" id="7_ab420"]
 [ext_resource type="PackedScene" uid="uid://clyjiw7yrsvyk" path="res://scenes/prototype_room.tscn" id="7_bocic"]
 [ext_resource type="PackedScene" uid="uid://cf43h8i06dy3d" path="res://scenes/players/remote_player.tscn" id="9_2c66a"]
+[ext_resource type="PackedScene" uid="uid://digtkc52es5kp" path="res://scenes/bunker/lobby.tscn" id="9_arjy4"]
 [ext_resource type="PackedScene" uid="uid://bai1nenlxlmy7" path="res://scenes/dungeonv3.tscn" id="9_fe3t2"]
-[ext_resource type="Script" path="res://scripts/stats/DebugPlayer.cs" id="11_qp4hc"]
 
 [sub_resource type="Environment" id="Environment_bua0u"]
 background_mode = 2
@@ -17,9 +17,6 @@ ambient_light_color = Color(0.054902, 0.054902, 0.054902, 1)
 ambient_light_energy = 16.0
 volumetric_fog_density = 0.3342
 volumetric_fog_albedo = Color(0.0313726, 0.0313726, 0.0313726, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g8m7r"]
-bg_color = Color(0, 0, 0, 0)
 
 [node name="Game" type="Node"]
 script = ExtResource("5_guotx")
@@ -43,45 +40,8 @@ environment = SubResource("Environment_bua0u")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Stats" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("_timer", "_richTextLable")]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("11_qp4hc")
-_timer = NodePath("Timer")
-_richTextLable = NodePath("Panel/RichTextLabel")
-
-[node name="Panel" type="Panel" parent="CanvasLayer/Stats"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Stats/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/normal_font_size = 12
-theme_override_styles/normal = SubResource("StyleBoxFlat_g8m7r")
-bbcode_enabled = true
-scroll_active = false
-autowrap_mode = 0
-deselect_on_focus_loss_enabled = false
-
-[node name="Timer" type="Timer" parent="CanvasLayer/Stats"]
-wait_time = 0.1
-autostart = true
-
 [node name="Console" parent="CanvasLayer" instance=ExtResource("6_qchd8")]
 visible = false
 
-[connection signal="timeout" from="CanvasLayer/Stats/Timer" to="CanvasLayer/Stats" method="UpdateContent"]
+[node name="Lobby" parent="." instance=ExtResource("9_arjy4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25.317)

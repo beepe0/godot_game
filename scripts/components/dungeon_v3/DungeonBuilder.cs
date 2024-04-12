@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using BP.ComponentSystem;
+using BP.DebugGizmos;
 using BP.GameConsole;
 using Godot;
 
@@ -33,9 +34,6 @@ public partial class DungeonBuilder : ComponentObject
         
         workTime.Stop();
         
-        foreach (var tileCat in TileScenes.Values) 
-            GameConsole.Instance.DebugWarning($"Number of generated {tileCat.DungeonTileCategoryPreset.TilesCategory} tiles: {tileCat.CurrentNumberOfTilesPerTier}");
-        
         GameConsole.Instance.DebugWarning($"Elapsed time: {workTime.Elapsed.TotalMilliseconds} ms, number of generated tiles: {CurrentNumberOfTiles}");
     }
     private async Task Generate()
@@ -52,7 +50,6 @@ public partial class DungeonBuilder : ComponentObject
             if(ValidTiles.Count < 1)
             {
                 if (CurrentNumberOfTiers >= ResLoader.DungeonBuilderPreset.NumberOfTiers || ValidTilesFrom.Count < 1) break;
-                GameConsole.Instance.DebugLog($"CurrentNumberOfTiers: {CurrentNumberOfTiers}, ValidTiles.Count: {ValidTiles.Count}, ValidTilesFrom.Count: {ValidTilesFrom.Count}");
 
                 ValidTiles.Clear();
                 ValidTiles.AddRange(ValidTilesFrom);

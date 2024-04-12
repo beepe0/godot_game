@@ -34,8 +34,8 @@ public partial class PlayerController : ComponentObject
     [Export(PropertyHint.Range, "0,1,0.01")] public float RoughnessOfSensitivity = 0.25f;
     [Export(PropertyHint.Range, "-180,180,1")] public short LockAxisMinX = -40;
     [Export(PropertyHint.Range, "-180,180,1")] public short LockAxisMaxX = 90;
-    [Export(PropertyHint.Range, "-360,360,1")] public short LockArmAxisMinX = -150;
-    [Export(PropertyHint.Range, "-360,360,1")] public short LockArmAxisMaxX = 150;
+    [Export(PropertyHint.Range, "-360,360,1")] public short LockArmAxisMinX = -40;
+    [Export(PropertyHint.Range, "-360,360,1")] public short LockArmAxisMaxX = 90;
     private Vector2 _mouseDelta;
     private Vector3 _cameraRotationDelta = Vector3.Zero;
 
