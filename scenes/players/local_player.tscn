@@ -313,7 +313,7 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(1, -6.10642e-08, 4.72248e-08, 5.4946e-08, 0.992752, 0.120182, -5.42213e-08, -0.120182, 0.992752, 4.996e-15, 0.1945, 6.51925e-09)
 bones/1/enabled = true
 bones/1/position = Vector3(4.996e-15, 0.1945, 6.51925e-09)
-bones/1/rotation = Quaternion(-0.0601619, 0.0081436, -0.00370762, 0.998149)
+bones/1/rotation = Quaternion(-0.060164, 0.00286874, -0.00130605, 0.998184)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Breast"
 bones/2/parent = 1
@@ -403,12 +403,12 @@ mesh = SubResource("ArrayMesh_ak4o2")
 skin = SubResource("Skin_5dk0g")
 
 [node name="BoneAttachmentNeck" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(0.99984, 0.00676504, 0.016567, -0.00848182, 0.994346, 0.105854, -0.0157572, -0.105977, 0.994244, 0.00589553, 1.84971, 0.0590379)
+transform = Transform3D(0.99998, 0.00238319, 0.00583621, -0.00298798, 0.994371, 0.105914, -0.00555094, -0.10593, 0.994358, 0.00207697, 1.84974, 0.059079)
 bone_name = "Head"
 bone_idx = 4
 
 [node name="BoneAttachmentBearst" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(0.99984, 0.0112681, 0.0139018, -0.00848202, 0.982458, -0.18629, -0.0157571, 0.186142, 0.982396, 0.00119317, 1.42407, -0.0102215)
+transform = Transform3D(0.99998, 0.00396963, 0.00489719, -0.00298817, 0.9825, -0.186239, -0.00555079, 0.186221, 0.982492, 0.000420375, 1.42408, -0.0102132)
 bone_name = "Breast"
 bone_idx = 2
 
@@ -648,6 +648,8 @@ Tag = "LocalPlayer"
 
 [node name="PlayerController" type="Node" parent="Components" node_paths=PackedStringArray("Player", "_interactRay", "_boneAttachmentNeck", "_boneAttachmentBreast", "_boneAttachmentShoulder", "ArmHandler", "Body", "CameraHandler", "CameraShaker", "Camera", "Collider")]
 script = ExtResource("8_h0g3b")
+MouseSensitivityX = 0.1
+MouseSensitivityY = 0.1
 Player = NodePath("../..")
 _interactRay = NodePath("../../Body/CameraShaker/CameraHandler/Camera3D/RayCast3D")
 _boneAttachmentNeck = NodePath("../../Body/Armature/Skeleton3D/BoneAttachmentNeck")

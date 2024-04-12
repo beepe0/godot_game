@@ -22,7 +22,6 @@ driver/enable_input=true
 
 [autoload]
 
-DebugDraw="*res://addons/debug_drawing/DebugDraw.cs"
 DrawGizmos="*res://submodules/debug_draw_system/DrawGizmos.cs"
 
 [debug]
@@ -69,7 +68,7 @@ project/assembly_name="godot_project"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/debug_drawing/plugin.cfg", "res://addons/debug_gizmos_system/plugin.cfg")
+enabled=PackedStringArray("res://addons/debug_gizmos_system/plugin.cfg")
 
 [input]
 
