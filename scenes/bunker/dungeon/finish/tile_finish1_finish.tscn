@@ -116,6 +116,7 @@ shape = SubResource("BoxShape3D_rmeng")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.908355, -2.81719, 0, 0.4182, 6.11911, 0, 0.936157, 0.778231)
+visible = false
 mesh = SubResource("BoxMesh_88koe")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]

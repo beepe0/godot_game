@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bym0ct77vuaps"]
+
+[ext_resource type="Texture2D" uid="uid://b5f80svrglrfk" path="res://models/textures/lobby_room_prototype_atlas_albedo.png" id="1_sq33t"]
+[ext_resource type="Texture2D" uid="uid://cdf027wblvyyg" path="res://models/textures/lobby_room_prototype_atlas_normal.png" id="2_jqmuo"]
+
+[resource]
+resource_name = "prototype_material"
+albedo_texture = ExtResource("1_sq33t")
+normal_enabled = true
+normal_scale = -7.15
+normal_texture = ExtResource("2_jqmuo")
+texture_filter = 4

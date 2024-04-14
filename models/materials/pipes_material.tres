@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://tjp1xxy4e2pg"]
+
+[ext_resource type="Texture2D" uid="uid://b7okiwuq75oe5" path="res://models/textures/rusty_pipes_pipe_albedo.png" id="1_gkfol"]
+[ext_resource type="Texture2D" uid="uid://cp2gucfx6k5pm" path="res://models/textures/rusty_pipes_pipe_normal.png" id="2_ay10g"]
+
+[resource]
+resource_name = "pipes_material"
+cull_mode = 2
+albedo_texture = ExtResource("1_gkfol")
+normal_enabled = true
+normal_texture = ExtResource("2_ay10g")
+texture_filter = 0

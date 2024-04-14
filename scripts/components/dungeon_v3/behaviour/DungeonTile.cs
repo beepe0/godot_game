@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using BP.DebugGizmos;
+using Godot;
 using Godot.Collections;
 
 public partial class DungeonTile : Node3D
@@ -11,8 +12,12 @@ public partial class DungeonTile : Node3D
     [Export] public Array<Node3D> Connectors;
     [Export] public Area3D Bounds;
 
+    private TargetTest _target;
+
     public override void _Ready()
     {
+        _target = GetTree().GetFirstNodeInGroup("TargetTest") as TargetTest;
+        
         if (IsAutoDetect)
         {
             Bounds = GetNodeOrNull<Area3D>("Bounds");
@@ -28,6 +33,11 @@ public partial class DungeonTile : Node3D
                 }
             }
         }
+    }
+    public override void _PhysicsProcess(double delta)
+    {
+        DrawGizmos.SolidSphere(Position, Quaternion.Identity, Vector3.One, 0, Colors.Cyan);
+        Visible = !(Position.DistanceTo(_target.GlobalPosition) > _target.Range);
     }
     public void Snap(Node3D currentConnector, Node3D targetConnector)
     {
