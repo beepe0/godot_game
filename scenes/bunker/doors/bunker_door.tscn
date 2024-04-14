@@ -161,7 +161,7 @@ mesh = ExtResource("1_pfi3p")
 skeleton = NodePath("")
 
 [node name="BoneAttachmentHandle" type="BoneAttachment3D" parent="Root_BunkerDoor/Skeleton3D"]
-transform = Transform3D(0, 0, -1, -1, 0, 0, 0, 1, 0, 2.98023e-08, 1.6, 0.510706)
+transform = Transform3D(-1.19209e-07, 5.96046e-08, -1, -1, -1.19209e-07, 5.96046e-08, -5.96046e-08, 1, 0, 2.98023e-08, 1.6, 0.510706)
 bone_name = "Handle"
 bone_idx = 1
 

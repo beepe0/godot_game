@@ -8,5 +8,6 @@ diffuse_mode = 3
 specular_mode = 2
 albedo_texture = ExtResource("1_4j6ni")
 normal_enabled = true
-normal_scale = 5.53
+normal_scale = -1.08
 normal_texture = ExtResource("2_xafec")
+texture_filter = 0

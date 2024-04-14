@@ -1,7 +1,8 @@
-[gd_scene load_steps=42 format=3 uid="uid://c5q0it6f74vd8"]
+[gd_scene load_steps=43 format=3 uid="uid://c5q0it6f74vd8"]
 
 [ext_resource type="Material" uid="uid://5262uff6vxoa" path="res://models/materials/skin_albedo.tres" id="1_62fy6"]
 [ext_resource type="Script" path="res://submodules/component_system/ComponentSystem.cs" id="1_dt56i"]
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/behaviour/TargetTest.cs" id="1_wjjoq"]
 [ext_resource type="PackedScene" uid="uid://dgw3383ifm0rc" path="res://scenes/bunker/flashlights/flashlight_1.tscn" id="2_hkem1"]
 [ext_resource type="ArrayMesh" uid="uid://byvon3h0wnwfl" path="res://models/meshes/players/arms/model_camera_player1_arms.res" id="2_k07vj"]
 [ext_resource type="AnimationLibrary" uid="uid://bu8de48jbredd" path="res://models/animations/player1/arms/animation_lib_payer1_arms.res" id="4_xgytn"]
@@ -313,7 +314,7 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(1, -6.10642e-08, 4.72248e-08, 5.4946e-08, 0.992752, 0.120182, -5.42213e-08, -0.120182, 0.992752, 4.996e-15, 0.1945, 6.51925e-09)
 bones/1/enabled = true
 bones/1/position = Vector3(4.996e-15, 0.1945, 6.51925e-09)
-bones/1/rotation = Quaternion(-0.0601619, 0.0081436, -0.00370762, 0.998149)
+bones/1/rotation = Quaternion(-0.0601627, 0.0067233, -0.00306098, 0.998161)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Breast"
 bones/2/parent = 1
@@ -403,12 +404,12 @@ mesh = SubResource("ArrayMesh_ak4o2")
 skin = SubResource("Skin_5dk0g")
 
 [node name="BoneAttachmentNeck" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(0.99984, 0.00676504, 0.016567, -0.00848182, 0.994346, 0.105854, -0.0157572, -0.105977, 0.994244, 0.00589553, 1.84971, 0.0590379)
+transform = Transform3D(0.999891, 0.00558525, 0.0136778, -0.00700262, 0.994355, 0.105875, -0.0130092, -0.105959, 0.994285, 0.0048674, 1.84972, 0.0590531)
 bone_name = "Head"
 bone_idx = 4
 
 [node name="BoneAttachmentBearst" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(0.99984, 0.0112681, 0.0139018, -0.00848202, 0.982458, -0.18629, -0.0157571, 0.186142, 0.982396, 0.00119317, 1.42407, -0.0102215)
+transform = Transform3D(0.999891, 0.00930301, 0.0114773, -0.00700282, 0.982473, -0.186272, -0.0130091, 0.186171, 0.982431, 0.000985095, 1.42408, -0.0102185)
 bone_name = "Breast"
 bone_idx = 2
 
@@ -638,6 +639,10 @@ bone_name = "Shoulder.R"
 bone_idx = 2
 override_pose = true
 
+[node name="TargetTest" type="Marker3D" parent="Body" groups=["TargetTest"]]
+script = ExtResource("1_wjjoq")
+Range = 20.0
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 0)
 shape = SubResource("CapsuleShape3D_hwg6v")
@@ -648,6 +653,7 @@ Tag = "LocalPlayer"
 
 [node name="PlayerController" type="Node" parent="Components" node_paths=PackedStringArray("Player", "_interactRay", "_boneAttachmentNeck", "_boneAttachmentBreast", "_boneAttachmentShoulder", "ArmHandler", "Body", "CameraHandler", "CameraShaker", "Camera", "Collider")]
 script = ExtResource("8_h0g3b")
+PowerOfAddictionRotationCamera = 0.05
 Player = NodePath("../..")
 _interactRay = NodePath("../../Body/CameraShaker/CameraHandler/Camera3D/RayCast3D")
 _boneAttachmentNeck = NodePath("../../Body/Armature/Skeleton3D/BoneAttachmentNeck")
