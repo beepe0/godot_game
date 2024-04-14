@@ -22,8 +22,7 @@ driver/enable_input=true
 
 [autoload]
 
-DebugDraw="*res://addons/debug_drawing/DebugDraw.cs"
-DrawGizmos="*res://submodules/debug_draw_system/DrawGizmos.cs"
+DrawGizmos="*res://addons/godot_debug_draw_system/Gizmos.cs"
 
 [debug]
 
@@ -39,19 +38,19 @@ layers/layer_2="2"
 
 target_pool_size=1024
 start_pool_size=256
-meshes/box_mesh_res="res://submodules/debug_draw_system/gizmos/meshes/gizmos_Box.res"
-meshes/arrow_mesh_res="res://submodules/debug_draw_system/gizmos/meshes/gizmos_Arrow.res"
-meshes/circle_mesh_res="res://submodules/debug_draw_system/gizmos/meshes/gizmos_Circle.res"
-meshes/plane_mesh_res="res://submodules/debug_draw_system/gizmos/meshes/gizmos_Plane.res"
-meshes/sphere_mesh_res="res://submodules/debug_draw_system/gizmos/meshes/gizmos_Sphere.res"
-meshes/capsule_mesh_res="res://submodules/debug_draw_system/gizmos/meshes/gizmos_Capsule.res"
-meshes/cylinder_mesh_res="res://submodules/debug_draw_system/gizmos/meshes/gizmos_Cylinder.res"
-meshes/point_mesh_res="res://submodules/debug_draw_system/gizmos/meshes/gizmos_Point.res"
-meshes/solid_box_mesh_res="res://submodules/debug_draw_system/gizmos/meshes/gizmos_SolidBox.res"
-meshes/arrows_mesh_res="res://submodules/debug_draw_system/gizmos/meshes/gizmos_Arrows.res"
-meshes/solid_capsule_mesh_res="res://submodules/debug_draw_system/gizmos/meshes/gizmos_SolidCapsule.res"
-meshes/solid_cylinder_mesh_res="res://submodules/debug_draw_system/gizmos/meshes/gizmos_SolidCylinder.res"
-meshes/solid_sphere_mesh_res="res://submodules/debug_draw_system/gizmos/meshes/gizmos_SolidSphere.res"
+meshes/box_mesh_res="res://addons/godot_debug_draw_system/gizmos/meshes/gizmos_Box.res"
+meshes/arrow_mesh_res="res://addons/godot_debug_draw_system/gizmos/meshes/gizmos_Arrow.res"
+meshes/circle_mesh_res="res://addons/godot_debug_draw_system/gizmos/meshes/gizmos_Circle.res"
+meshes/plane_mesh_res="res://addons/godot_debug_draw_system/gizmos/meshes/gizmos_Plane.res"
+meshes/sphere_mesh_res="res://addons/godot_debug_draw_system/gizmos/meshes/gizmos_Sphere.res"
+meshes/capsule_mesh_res="res://addons/godot_debug_draw_system/gizmos/meshes/gizmos_Capsule.res"
+meshes/cylinder_mesh_res="res://addons/godot_debug_draw_system/gizmos/meshes/gizmos_Cylinder.res"
+meshes/point_mesh_res="res://addons/godot_debug_draw_system/gizmos/meshes/gizmos_Point.res"
+meshes/solid_box_mesh_res="res://addons/godot_debug_draw_system/gizmos/meshes/gizmos_SolidBox.res"
+meshes/arrows_mesh_res="res://addons/godot_debug_draw_system/gizmos/meshes/gizmos_Arrows.res"
+meshes/solid_capsule_mesh_res="res://addons/godot_debug_draw_system/gizmos/meshes/gizmos_SolidCapsule.res"
+meshes/solid_cylinder_mesh_res="res://addons/godot_debug_draw_system/gizmos/meshes/gizmos_SolidCylinder.res"
+meshes/solid_sphere_mesh_res="res://addons/godot_debug_draw_system/gizmos/meshes/gizmos_SolidSphere.res"
 
 [display]
 
@@ -69,7 +68,7 @@ project/assembly_name="godot_project"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/debug_drawing/plugin.cfg", "res://addons/debug_gizmos_system/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_debug_draw_system/plugin.cfg")
 
 [input]
 

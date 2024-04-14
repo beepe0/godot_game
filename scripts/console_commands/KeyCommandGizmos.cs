@@ -13,7 +13,7 @@ public partial class KeyCommandGizmos : Command
     {
         if (keys[1].Equals("set-depth-test"))
         {
-            DrawGizmos.SetDepthTest(bool.Parse(keys[2]));
+            Gizmos.SetDepthTest(bool.Parse(keys[2]));
         }
     }
 }
