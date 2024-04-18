@@ -24,7 +24,6 @@ ssil_intensity = 16.0
 ssil_sharpness = 1.0
 sdfgi_use_occlusion = true
 sdfgi_y_scale = 0
-glow_enabled = true
 glow_levels/1 = 16.0
 glow_levels/2 = 16.0
 glow_levels/3 = 8.13
@@ -37,7 +36,7 @@ glow_bloom = 0.1
 glow_blend_mode = 1
 glow_hdr_threshold = 0.41
 glow_hdr_scale = 0.0
-volumetric_fog_density = 0.1
+volumetric_fog_density = 0.2056
 volumetric_fog_albedo = Color(0.188235, 0.188235, 0.188235, 1)
 volumetric_fog_anisotropy = 0.9
 volumetric_fog_temporal_reprojection_enabled = false
@@ -63,6 +62,7 @@ environment = SubResource("Environment_bua0u")
 [node name="Dungeon" parent="." instance=ExtResource("9_fe3t2")]
 
 [node name="PrototypeRoom" parent="." instance=ExtResource("7_bocic")]
+visible = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -296,6 +296,8 @@ height = 2.1
 
 [node name="Player" type="CharacterBody3D"]
 
+[node name="TargetTest" type="Marker3D" parent="." groups=["TargetTest"]]
+
 [node name="Body" type="Node3D" parent="."]
 
 [node name="Armature" type="Node3D" parent="Body"]
@@ -313,7 +315,7 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(1, -6.10642e-08, 4.72248e-08, 5.4946e-08, 0.992752, 0.120182, -5.42213e-08, -0.120182, 0.992752, 4.996e-15, 0.1945, 6.51925e-09)
 bones/1/enabled = true
 bones/1/position = Vector3(4.996e-15, 0.1945, 6.51925e-09)
-bones/1/rotation = Quaternion(-0.0601643, 0.00120216, -0.000547283, 0.998188)
+bones/1/rotation = Quaternion(-0.0601619, 0.00826125, -0.00376118, 0.998147)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Breast"
 bones/2/parent = 1
@@ -403,12 +405,12 @@ mesh = SubResource("ArrayMesh_ak4o2")
 skin = SubResource("Skin_5dk0g")
 
 [node name="BoneAttachmentNeck" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(0.999996, 0.000998686, 0.00244566, -0.00125212, 0.994374, 0.105921, -0.00232612, -0.105924, 0.994372, 0.000870436, 1.84974, 0.0590837)
+transform = Transform3D(0.999835, 0.00686276, 0.0168064, -0.00860435, 0.994345, 0.105852, -0.0159849, -0.105979, 0.99424, 0.00598069, 1.84971, 0.0590364)
 bone_name = "Head"
 bone_idx = 4
 
 [node name="BoneAttachmentBearst" type="BoneAttachment3D" parent="Body/Armature/Skeleton3D"]
-transform = Transform3D(0.999996, 0.00166358, 0.00205205, -0.00125232, 0.982505, -0.186233, -0.00232596, 0.18623, 0.982503, 0.000176201, 1.42408, -0.0102123)
+transform = Transform3D(0.999835, 0.0114309, 0.0141026, -0.00860454, 0.982457, -0.186292, -0.0159847, 0.186139, 0.982393, 0.0012104, 1.42407, -0.0102218)
 bone_name = "Breast"
 bone_idx = 2
 
@@ -648,8 +650,9 @@ Tag = "LocalPlayer"
 
 [node name="PlayerController" type="Node" parent="Components" node_paths=PackedStringArray("Player", "_interactRay", "_boneAttachmentNeck", "_boneAttachmentBreast", "_boneAttachmentShoulder", "ArmHandler", "Body", "CameraHandler", "CameraShaker", "Camera", "Collider")]
 script = ExtResource("8_h0g3b")
-MouseSensitivityX = 0.1
-MouseSensitivityY = 0.1
+LockAxisMinX = -90
+LockArmAxisMinX = -90
+PowerOfAddictionRotationCamera = 0.05
 Player = NodePath("../..")
 _interactRay = NodePath("../../Body/CameraShaker/CameraHandler/Camera3D/RayCast3D")
 _boneAttachmentNeck = NodePath("../../Body/Armature/Skeleton3D/BoneAttachmentNeck")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://c74rvm576k0j0"]
+[gd_scene load_steps=10 format=3 uid="uid://c74rvm576k0j0"]
 
 [ext_resource type="Script" path="res://scripts/components/dungeon_v3/behaviour/DungeonTile.cs" id="1_qqjup"]
+[ext_resource type="Resource" uid="uid://dbqmkhf65gmpx" path="res://scenes/bunker/dungeon/resources/main.tres" id="2_6m8kh"]
 [ext_resource type="Material" uid="uid://vnxnircm6vd3" path="res://models/materials/bunker_materials.tres" id="2_yxbii"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_lkn35"]
@@ -47,7 +48,7 @@ size = Vector3(5.8, 2.4, 5.7)
 [node name="Tile_Main1" type="Node3D" node_paths=PackedStringArray("Connectors") groups=["DungeonTile"]]
 transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, 0, 0, 0)
 script = ExtResource("1_qqjup")
-Category = "main"
+Preset = ExtResource("2_6m8kh")
 Connectors = []
 
 [node name="Tile_Main1" type="MeshInstance3D" parent="."]
@@ -97,7 +98,7 @@ shape = SubResource("BoxShape3D_ol5mb")
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.875, 0)
 light_color = Color(1, 0.701961, 0.490196, 1)
-light_energy = 0.637
 light_volumetric_fog_energy = 4.232
 shadow_enabled = true
 omni_range = 6.56555
+omni_attenuation = 0.707106

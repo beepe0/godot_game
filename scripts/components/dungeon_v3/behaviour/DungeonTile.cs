@@ -1,23 +1,24 @@
-﻿using BP.DebugGizmos;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BP.ComponentSystem;
+using BP.DebugGizmos;
 using Godot;
 using Godot.Collections;
 
 public partial class DungeonTile : Node3D
 {
-    [ExportGroup("Dungeon Tile Category")]
-    [Export] public string Category = "none";
-    
-    [ExportGroup("Properties")]
+    [ExportGroup("Preset")] 
+    [Export] public DungeonTileCategoryPreset Preset;
+    [ExportGroup("Properties")] 
     [Export] public bool IsAutoDetect = true;
     [Export] public Array<Node3D> Connectors;
     [Export] public Area3D Bounds;
 
-    private TargetTest _target;
-
+    public DungeonBuilder DungeonBuilder;
+    
     public override void _Ready()
     {
-        _target = GetTree().GetFirstNodeInGroup("TargetTest") as TargetTest;
-        
         if (IsAutoDetect)
         {
             Bounds = GetNodeOrNull<Area3D>("Bounds");
@@ -25,7 +26,7 @@ public partial class DungeonTile : Node3D
             Array<Node> connectors = GetNodeOrNull<Node3D>("Connectors").GetChildren();
             if (connectors != null && connectors.Count > 0)
             {
-                Connectors = new ();
+                Connectors = new();
 
                 foreach (var node in connectors)
                 {
@@ -33,11 +34,73 @@ public partial class DungeonTile : Node3D
                 }
             }
         }
+
+        DungeonBuilder = ComponentSystem.GetComponentSystemWithTag(Preset.GenerationName).GetComponent<DungeonBuilder>();
+
     }
-    public override void _PhysicsProcess(double delta)
+    public async Task<DungeonTile> InitTileOrNull(Node3D targetSnap = null)
     {
-        DrawGizmos.SolidSphere(Position, Quaternion.Identity, Vector3.One, 0, Colors.Cyan);
-        Visible = !(Position.DistanceTo(_target.GlobalPosition) > _target.Range);
+        DungeonTile tile = InitTile();
+        
+        if (tile == null) return null;
+        
+        if (targetSnap != null)
+        {
+            Node3D currentConnector = tile.Connectors[(ushort)DungeonBuilder.Random.RandiRange(0, tile.Connectors.Count - 1)];
+            tile.Snap(currentConnector, targetSnap);
+                
+            await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
+                
+            if (tile.Bounds.GetOverlappingAreas().Count > 0)
+            {
+                tile.QueueFree();
+                return null;
+            }
+        
+            currentConnector.Visible = false;
+            targetSnap.Visible = false;
+        }
+        
+        Preset.CurrentNumberOfTilesPerTier++;
+        DungeonBuilder.CurrentNumberOfTiles++;
+        
+        return tile;
+    }
+    private DungeonTile InitTile()
+    {
+        DungeonTileCategoryPreset preset = null;
+        do
+        {
+            if (Preset.AvailableTileScenes.Count < 1) return null;
+
+            preset = GetMin(Preset.AvailableTileScenes);
+
+            if (preset.CurrentNumberOfTilesPerTier >= preset.TargetNumberOfTilesPerTier)
+            {
+                Preset.AvailableTileScenes.Remove(preset);
+                Preset.UnavailableTileScenes.Add(preset);
+                preset = null;
+            }
+            
+        } while (preset == null);
+        
+        return preset.PackedScenes[(ushort)DungeonBuilder.Random.RandiRange(0, preset.PackedScenes.Count - 1)].CreateOnStage<DungeonTile>(DungeonBuilder.DungeonTiers[DungeonBuilder.CurrentNumberOfTiers], DungeonBuilder.DungeonBuilderPreset.StartPosition);
+    }
+    private DungeonTileCategoryPreset GetMin(List<DungeonTileCategoryPreset> list)
+    {
+        DungeonTileCategoryPreset minTile = null;
+        ushort minPriority = ushort.MaxValue;
+        
+        foreach (var t in list)
+        {
+            if (t.Priority < minPriority)
+            {
+                minTile = t;
+                minPriority = t.Priority;
+            }
+        }
+
+        return minTile;
     }
     public void Snap(Node3D currentConnector, Node3D targetConnector)
     {
@@ -45,13 +108,13 @@ public partial class DungeonTile : Node3D
         
         Rotation = Vector3.Zero;
         
-        Position = targetConnector.GlobalPosition - (currentConnector.GlobalPosition - Position);
+        GlobalPosition = targetConnector.GlobalPosition - (currentConnector.GlobalPosition - GlobalPosition);
         Vector2 vectorA = new Vector2(currentConnector.GlobalBasis.Z.X, currentConnector.GlobalBasis.Z.Z);
         Vector2 vectorB = new Vector2(targetConnector.GlobalBasis.Z.X, targetConnector.GlobalBasis.Z.Z);
         float rawAngle = (vectorA).AngleTo(vectorB);
         float angle = Mathf.Pi - rawAngle;
                     
-        Position = targetConnector.GlobalPosition + (Position - targetConnector.GlobalPosition).Rotated(Vector3.Up, angle);
+        GlobalPosition = targetConnector.GlobalPosition + (GlobalPosition - targetConnector.GlobalPosition).Rotated(Vector3.Up, angle);
         Rotation = Vector3.Up * angle;
     }
 }
