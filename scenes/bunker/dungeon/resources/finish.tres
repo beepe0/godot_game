@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DungeonTileCategoryPreset" load_steps=2 format=3 uid="uid://bu2ouiru58nn6"]
+
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/resources/DungeonTileCategoryPreset.cs" id="1_e7erf"]
+
+[resource]
+script = ExtResource("1_e7erf")
+GenerationName = "Dungeon"
+TilesCategory = "finish"
+TargetNumberOfTilesPerTier = 2
+Priority = 3
+ValidNeighbours = PackedStringArray("basic")
+RoomsFolderPath = "res://scenes/bunker/dungeon/finish"

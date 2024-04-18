@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://cyjgii10vec80"]
-
-[ext_resource type="Script" path="res://scripts/components/dungeon_v3/categories/DungeonTileCategoryMain.cs" id="1_gpt4x"]
-[ext_resource type="Resource" uid="uid://5jp2gplp4h1m" path="res://scenes/bunker/dungeon/resources/tileset_main.tres" id="2_b7cg7"]
-
-[node name="Main" type="Node3D"]
-script = ExtResource("1_gpt4x")
-DungeonTileCategoryPreset = ExtResource("2_b7cg7")

@@ -22,7 +22,7 @@ driver/enable_input=true
 
 [autoload]
 
-DrawGizmos="*res://addons/godot_debug_draw_system/Gizmos.cs"
+Gizmos="*res://addons/godot_debug_draw_system/Gizmos.cs"
 
 [debug]
 

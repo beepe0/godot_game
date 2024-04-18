@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="DungeonBuilderPreset" load_steps=5 format=3 uid="uid://dwyr3nrnsjbsx"]
+
+[ext_resource type="Resource" uid="uid://dbqmkhf65gmpx" path="res://scenes/bunker/dungeon/resources/main.tres" id="1_2j72n"]
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/resources/DungeonBuilderPreset.cs" id="2_8b875"]
+[ext_resource type="Resource" uid="uid://bfwyop4gvwk6s" path="res://scenes/bunker/dungeon/resources/basic.tres" id="2_tfgs5"]
+[ext_resource type="Resource" uid="uid://bu2ouiru58nn6" path="res://scenes/bunker/dungeon/resources/finish.tres" id="3_31js2"]
+
+[resource]
+script = ExtResource("2_8b875")
+Seed = 1
+TargetNumberOfTiles = 100
+NumberOfTiers = 1
+StartPosition = Vector3(0, -30, 0)
+CategoryScenes = [ExtResource("1_2j72n"), ExtResource("2_tfgs5"), ExtResource("3_31js2")]

@@ -15,45 +15,61 @@ public partial class Game : Node
 	{
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
+	// public override void _Process(double delta)
+	// {
+	// 	DrawGizmos.Text("Performance.GetMonitor", 0, Colors.Aqua);
+	// 	DrawGizmos.Text($"TimeFps: {Performance.GetMonitor(Performance.Monitor.TimeFps)}");
+	// 	DrawGizmos.Text($"RenderTotalDrawCallsInFrame: {Performance.GetMonitor(Performance.Monitor.RenderTotalDrawCallsInFrame)}");
+	// 	DrawGizmos.Text($"RenderTotalPrimitivesInFrame: {Performance.GetMonitor(Performance.Monitor.RenderTotalPrimitivesInFrame)}");
+	// 	DrawGizmos.Text("====================CanvasDrawer=====================", 0, Colors.Red);
+	// 	DrawGizmos.Text($"DrawGizmos._canvasDrawer.GizmosTextPool.MaxSize: {DrawGizmos._canvasDrawer.GizmosTextPool.MaxSize}");
+	// 	DrawGizmos.Text($"DrawGizmos._canvasDrawer.GizmosTextPool.AvailableInstances: {DrawGizmos._canvasDrawer.GizmosTextPool.AvailableInstances}");
+	// 	DrawGizmos.Text($"DrawGizmos._canvasDrawer.GizmosTextPool.CurrentNumberOfInstances: {DrawGizmos._canvasDrawer.GizmosTextPool.CurrentNumberOfInstances}");
+	// 	DrawGizmos.Text($"DrawGizmos._canvasDrawer.GizmosText2dPool.MaxSize: {DrawGizmos._canvasDrawer.GizmosText2dPool.MaxSize}");
+	// 	DrawGizmos.Text($"DrawGizmos._canvasDrawer.GizmosText2dPool.AvailableInstances: {DrawGizmos._canvasDrawer.GizmosText2dPool.AvailableInstances}");
+	// 	DrawGizmos.Text($"DrawGizmos._canvasDrawer.GizmosText2dPool.CurrentNumberOfInstances: {DrawGizmos._canvasDrawer.GizmosText2dPool.CurrentNumberOfInstances}");
+	// 	DrawGizmos.Text($"DrawGizmos._canvasDrawer.GizmosText3dPool.MaxSize: {DrawGizmos._canvasDrawer.GizmosText3dPool.MaxSize}");
+	// 	DrawGizmos.Text($"DrawGizmos._canvasDrawer.GizmosText3dPool.AvailableInstances: {DrawGizmos._canvasDrawer.GizmosText3dPool.AvailableInstances}");
+	// 	DrawGizmos.Text($"DrawGizmos._canvasDrawer.GizmosText3dPool.CurrentNumberOfInstances: {DrawGizmos._canvasDrawer.GizmosText3dPool.CurrentNumberOfInstances}");
+	// 	DrawGizmos.Text("====================MeshDrawer=====================", 0, Colors.Red);
+	// 	DrawGizmos.Text($"DrawGizmos._meshDrawer.GizmosMeshPool.MaxSize: {DrawGizmos._meshDrawer.GizmosMeshPool.MaxSize}");
+	// 	DrawGizmos.Text($"DrawGizmos._meshDrawer.GizmosMeshPool.AvailableInstances: {DrawGizmos._meshDrawer.GizmosMeshPool.AvailableInstances}");
+	// 	DrawGizmos.Text($"DrawGizmos._meshDrawer.GizmosMeshPool.CurrentNumberOfInstances: {DrawGizmos._meshDrawer.GizmosMeshPool.CurrentNumberOfInstances}");
+	// 	
+	// 	DrawGizmos.Text3D("Performance.GetMonitor", new Vector3(0,0,0), 0, Colors.Coral);
+	// 	DrawGizmos.Text3D($"TimeFps: {Performance.GetMonitor(Performance.Monitor.TimeFps)}", new Vector3(0,-0.1f,0));
+	// 	DrawGizmos.Text3D($"RenderTotalDrawCallsInFrame: {Performance.GetMonitor(Performance.Monitor.RenderTotalDrawCallsInFrame)}", new Vector3(0,-0.2f,0));
+	// 	DrawGizmos.Text3D($"RenderTotalPrimitivesInFrame: {Performance.GetMonitor(Performance.Monitor.RenderTotalPrimitivesInFrame)}", new Vector3(0,-0.3f,0));
+	// 	
+	// 	DrawGizmos.Box(new Vector3(0, 0, 0), Quaternion.Identity, Vector3.One, 0, Colors.Aqua);
+	// 	DrawGizmos.Arrow(new Vector3(0, 3, 0), Quaternion.Identity, Vector3.One, 0, Colors.Aquamarine);
+	// 	DrawGizmos.Circle(new Vector3(0, 6, 0), Quaternion.Identity, Vector3.One, 0, Colors.RebeccaPurple);
+	// 	DrawGizmos.Plane(new Vector3(0, 9, 0), Quaternion.Identity, Vector3.One, 0, Colors.AliceBlue);
+	// 	DrawGizmos.Sphere(new Vector3(0, 12, 0), Quaternion.Identity, Vector3.One, 0, Colors.Red);
+	// 	DrawGizmos.Capsule(new Vector3(0, 16, 0), Quaternion.Identity, Vector3.One, 0, Colors.Blue);
+	// 	DrawGizmos.Cylinder(new Vector3(0, 21, 0), Quaternion.Identity, Vector3.One, 0, Colors.Pink);
+	// 	DrawGizmos.Point(new Vector3(0, 25, 0), Quaternion.Identity, Vector3.One, 0, Colors.Gainsboro);
+	// 	
+	// 	DrawGizmos.SolidBox(new Vector3(3, 0, 0), Quaternion.Identity, Vector3.One, 0, Colors.Salmon);
+	// 	DrawGizmos.Arrows(new Vector3(3, 3, 0), Quaternion.Identity, Vector3.One, 0);
+	// 	DrawGizmos.SolidCapsule(new Vector3(3, 6, 0), Quaternion.Identity, Vector3.One, 0, Colors.Bisque);
+	// 	DrawGizmos.SolidCylinder(new Vector3(3, 11, 0), Quaternion.Identity, Vector3.One, 0, Colors.ForestGreen);
+	// 	DrawGizmos.SolidSphere(new Vector3(3, 15, 0), Quaternion.Identity, Vector3.One, 0, Colors.Gold);
+ //    }
 	public override void _Process(double delta)
 	{
-		Gizmos.Text("Performance.GetMonitor", 0, Colors.Aqua);
+		Gizmos.Text("Performance:", 0, Colors.Burlywood);
 		Gizmos.Text($"TimeFps: {Performance.GetMonitor(Performance.Monitor.TimeFps)}");
+		Gizmos.Text($"TimeProcess: {Math.Round(Performance.GetMonitor(Performance.Monitor.TimeProcess) * 1000, 2)} ms");
+		Gizmos.Text($"TimePhysicsProcess: {Math.Round(Performance.GetMonitor(Performance.Monitor.TimePhysicsProcess) * 1000, 2)} ms");
+		Gizmos.Text($"TimeNavigationProcess: {Math.Round(Performance.GetMonitor(Performance.Monitor.TimeNavigationProcess) * 1000, 2)} ms");
+		Gizmos.Text("Draw:", 0, Colors.Burlywood);
 		Gizmos.Text($"RenderTotalDrawCallsInFrame: {Performance.GetMonitor(Performance.Monitor.RenderTotalDrawCallsInFrame)}");
 		Gizmos.Text($"RenderTotalPrimitivesInFrame: {Performance.GetMonitor(Performance.Monitor.RenderTotalPrimitivesInFrame)}");
-		Gizmos.Text("====================CanvasDrawer=====================", 0, Colors.Red);
-		Gizmos.Text($"Gizmos._canvasDrawer.GizmosTextPool.MaxSize: {Gizmos._canvasDrawer.GizmosTextPool.MaxSize}");
-		Gizmos.Text($"Gizmos._canvasDrawer.GizmosTextPool.AvailableInstances: {Gizmos._canvasDrawer.GizmosTextPool.AvailableInstances}");
-		Gizmos.Text($"Gizmos._canvasDrawer.GizmosTextPool.CurrentNumberOfInstances: {Gizmos._canvasDrawer.GizmosTextPool.CurrentNumberOfInstances}");
-		Gizmos.Text($"Gizmos._canvasDrawer.GizmosText2dPool.MaxSize: {Gizmos._canvasDrawer.GizmosText2dPool.MaxSize}");
-		Gizmos.Text($"Gizmos._canvasDrawer.GizmosText2dPool.AvailableInstances: {Gizmos._canvasDrawer.GizmosText2dPool.AvailableInstances}");
-		Gizmos.Text($"Gizmos._canvasDrawer.GizmosText2dPool.CurrentNumberOfInstances: {Gizmos._canvasDrawer.GizmosText2dPool.CurrentNumberOfInstances}");
-		Gizmos.Text($"Gizmos._canvasDrawer.GizmosText3dPool.MaxSize: {Gizmos._canvasDrawer.GizmosText3dPool.MaxSize}");
-		Gizmos.Text($"Gizmos._canvasDrawer.GizmosText3dPool.AvailableInstances: {Gizmos._canvasDrawer.GizmosText3dPool.AvailableInstances}");
-		Gizmos.Text($"Gizmos._canvasDrawer.GizmosText3dPool.CurrentNumberOfInstances: {Gizmos._canvasDrawer.GizmosText3dPool.CurrentNumberOfInstances}");
-		Gizmos.Text("====================MeshDrawer=====================", 0, Colors.Red);
-		Gizmos.Text($"Gizmos._meshDrawer.GizmosMeshPool.MaxSize: {Gizmos._meshDrawer.GizmosMeshPool.MaxSize}");
-		Gizmos.Text($"Gizmos._meshDrawer.GizmosMeshPool.AvailableInstances: {Gizmos._meshDrawer.GizmosMeshPool.AvailableInstances}");
-		Gizmos.Text($"Gizmos._meshDrawer.GizmosMeshPool.CurrentNumberOfInstances: {Gizmos._meshDrawer.GizmosMeshPool.CurrentNumberOfInstances}");
-		
-		Gizmos.Text3D("Performance.GetMonitor", new Vector3(0,0,0), 0, Colors.Coral);
-		Gizmos.Text3D($"TimeFps: {Performance.GetMonitor(Performance.Monitor.TimeFps)}", new Vector3(0,-0.1f,0));
-		Gizmos.Text3D($"RenderTotalDrawCallsInFrame: {Performance.GetMonitor(Performance.Monitor.RenderTotalDrawCallsInFrame)}", new Vector3(0,-0.2f,0));
-		Gizmos.Text3D($"RenderTotalPrimitivesInFrame: {Performance.GetMonitor(Performance.Monitor.RenderTotalPrimitivesInFrame)}", new Vector3(0,-0.3f,0));
-		
-		Gizmos.Box(new Vector3(0, 0, 0), Quaternion.Identity, Vector3.One, 0, Colors.Aqua);
-		Gizmos.Arrow(new Vector3(0, 3, 0), Quaternion.Identity, Vector3.One, 0, Colors.Aquamarine);
-		Gizmos.Circle(new Vector3(0, 6, 0), Quaternion.Identity, Vector3.One, 0, Colors.RebeccaPurple);
-		Gizmos.Plane(new Vector3(0, 9, 0), Quaternion.Identity, Vector3.One, 0, Colors.AliceBlue);
-		Gizmos.Sphere(new Vector3(0, 12, 0), Quaternion.Identity, Vector3.One, 0, Colors.Red);
-		Gizmos.Capsule(new Vector3(0, 16, 0), Quaternion.Identity, Vector3.One, 0, Colors.Blue);
-		Gizmos.Cylinder(new Vector3(0, 21, 0), Quaternion.Identity, Vector3.One, 0, Colors.Pink);
-		Gizmos.Point(new Vector3(0, 25, 0), Quaternion.Identity, Vector3.One, 0, Colors.Gainsboro);
-		
-		Gizmos.SolidBox(new Vector3(3, 0, 0), Quaternion.Identity, Vector3.One, 0, Colors.Salmon);
-		Gizmos.Arrows(new Vector3(3, 3, 0), Quaternion.Identity, Vector3.One, 0);
-		Gizmos.SolidCapsule(new Vector3(3, 6, 0), Quaternion.Identity, Vector3.One, 0, Colors.Bisque);
-		Gizmos.SolidCylinder(new Vector3(3, 11, 0), Quaternion.Identity, Vector3.One, 0, Colors.ForestGreen);
-		Gizmos.SolidSphere(new Vector3(3, 15, 0), Quaternion.Identity, Vector3.One, 0, Colors.Gold);
+		Gizmos.Text("Objects", 0, Colors.Burlywood);
+		Gizmos.Text($"ObjectCount: {Performance.GetMonitor(Performance.Monitor.ObjectCount)}");
+		Gizmos.Text($"ObjectResourceCount: {Performance.GetMonitor(Performance.Monitor.ObjectResourceCount)}");
+		Gizmos.Text($"ObjectNodeCount: {Performance.GetMonitor(Performance.Monitor.ObjectNodeCount)}");
+		Gizmos.Text($"ObjectOrphanNodeCount: {Performance.GetMonitor(Performance.Monitor.ObjectOrphanNodeCount)}");
     }
 }
