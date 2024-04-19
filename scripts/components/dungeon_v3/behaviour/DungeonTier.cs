@@ -36,8 +36,7 @@ public partial class DungeonTier : Node
     {
         for (ushort i = 0; i < Tiles.Count; i++)
         {
-            Gizmos.Text3D($"ID: {i} - {Tiles[i].Preset.TilesCategory}", Tiles[i].GlobalPosition);
-            Gizmos.SolidSphere(Tiles[i].GlobalPosition, Quaternion.Identity, Vector3.One / 2, 0, Colors.Purple);
+            Tiles[i].DrawGizmos(i);
         }
     }
 }

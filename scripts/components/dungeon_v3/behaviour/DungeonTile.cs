@@ -61,7 +61,7 @@ public partial class DungeonTile : Node3D
             targetSnap.Visible = false;
         }
         
-        Preset.CurrentNumberOfTilesPerTier++;
+        tile.Preset.CurrentNumberOfTilesPerTier++;
         DungeonBuilder.CurrentNumberOfTiles++;
         
         return tile;
@@ -101,6 +101,16 @@ public partial class DungeonTile : Node3D
         }
 
         return minTile;
+    }
+
+    public virtual void DrawGizmos(ushort id)
+    {
+        foreach (var node in Bounds.GetChildren())
+        {
+            CollisionShape3D coll = ((CollisionShape3D)node);
+            Gizmos.Box(coll.GlobalPosition, Quaternion.Identity, ((BoxShape3D)coll.Shape).Size, 0, Colors.Gray);
+            Gizmos.SolidBox(coll.GlobalPosition, Quaternion.Identity, Vector3.One / 3, 0, Colors.Gray);
+        }
     }
     public void Snap(Node3D currentConnector, Node3D targetConnector)
     {

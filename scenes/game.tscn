@@ -60,6 +60,7 @@ _remotePlayerScene = ExtResource("9_2c66a")
 environment = SubResource("Environment_bua0u")
 
 [node name="Dungeon" parent="." instance=ExtResource("9_fe3t2")]
+transform = Transform3D(-0.930967, 0, -0.365104, 0, 1, 0, 0.365104, 0, -0.930967, 0, 0, 0)
 
 [node name="PrototypeRoom" parent="." instance=ExtResource("7_bocic")]
 visible = false
@@ -68,6 +69,8 @@ visible = false
 
 [node name="Console" parent="CanvasLayer" instance=ExtResource("6_qchd8")]
 visible = false
+_fontSize = null
+_scrollSpeed = null
 
 [node name="Lobby" parent="." instance=ExtResource("9_arjy4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25.317)

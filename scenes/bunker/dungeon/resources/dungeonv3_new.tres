@@ -8,7 +8,6 @@
 [resource]
 script = ExtResource("2_8b875")
 Seed = 1
-TargetNumberOfTiles = 100
 NumberOfTiers = 1
 StartPosition = Vector3(0, -30, 0)
-CategoryScenes = [ExtResource("1_2j72n"), ExtResource("2_tfgs5"), ExtResource("3_31js2")]
+CategoryScenes = [ExtResource("2_tfgs5"), ExtResource("3_31js2"), ExtResource("1_2j72n")]
