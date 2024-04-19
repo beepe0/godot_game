@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://c74rvm576k0j0"]
 
-[ext_resource type="Script" path="res://scripts/components/dungeon_v3/behaviour/DungeonTile.cs" id="1_qqjup"]
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/tiles/DungeonTileMain.cs" id="1_xc1x2"]
 [ext_resource type="Resource" uid="uid://dbqmkhf65gmpx" path="res://scenes/bunker/dungeon/resources/main.tres" id="2_6m8kh"]
 [ext_resource type="Material" uid="uid://vnxnircm6vd3" path="res://models/materials/bunker_materials.tres" id="2_yxbii"]
 
@@ -47,7 +47,7 @@ size = Vector3(5.8, 2.4, 5.7)
 
 [node name="Tile_Main1" type="Node3D" node_paths=PackedStringArray("Connectors") groups=["DungeonTile"]]
 transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, 0, 0, 0)
-script = ExtResource("1_qqjup")
+script = ExtResource("1_xc1x2")
 Preset = ExtResource("2_6m8kh")
 Connectors = []
 

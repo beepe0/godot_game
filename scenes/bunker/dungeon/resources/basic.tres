@@ -6,7 +6,7 @@
 script = ExtResource("1_2wc4w")
 GenerationName = "Dungeon"
 TilesCategory = "basic"
-TargetNumberOfTilesPerTier = 100
+TargetNumberOfTilesPerTier = 20
 Priority = 1
 ValidNeighbours = PackedStringArray("finish", "basic", "main")
 RoomsFolderPath = "res://scenes/bunker/dungeon/basic"
