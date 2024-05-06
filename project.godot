@@ -54,11 +54,12 @@ meshes/solid_sphere_mesh_res="res://addons/godot_debug_draw_system/gizmos/meshes
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_width=1440
+window/size/viewport_height=900
 window/size/mode=3
 window/size/resizable=false
 window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 window/vsync/vsync_mode=0
 
 [dotnet]

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BP.ComponentSystem;
 using BP.DebugGizmos;
+using BP.GameConsole;
 using Godot;
 using Godot.Collections;
 
@@ -11,18 +12,22 @@ public partial class DungeonTile : Node3D
     [ExportGroup("Preset")] 
     [Export] public DungeonTileCategoryPreset Preset;
     [ExportGroup("Properties")] 
-    [Export] public bool IsAutoDetect = true;
-    [Export] public Array<Node3D> Connectors;
-    [Export] public Area3D Bounds;
-
-    public DungeonBuilder DungeonBuilder;
+    [Export] public bool IsAutoDetectConnectors = true;
+    [Export] public Array<Node3D> Connectors; 
+    
+    public Area3D AreaBounds;
+    public List<TileBounds> AabbBounds;
+    protected DungeonBuilder DungeonBuilder;
     
     public override void _Ready()
     {
-        if (IsAutoDetect)
-        {
-            Bounds = GetNodeOrNull<Area3D>("Bounds");
+        AreaBounds = GetNodeOrNull<Area3D>("Bounds");
 
+        Array<Node> aabbBounds = AreaBounds.GetChildren();
+        AabbBounds = new();
+        
+        if (IsAutoDetectConnectors)
+        {
             Array<Node> connectors = GetNodeOrNull<Node3D>("Connectors").GetChildren();
             if (connectors != null && connectors.Count > 0)
             {
@@ -36,7 +41,6 @@ public partial class DungeonTile : Node3D
         }
 
         DungeonBuilder = ComponentSystem.GetComponentSystemWithTag(Preset.GenerationName).GetComponent<DungeonBuilder>();
-
     }
     public async Task<DungeonTile> InitTileOrNull(Node3D targetSnap = null)
     {
@@ -51,12 +55,13 @@ public partial class DungeonTile : Node3D
                 
             await ToSignal(GetTree(), SceneTree.SignalName.PhysicsFrame);
                 
-            if (tile.Bounds.GetOverlappingAreas().Count > 0)
-            {
+            if (tile.AreaBounds.GetOverlappingAreas().Count > 0)
+            { 
                 tile.QueueFree();
                 return null;
             }
-        
+            tile.OnInit();
+            
             currentConnector.Visible = false;
             targetSnap.Visible = false;
         }
@@ -99,20 +104,9 @@ public partial class DungeonTile : Node3D
                 minPriority = t.Priority;
             }
         }
-
         return minTile;
     }
-
-    public virtual void DrawGizmos(ushort id)
-    {
-        foreach (var node in Bounds.GetChildren())
-        {
-            CollisionShape3D coll = ((CollisionShape3D)node);
-            Gizmos.Box(coll.GlobalPosition, Quaternion.Identity, ((BoxShape3D)coll.Shape).Size, 0, Colors.Gray);
-            Gizmos.SolidBox(coll.GlobalPosition, Quaternion.Identity, Vector3.One / 3, 0, Colors.Gray);
-        }
-    }
-    public void Snap(Node3D currentConnector, Node3D targetConnector)
+    private void Snap(Node3D currentConnector, Node3D targetConnector)
     {
         if(Connectors.Count < 1) return;
         
@@ -126,5 +120,31 @@ public partial class DungeonTile : Node3D
                     
         GlobalPosition = targetConnector.GlobalPosition + (GlobalPosition - targetConnector.GlobalPosition).Rotated(Vector3.Up, angle);
         Rotation = Vector3.Up * angle;
+    }
+    public virtual void OnDrawGizmos(ushort id)
+    {
+        foreach (var aabb in AabbBounds)
+        {
+            Gizmos.Box(aabb.Transform3D, aabb.Aabb.Size, 0, Colors.Blue);
+        }
+    }
+    public virtual void OnInit()
+    {
+        foreach (CollisionShape3D bound in AreaBounds.GetChildren())
+        {
+            BoxShape3D boxShape3D = bound.Shape as BoxShape3D;
+            //AabbBounds.Add(new TileBounds(bound.GlobalTransform, new Aabb(bound.GlobalPosition - boxShape3D.Size / 2, bound.GlobalTransform.)));
+        }
+    }
+    public struct TileBounds
+    {
+        public Transform3D Transform3D;
+        public Aabb Aabb;
+
+        public TileBounds(Transform3D transform3D, Aabb aabb)
+        {
+            Transform3D = transform3D;
+            Aabb = aabb;
+        }
     }
 }

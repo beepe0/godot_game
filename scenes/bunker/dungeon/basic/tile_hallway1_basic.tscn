@@ -42,11 +42,10 @@ albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_36qwb"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_wdmb6"]
-size = Vector3(5.8, 2.4, 2.4)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_bwa27"]
+points = PackedVector3Array(2.99992, 1.59984, 0.399374, 2.79965, 2.4, 1.19988, 2.99992, 0, 0.399374, 2.99992, 1.59984, -0.400548, 1.19983, 2.4, 2.79973, 2.79965, 0, 1.19988, 2.79965, 2.4, -1.20047, 2.99992, 0, -0.400548, -1.20049, 2.4, 2.79973, 0.399915, 1.59984, 3, 1.19983, 0, 2.79973, 2.79965, 0, -1.20047, 1.19983, 2.4, -2.80031, -1.20049, 0, 2.79973, -0.400584, 1.59984, 3, -2.80032, 2.4, 1.19988, 0.399915, 0, 3, 1.19983, 0, -2.80031, 0.399915, 1.59984, -3, -1.20049, 2.4, -2.80031, -0.400584, 0, 3, -2.80032, 0, 1.19988, -3, 1.59984, 0.399374, -2.80032, 2.4, -1.20047, 0.399915, 0, -3, -0.400584, 1.59984, -3, -1.20049, 0, -2.80031, -3, 0, 0.399374, -3, 1.59984, -0.400548, -2.80032, 0, -1.20047, -0.400584, 0, -3, -3, 0, -0.400548)
 
 [node name="Tile_Hallway1" type="Node3D" node_paths=PackedStringArray("Connectors") groups=["DungeonTile"]]
-transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, 0, 0, 0)
 script = ExtResource("1_bsf5t")
 Preset = ExtResource("2_xgtbc")
 Connectors = []
@@ -100,9 +99,4 @@ skeleton = NodePath("../../ConnectorA")
 [node name="Bounds" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Bounds"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
-shape = SubResource("BoxShape3D_wdmb6")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Bounds"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.2, 0)
-shape = SubResource("BoxShape3D_wdmb6")
+shape = SubResource("ConvexPolygonShape3D_bwa27")

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="AabbBound" load_steps=2 format=3 uid="uid://bqorsgp0j03dp"]
+
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/resources/AabbBound.cs" id="1_3yqpn"]
+
+[resource]
+script = ExtResource("1_3yqpn")
+Size = Vector3(1, 1, 1)
+Position = Vector3(0, 0, 0)

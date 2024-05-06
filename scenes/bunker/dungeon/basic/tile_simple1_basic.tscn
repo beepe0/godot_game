@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bn26a18oeupeu"]
+[gd_scene load_steps=10 format=3 uid="uid://bn26a18oeupeu"]
 
 [ext_resource type="Script" path="res://scripts/components/dungeon_v3/tiles/DungeonTileBasic.cs" id="1_kfy1t"]
 [ext_resource type="Resource" uid="uid://bfwyop4gvwk6s" path="res://scenes/bunker/dungeon/resources/basic.tres" id="2_1wlbc"]
@@ -42,14 +42,11 @@ albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_lsxxf"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_wwb00"]
-size = Vector3(9.8, 2.4, 5.7)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_jx3jw"]
-size = Vector3(4.9, 2.4, 5.1)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ffgen"]
+points = PackedVector3Array(7, 1.59984, -0.200353, 7, 0, -0.200353, 7, 1.59984, -1.00037, 6.79933, 2.4, 2.3849, 7, 0, -1.00037, 6.79933, 0, 2.3849, 6.79933, 2.4, -1.98667, 6.18559, 2.4, 2.99973, 6.79933, 0, -1.98667, 6.18559, 0, 2.99973, 1.99902, 2.4, -7.6008, -2.80031, 2.4, 2.99973, 1.99902, 1.59984, 3.2, 1.99902, 0, -7.6008, 1.99902, 0, 3.2, 1.1993, 1.59984, -7.8, -2.18657, 2.4, -7.6008, -3, 1.59984, 1.39969, -2.80031, 0, 2.99973, 1.1993, 1.59984, 3.2, -2.80031, 2.4, -6.98706, 1.1993, 0, -7.8, 1.1993, 0, 3.2, 0.399569, 1.59984, -7.8, -2.18657, 0, -7.6008, -3, 0, 1.39969, -3, 1.59984, -6.70065, -2.80031, 0, -6.98706, 0.399569, 0, -7.8, -3, 0, -6.70065)
 
 [node name="Tile_Simple1" type="Node3D" node_paths=PackedStringArray("Connectors") groups=["DungeonTile"]]
-transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0995056)
 script = ExtResource("1_kfy1t")
 Preset = ExtResource("2_1wlbc")
 Connectors = []
@@ -60,10 +57,11 @@ skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Tile_Simple"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Tile_Simple/StaticBody3D"]
+[node name="1" type="CollisionShape3D" parent="Tile_Simple/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_btcyp")
 
 [node name="Connectors" type="Node3D" parent="."]
+metadata/test = Vector3(0, 0, 0)
 
 [node name="ConnectorA" type="Node3D" parent="Connectors"]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0.8, 0.8, -7.8)
@@ -113,9 +111,4 @@ skeleton = NodePath("../../ConnectorA")
 [node name="Bounds" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Bounds"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.2, 0.25)
-shape = SubResource("BoxShape3D_wwb00")
-
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Bounds"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 1.2, -5.15)
-shape = SubResource("BoxShape3D_jx3jw")
+shape = SubResource("ConvexPolygonShape3D_ffgen")
