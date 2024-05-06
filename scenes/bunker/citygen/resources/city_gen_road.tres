@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DungeonTileCategoryPreset" load_steps=2 format=3 uid="uid://ds68rhpcuss02"]
+
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/resources/DungeonTileCategoryPreset.cs" id="1_76cuw"]
+
+[resource]
+script = ExtResource("1_76cuw")
+GenerationName = "CityGeneration"
+TilesCategory = "road"
+TargetNumberOfTilesPerTier = 100
+Priority = 0
+ValidNeighbours = PackedStringArray("road", "build")
+RoomsFolderPath = "res://scenes/bunker/citygen/road"

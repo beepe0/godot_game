@@ -30,5 +30,5 @@ public partial class Game : Node
 		Gizmos.Text($"ObjectResourceCount: {Performance.GetMonitor(Performance.Monitor.ObjectResourceCount)}");
 		Gizmos.Text($"ObjectNodeCount: {Performance.GetMonitor(Performance.Monitor.ObjectNodeCount)}");
 		Gizmos.Text($"ObjectOrphanNodeCount: {Performance.GetMonitor(Performance.Monitor.ObjectOrphanNodeCount)}");
-    }
+	}
 }
