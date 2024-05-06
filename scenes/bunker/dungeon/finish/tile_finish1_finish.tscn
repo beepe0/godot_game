@@ -42,8 +42,8 @@ albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_74was"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_rmeng"]
-size = Vector3(5, 5.2, 8.8)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7d5kx"]
+points = PackedVector3Array(2.6, 4.39984, -2.80039, 2.6, 0, -2.80039, 2.6, 4.39984, -3.60063, 2.39996, 5.2, 4.39914, 2.59949, 0, -3.60063, 2.6, 0.799648, -3.60063, 2.39996, 0, 4.39914, 2.39996, 5.2, -4.4, 0.799648, 5.2, 4.4, 2.39996, 0, -4.4, -2.40047, 0, 4.39914, -2.40047, 5.2, -4.4, -2.40047, 5.2, 4.4, -2.40047, 0, -4.4, -2.6, 0, -2.80039, -2.6, 4.39984, -3.60063, -2.6, 4.39984, -2.80039, -2.6, 0, -3.60063)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vgp0i"]
 albedo_color = Color(0.164706, 0.164706, 0.164706, 1)
@@ -53,12 +53,12 @@ material = SubResource("StandardMaterial3D_vgp0i")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sl2m0"]
 
-[node name="Tile_Finish1" type="Node3D" node_paths=PackedStringArray("Connectors") groups=["DungeonTile"]]
-transform = Transform3D(1.6, 0, 0, 0, 1.6, 0, 0, 0, 1.6, 0, 0, 0)
+[node name="Tile_Finish1" type="Node3D" node_paths=PackedStringArray("SecondConnectors", "Connectors") groups=["DungeonTile"]]
 script = ExtResource("1_5i5nk")
+SecondConnectors = [NodePath("Connectors/ConnectorC"), NodePath("Connectors/ConnectorD")]
 Preset = ExtResource("2_vpeht")
-IsAutoDetect = null
-Connectors = []
+IsAutoDetectConnectors = false
+Connectors = [NodePath("Connectors/ConnectorA"), NodePath("Connectors/ConnectorB")]
 
 [node name="Tile_Finish1" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_1m34h")
@@ -110,12 +110,10 @@ skeleton = NodePath("../../ConnectorA")
 [node name="Bounds" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Bounds"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.58794e-08, 2.6, 0)
-shape = SubResource("BoxShape3D_rmeng")
+shape = SubResource("ConvexPolygonShape3D_7d5kx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.908355, -2.81719, 0, 0.4182, 6.11911, 0, 0.936157, 0.778231)
-visible = false
 mesh = SubResource("BoxMesh_88koe")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]

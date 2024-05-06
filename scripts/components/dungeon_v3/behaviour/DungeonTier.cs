@@ -9,6 +9,7 @@ public partial class DungeonTier : Node
     public DungeonBuilder DungeonBuilder;
     
     public readonly List<DungeonTile> ValidTiles = new();
+    public readonly List<DungeonTile> ValidTilesFrom = new();
     public readonly List<DungeonTile> Tiles = new();
 
     public async Task AddTiles(DungeonTile targetRoom)
@@ -36,7 +37,7 @@ public partial class DungeonTier : Node
     {
         for (ushort i = 0; i < Tiles.Count; i++)
         {
-            Tiles[i].DrawGizmos(i);
+            Tiles[i].OnDrawGizmos(i);
         }
     }
 }

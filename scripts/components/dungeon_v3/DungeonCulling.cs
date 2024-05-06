@@ -7,7 +7,7 @@ using Godot;
 [GlobalClass]
 public partial class DungeonCulling : ComponentObject
 {
-    public readonly List<DungeonTile> DungeonTiles = new List<DungeonTile>();
+    [Export] public DungeonBuilder DungeonBuilder;
 
     [Export] public Node3D Target;
     [Export] public Vector3 Bounds;
@@ -22,9 +22,9 @@ public partial class DungeonCulling : ComponentObject
     public override void _PhysicsProcess(double delta)
     {
         if(Target == null) return;
-        
+    
         Gizmos.SolidSphere(Target.GlobalPosition, Quaternion.Identity, Target.Scale / 2, 0, Colors.Red);
-        Gizmos.Box(Target.GlobalPosition, Quaternion.Identity, Bounds / 2, 0, Colors.Burlywood);
+        Gizmos.Box(Target.GlobalPosition, Quaternion.Identity, Bounds, 0, Colors.Red);
         
         if (Input.IsMouseButtonPressed(MouseButton.Left))
         {
@@ -34,21 +34,24 @@ public partial class DungeonCulling : ComponentObject
             }
             else
             {
-                _position += new Vector3(-_velocity.Y, 0 , _velocity.X);
+                _position += new Vector3(_velocity.X, 0 , -_velocity.Y);
             }
             Target.Position = _position;
         }
 
         _aabb = new Aabb(Target.GlobalPosition - Bounds / 2, Bounds);
-
+        
         _velocity = Vector2.Zero;
-        
-        foreach (var tile in DungeonTiles)
+
+        foreach (var tiles in DungeonBuilder.DungeonTiers)
         {
-            Gizmos.SolidSphere(tile.GlobalPosition, Quaternion.Identity, Vector3.One / 2, 0, Colors.Cyan);
-            //Gizmos.Text3D(tile.Category, tile.GlobalPosition, 0, Colors.Orange);
-        
-            tile.Visible = _aabb.HasPoint(tile.GlobalPosition);
+            foreach (var tile in tiles.Tiles)
+            {
+                foreach (var aabb in tile.AabbBounds)
+                {
+                    tile.Visible = _aabb.Intersects(aabb.Aabb);
+                }
+            }
         }
     }
     public override void _Input(InputEvent @event)
@@ -57,7 +60,7 @@ public partial class DungeonCulling : ComponentObject
         {
             if (inputEventMouseMotion != null)
             {
-                _velocity = inputEventMouseMotion.Velocity / 1000;
+                _velocity = inputEventMouseMotion.Relative / 100;
             }
         }
     }

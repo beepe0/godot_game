@@ -12,6 +12,7 @@ public static class GodotExtension
     {
         T obj = scene.Instantiate<T>();
         obj.Position = position;
+        obj.Name = "Node";
         parent.AddChild(obj);
         return obj;
     }

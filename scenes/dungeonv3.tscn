@@ -14,15 +14,17 @@
 script = ExtResource("1_inula")
 Tag = "Dungeon"
 
-[node name="DungeonBuilder" type="Node" parent="ComponentSystem" node_paths=PackedStringArray("ResLoader")]
+[node name="DungeonBuilder" type="Node" parent="ComponentSystem" node_paths=PackedStringArray("ResLoader", "DungeonCulling")]
 script = ExtResource("2_kssw0")
 DungeonBuilderPreset = ExtResource("3_sainp")
 ResLoader = NodePath("../DungeonResourceLoader")
+DungeonCulling = NodePath("../DungeonCulling")
 
 [node name="DungeonResourceLoader" type="Node" parent="ComponentSystem" node_paths=PackedStringArray("DungeonBuilder")]
 script = ExtResource("3_0dp3b")
 DungeonBuilder = NodePath("../DungeonBuilder")
 
-[node name="DungeonCulling" type="Node" parent="ComponentSystem"]
+[node name="DungeonCulling" type="Node" parent="ComponentSystem" node_paths=PackedStringArray("DungeonBuilder")]
 script = ExtResource("5_0qxr1")
-Bounds = Vector3(40, 3, 40)
+DungeonBuilder = NodePath("../DungeonBuilder")
+Bounds = Vector3(5, 5, 5)

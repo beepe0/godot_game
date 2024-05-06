@@ -46,32 +46,30 @@ adjustment_saturation = 1.84
 [node name="Game" type="Node"]
 script = ExtResource("5_guotx")
 
-[node name="Singeltons" type="Node" parent="."]
+[node name="Node" type="Node" parent="."]
 
-[node name="CommandManager" type="Node" parent="Singeltons"]
+[node name="Singeltons" type="Node" parent="Node"]
+
+[node name="CommandManager" type="Node" parent="Node/Singeltons"]
 script = ExtResource("4_1ivhn")
 
-[node name="MultiplayerManager" type="Node" parent="Singeltons"]
+[node name="MultiplayerManager" type="Node" parent="Node/Singeltons"]
 script = ExtResource("7_ab420")
 _localPlayerScene = ExtResource("4_1f4f1")
 _remotePlayerScene = ExtResource("9_2c66a")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Node"]
 environment = SubResource("Environment_bua0u")
 
-[node name="Dungeon" parent="." instance=ExtResource("9_fe3t2")]
-transform = Transform3D(-0.930967, 0, -0.365104, 0, 1, 0, 0.365104, 0, -0.930967, 0, 0, 0)
+[node name="Dungeon" parent="Node" instance=ExtResource("9_fe3t2")]
 
-[node name="PrototypeRoom" parent="." instance=ExtResource("7_bocic")]
-visible = false
+[node name="PrototypeRoom" parent="Node" instance=ExtResource("7_bocic")]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Console" parent="CanvasLayer" instance=ExtResource("6_qchd8")]
-visible = false
-_fontSize = null
-_scrollSpeed = null
-
-[node name="Lobby" parent="." instance=ExtResource("9_arjy4")]
+[node name="Lobby" parent="Node" instance=ExtResource("9_arjy4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25.317)
+visible = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Node"]
+
+[node name="Console" parent="Node/CanvasLayer" instance=ExtResource("6_qchd8")]
 visible = false

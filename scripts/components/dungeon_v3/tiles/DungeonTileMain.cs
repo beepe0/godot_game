@@ -4,11 +4,9 @@ using Godot.Collections;
 
 public partial class DungeonTileMain : DungeonTile
 {
-    // [Export] public Array<Node3D> SecondConnectors;
-    // public bool CanBeAdded;
-    public override void DrawGizmos(ushort id)
+    public override void OnDrawGizmos(ushort id)
     {
-        base.DrawGizmos(id);
+        base.OnDrawGizmos(id);
 
         Gizmos.Text3D($"ID: {id} - {Preset.TilesCategory}", GlobalPosition);
         Gizmos.SolidSphere(GlobalPosition, Quaternion.Identity, Vector3.One / 2, 0, Colors.Red);

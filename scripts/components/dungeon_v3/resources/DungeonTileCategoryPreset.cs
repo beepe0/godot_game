@@ -18,4 +18,11 @@ public partial class DungeonTileCategoryPreset : Resource
     
     [ExportGroup("Tile Path Settings")]
     [Export(PropertyHint.Dir)] public string RoomsFolderPath { get; set; }
+
+    public void ResetTempProperties()
+    {
+        AvailableTileScenes.AddRange(UnavailableTileScenes);
+        UnavailableTileScenes.Clear();
+        CurrentNumberOfTilesPerTier = 0;
+    }
 }
