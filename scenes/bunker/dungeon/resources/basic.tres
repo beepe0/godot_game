@@ -8,5 +8,5 @@ GenerationName = "Dungeon"
 TilesCategory = "basic"
 TargetNumberOfTilesPerTier = 20
 Priority = 1
-ValidNeighbours = PackedStringArray("finish", "basic", "main")
+ValidNeighbours = PackedStringArray("finish", "basic")
 RoomsFolderPath = "res://scenes/bunker/dungeon/basic"

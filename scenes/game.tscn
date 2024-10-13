@@ -4,11 +4,11 @@
 [ext_resource type="Script" path="res://addons/godot_console_manager/CommandManager.cs" id="4_1ivhn"]
 [ext_resource type="Script" path="res://scripts/Game.cs" id="5_guotx"]
 [ext_resource type="PackedScene" uid="uid://byssswptinsio" path="res://addons/godot_console_manager/scene/ui/console.tscn" id="6_qchd8"]
-[ext_resource type="PackedScene" uid="uid://ft0j155e8agy" path="res://scenes/bunker/citygen/citygenv3.tscn" id="6_qf41x"]
 [ext_resource type="Script" path="res://scripts/multiplayer/MultiplayerManager.cs" id="7_ab420"]
 [ext_resource type="PackedScene" uid="uid://clyjiw7yrsvyk" path="res://scenes/prototype_room.tscn" id="7_bocic"]
 [ext_resource type="PackedScene" uid="uid://cf43h8i06dy3d" path="res://scenes/players/remote_player.tscn" id="9_2c66a"]
 [ext_resource type="PackedScene" uid="uid://digtkc52es5kp" path="res://scenes/bunker/lobby.tscn" id="9_arjy4"]
+[ext_resource type="PackedScene" uid="uid://bai1nenlxlmy7" path="res://scenes/dungeonv3.tscn" id="9_fe3t2"]
 
 [sub_resource type="Environment" id="Environment_bua0u"]
 background_mode = 2
@@ -36,6 +36,7 @@ glow_bloom = 0.1
 glow_blend_mode = 1
 glow_hdr_threshold = 0.41
 glow_hdr_scale = 0.0
+volumetric_fog_enabled = true
 volumetric_fog_density = 0.2056
 volumetric_fog_albedo = Color(0.188235, 0.188235, 0.188235, 1)
 volumetric_fog_anisotropy = 0.9
@@ -61,10 +62,9 @@ _remotePlayerScene = ExtResource("9_2c66a")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Node"]
 environment = SubResource("Environment_bua0u")
 
-[node name="CityGeneration" parent="Node" instance=ExtResource("6_qf41x")]
+[node name="Dungeon" parent="Node" instance=ExtResource("9_fe3t2")]
 
 [node name="PrototypeRoom" parent="Node" instance=ExtResource("7_bocic")]
-visible = false
 
 [node name="Lobby" parent="Node" instance=ExtResource("9_arjy4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25.317)

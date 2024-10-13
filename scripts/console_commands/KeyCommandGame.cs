@@ -16,7 +16,7 @@ public partial class KeyCommandGame : Command
         }
         else if (keys[1].Equals("generate-dungeon"))
         {
-            ComponentSystem.GetComponentSystemWithTag("CityGeneration").GetComponent<DungeonBuilder>().Build();
+            ComponentSystem.GetComponentSystemWithTag("Dungeon").GetComponent<DungeonBuilder>().Build();
         }
         else if (keys[1].Equals("target-fps"))
         {
