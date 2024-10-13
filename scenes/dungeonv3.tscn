@@ -8,23 +8,19 @@
 
 [node name="Dungeon" type="Node3D"]
 
-[node name="Rooms" type="Node3D" parent="."]
-
 [node name="ComponentSystem" type="Node" parent="."]
 script = ExtResource("1_inula")
 Tag = "Dungeon"
 
-[node name="DungeonBuilder" type="Node" parent="ComponentSystem" node_paths=PackedStringArray("ResLoader", "DungeonCulling")]
+[node name="DungeonBuilder" type="Node" parent="ComponentSystem" node_paths=PackedStringArray("ResLoader")]
 script = ExtResource("2_kssw0")
 DungeonBuilderPreset = ExtResource("3_sainp")
 ResLoader = NodePath("../DungeonResourceLoader")
-DungeonCulling = NodePath("../DungeonCulling")
 
 [node name="DungeonResourceLoader" type="Node" parent="ComponentSystem" node_paths=PackedStringArray("DungeonBuilder")]
 script = ExtResource("3_0dp3b")
 DungeonBuilder = NodePath("../DungeonBuilder")
 
-[node name="DungeonCulling" type="Node" parent="ComponentSystem" node_paths=PackedStringArray("DungeonBuilder")]
+[node name="DungeonCulling" type="Node" parent="ComponentSystem"]
 script = ExtResource("5_0qxr1")
-DungeonBuilder = NodePath("../DungeonBuilder")
 Bounds = Vector3(5, 5, 5)

@@ -16,16 +16,12 @@ public partial class DungeonTile : Node3D
     [Export] public Array<Node3D> Connectors; 
     
     public Area3D AreaBounds;
-    public List<TileBounds> AabbBounds;
     protected DungeonBuilder DungeonBuilder;
     
     public override void _Ready()
     {
         AreaBounds = GetNodeOrNull<Area3D>("Bounds");
 
-        Array<Node> aabbBounds = AreaBounds.GetChildren();
-        AabbBounds = new();
-        
         if (IsAutoDetectConnectors)
         {
             Array<Node> connectors = GetNodeOrNull<Node3D>("Connectors").GetChildren();
@@ -93,18 +89,18 @@ public partial class DungeonTile : Node3D
     }
     private DungeonTileCategoryPreset GetMin(List<DungeonTileCategoryPreset> list)
     {
-        DungeonTileCategoryPreset minTile = null;
+        List<DungeonTileCategoryPreset> minTiles = new();
         ushort minPriority = ushort.MaxValue;
         
         foreach (var t in list)
         {
-            if (t.Priority < minPriority)
+            if (t.Priority <= minPriority)
             {
-                minTile = t;
+                minTiles.Add(t);
                 minPriority = t.Priority;
             }
         }
-        return minTile;
+        return minTiles[(ushort)DungeonBuilder.Random.RandiRange(0, minTiles.Count - 1)];
     }
     private void Snap(Node3D currentConnector, Node3D targetConnector)
     {
@@ -123,18 +119,11 @@ public partial class DungeonTile : Node3D
     }
     public virtual void OnDrawGizmos(ushort id)
     {
-        foreach (var aabb in AabbBounds)
-        {
-            Gizmos.Box(aabb.Transform3D, aabb.Aabb.Size, 0, Colors.Blue);
-        }
+
     }
     public virtual void OnInit()
     {
-        foreach (CollisionShape3D bound in AreaBounds.GetChildren())
-        {
-            BoxShape3D boxShape3D = bound.Shape as BoxShape3D;
-            //AabbBounds.Add(new TileBounds(bound.GlobalTransform, new Aabb(bound.GlobalPosition - boxShape3D.Size / 2, bound.GlobalTransform.)));
-        }
+
     }
     public struct TileBounds
     {

@@ -47,7 +47,7 @@ public partial class DungeonBuilder : ComponentObject
         
         await Generate();
         
-        DungeonCulling.Begin();
+        //DungeonCulling.Begin();
         workTime.Stop();
         
         GameConsole.Instance.DebugWarning($"Elapsed time: {workTime.Elapsed.TotalMilliseconds} ms, number of generated tiles: {CurrentNumberOfTiles}");

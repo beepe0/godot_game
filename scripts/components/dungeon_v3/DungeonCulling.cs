@@ -43,16 +43,16 @@ public partial class DungeonCulling : ComponentObject
         
         _velocity = Vector2.Zero;
 
-        foreach (var tiles in DungeonBuilder.DungeonTiers)
-        {
-            foreach (var tile in tiles.Tiles)
-            {
-                foreach (var aabb in tile.AabbBounds)
-                {
-                    tile.Visible = _aabb.Intersects(aabb.Aabb);
-                }
-            }
-        }
+        // foreach (var tiles in DungeonBuilder.DungeonTiers)
+        // {
+        //     foreach (var tile in tiles.Tiles)
+        //     {
+        //         foreach (var aabb in tile.AabbBounds)
+        //         {
+        //             tile.Visible = _aabb.Intersects(aabb.Aabb);
+        //         }
+        //     }
+        // }
     }
     public override void _Input(InputEvent @event)
     {

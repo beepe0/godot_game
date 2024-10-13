@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DungeonBuilderPreset" load_steps=4 format=3 uid="uid://ddtj4ar35pqsk"]
+
+[ext_resource type="Resource" uid="uid://ds68rhpcuss02" path="res://scenes/bunker/citygen/resources/city_gen_road.tres" id="1_yeah4"]
+[ext_resource type="Resource" uid="uid://cec4dl8oae443" path="res://scenes/bunker/citygen/resources/city_gen_build.tres" id="2_cn3tx"]
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/resources/DungeonBuilderPreset.cs" id="3_q4tjo"]
+
+[resource]
+script = ExtResource("3_q4tjo")
+Seed = 0
+NumberOfTiers = 1
+StartPosition = Vector3(0, -30, 0)
+CategoryScenes = [ExtResource("1_yeah4"), ExtResource("2_cn3tx")]

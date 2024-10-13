@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://ft0j155e8agy"]
+
+[ext_resource type="Script" path="res://addons/godot_component_system/ComponentSystem.cs" id="1_rlncx"]
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/DungeonBuilder.cs" id="2_w0okm"]
+[ext_resource type="Resource" uid="uid://ddtj4ar35pqsk" path="res://scenes/bunker/citygen/resources/city_generationv3.tres" id="3_c3upb"]
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/DungeonResourceLoader.cs" id="4_4xoyl"]
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/DungeonCulling.cs" id="5_jg6xk"]
+
+[node name="CityGeneration" type="Node3D"]
+
+[node name="ComponentSystem" type="Node" parent="."]
+script = ExtResource("1_rlncx")
+Tag = "CityGeneration"
+
+[node name="DungeonBuilder" type="Node" parent="ComponentSystem" node_paths=PackedStringArray("ResLoader", "DungeonCulling")]
+script = ExtResource("2_w0okm")
+DungeonBuilderPreset = ExtResource("3_c3upb")
+ResLoader = NodePath("../DungeonResourceLoader")
+DungeonCulling = NodePath("../DungeonCulling")
+
+[node name="DungeonResourceLoader" type="Node" parent="ComponentSystem" node_paths=PackedStringArray("DungeonBuilder")]
+script = ExtResource("4_4xoyl")
+DungeonBuilder = NodePath("../DungeonBuilder")
+
+[node name="DungeonCulling" type="Node" parent="ComponentSystem" node_paths=PackedStringArray("DungeonBuilder")]
+script = ExtResource("5_jg6xk")
+DungeonBuilder = NodePath("../DungeonBuilder")
+Bounds = Vector3(5, 5, 5)

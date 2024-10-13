@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://bw2ushp3n3qa5"]
+
+[ext_resource type="Script" path="res://scripts/components/dungeon_v3/behaviour/DungeonTile.cs" id="1_ra3fr"]
+[ext_resource type="Resource" uid="uid://ds68rhpcuss02" path="res://scenes/bunker/citygen/resources/city_gen_road.tres" id="2_4uhdl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aiaov"]
+albedo_color = Color(0.572549, 0.572549, 0.572549, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6o5lu"]
+material = SubResource("StandardMaterial3D_aiaov")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1on5q"]
+size = Vector3(2.395, 0.06, 0.885)
+
+[node name="1_Tile_Road" type="Node3D" node_paths=PackedStringArray("Connectors")]
+script = ExtResource("1_ra3fr")
+Preset = ExtResource("2_4uhdl")
+Connectors = []
+
+[node name="MeshRoot" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.5, 0, 0, 0, 0.06, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_6o5lu")
+skeleton = NodePath("../../..")
+
+[node name="Connectors" type="Node3D" parent="."]
+
+[node name="ConnectorA" type="Node3D" parent="Connectors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 0, 0)
+
+[node name="ConnectorB" type="Node3D" parent="Connectors"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.25, 0, 0)
+
+[node name="Bounds" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bounds"]
+shape = SubResource("BoxShape3D_1on5q")
